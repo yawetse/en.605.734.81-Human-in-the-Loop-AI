@@ -1,0 +1,4 @@
+interface:
+  display_name: "HITL AI Peer Feedback"
+  short_description: "Draft concise EN.605.734 peer feedback"
+  default_prompt: "Use $peer-review-feedback to draft concise peer feedback for this EN.605.734 submission."

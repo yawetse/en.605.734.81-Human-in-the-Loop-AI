@@ -1,0 +1,4 @@
+interface:
+  display_name: "HITL AI Assignment Workflow"
+  short_description: "EN.605.734 assignments and notebooks"
+  default_prompt: "Use $notebook-assignment-workflow to help me work through this EN.605.734 assignment from the local course materials."

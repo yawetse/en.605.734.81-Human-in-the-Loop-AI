@@ -1,0 +1,4 @@
+interface:
+  display_name: "HITL AI Module Workflow"
+  short_description: "Summarize modules and prepare learning artifacts"
+  default_prompt: "Use $ai-course-module-self-check to summarize this EN.605.734 module and prepare the requested learning artifact."

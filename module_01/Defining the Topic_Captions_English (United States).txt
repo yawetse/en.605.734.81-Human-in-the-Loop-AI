@@ -1,0 +1,1633 @@
+Hello, I'm Dr.
+Ian McCullough.
+
+And this lecture we're
+
+going to go a
+little bit more
+
+in depth in
+defining the topic
+
+of crowdsourcing and
+human computation.
+
+So what is human
+computation?
+
+Is basically people doing
+
+a well-defined task that
+
+involves computation,
+alright?
+
+Computing something,
+estimating something.
+
+A lot of human endeavors
+
+are not very well-defined.
+
+And when you're
+
+dealing with
+automated systems,
+
+most of them require
+
+some level of human input,
+
+even if thinking about
+machine-learning,
+
+a lot of times requires
+
+labeled training data
+in order to function.
+
+There's a lot of
+automated systems
+
+that require human input
+in different ways.
+
+There's usually
+structured output
+
+coming out of
+human computation.
+
+So that's like the labels
+
+in the machine-learning
+example
+
+or image boundaries in
+
+a computer vision example,
+
+we might do some sort of
+
+ordering of text
+or categorizing,
+
+classifying things
+into buckets, right?
+
+These are, these are
+
+oftentimes what human
+computation looks like.
+
+It's at that type
+of structure that
+
+we're putting on the data.
+
+But it doesn't
+always, right?
+
+So sometimes, you
+know, opinion surveys,
+
+tasks to do summarization
+description,
+
+or even by hand
+math calculations
+
+is a form of human
+computation.
+
+When we look at
+examples in history,
+
+this is not new, right?
+
+Alan Greer talks
+about a time when
+
+the term computers
+referred to human beings.
+
+If you go back to the
+19 forties and fifties,
+
+they weren't thinking
+about a big machine.
+
+When you said computers
+
+here we're talking about
+
+people doing
+computational tasks.
+
+The Works Progress
+Administration made
+
+heavy use of people
+
+doing some of
+these things.
+
+It was this effort to find
+
+jobs for people and
+
+find ways to make
+them useful.
+
+And this is where
+the whole growth
+
+of human computation
+really began,
+
+as well as crowdsourcing
+in many respects.
+
+The picture you see here
+
+were the first computers
+
+at nasa and you
+might have seen
+
+the popular
+Hollywood movie,
+
+Hidden Figures that
+talks about this.
+
+But these are all
+mathematicians,
+
+women mathematicians.
+
+And these were the
+first computers
+
+that were doing
+the calculations
+
+necessary to launch nasa
+
+is for spacecraft
+into space.
+
+What is crowdsourcing?
+
+Crowdsourcing is
+where you pose
+
+an open question to
+
+a group of people,
+a crowd, right?
+
+And there's a few different
+benefits that you
+
+have when you're taking
+
+input from
+multiple people.
+
+And usually you're going
+
+to average them together,
+
+or you're going
+to group them
+
+or categorize
+them in some way.
+
+Here's a couple
+of books on
+
+the topic or outsourcing,
+
+which are pop science
+and good reads.
+
+If you're interested
+in the topic,
+
+I would like to
+pick those up.
+
+So why are you
+going to try
+
+and put a question
+to a bunch of
+
+people to get your input
+
+or get your computation.
+
+Well, no one worker
+
+is always going
+to be available.
+
+So sometimes if you have
+
+a larger group of people,
+
+it gives you
+things like speed.
+
+It gives you a
+diversity of thought.
+
+It gives you some of
+these other benefits.
+
+It allows us to take.
+
+Capitalize on some of
+
+this collective
+intelligence
+
+we spoke about earlier.
+
+It allows for
+
+the availability of
+different people.
+
+It allows you to create
+
+these on-demand
+systems where
+
+I want to know something,
+
+something is not available,
+let me do it now.
+
+Any individual is going
+
+to have a chance
+for error, right?
+
+Nobody's perfect
+every he's
+
+going to make mistakes.
+
+So as you get
+more and more,
+
+people are actually
+capitalizing
+
+on the central
+limit theorem
+
+where we know that
+
+if I take an estimate
+from any distribution
+
+and I take an average
+of those data points,
+
+the variance, the variance
+
+around that is
+going to be lower.
+
+It's going to scale it
+one over square root,
+
+square root of n,
+
+The number of people
+that you're polling.
+
+And so we're able to get
+
+more accurate
+estimates when
+
+we, when we average.
+
+Crowdsourcing is not,
+not a new thing.
+
+This idea of collective
+intelligence
+
+in general has been
+around for quite awhile.
+
+We'll look at a
+couple of examples.
+
+Classic one in the
+book that I mentioned
+
+earlier is guessing
+the weight of an ox.
+
+Alright, so if you
+have a, a large,
+
+large animal and it's,
+
+it's kinda like estimating
+
+the number of M&Ms
+and a jar, right?
+
+It's when you have a
+large group of people,
+
+everybody's
+individual estimate
+
+can be horribly wrong.
+
+But when you average them
+
+together, it's
+surprisingly accurate.
+
+And that's one of
+the principles of
+
+crowdsourcing that
+makes it so powerful.
+
+And again, it's tied in
+
+many respects to the
+central limit theorem.
+
+Where again, if
+I take a sample
+
+from any distribution
+
+and if I have enough
+of them and I
+
+average those
+samples together,
+
+the estimate
+of the average
+
+is normally distributed,
+
+has a lower variance.
+
+And then we can
+do a lot of
+
+things mathematically with
+
+those, those estimates.
+
+This connects totally do
+
+the different
+models of work.
+
+Alright, so we
+talked about how
+
+in the forties and
+fifties, right?
+
+The idea of a computer
+was oftentimes
+
+a person, not a machine.
+
+Well, this ties back
+to As we're going
+
+the Industrial
+Revolution and we're
+
+starting to establish
+
+the management of science.
+
+The value of a firm
+was considered how
+
+efficient it was of
+an organization.
+
+Now, next week
+we're going to talk
+
+about, about,
+
+about adaptability
+and agility,
+
+which is very different
+than efficiency.
+
+But efficiency is you have
+
+a very well-defined task
+
+and you're gonna do
+it consistently.
+
+You're gonna
+do it quickly.
+
+You're gonna do it
+over and over, right?
+
+This is, this is efficiency
+and organization.
+
+How are we doing
+that? Well, we're
+
+oftentimes doing that with
+
+things like
+division of labor.
+
+Let's break down
+the building of
+
+a car into its
+components, right?
+
+Who's gonna do the tires?
+
+Who's going to
+do the brakes?
+
+Who's going to do
+the body work?
+
+Who's gonna do
+
+the different parts
+of the engine?
+
+Who's going to
+assemble it, right?
+
+All of these
+different divisions,
+
+we can have
+people that are
+
+experts in one
+small component.
+
+And then we put them
+together and like
+
+an assembly line or
+inner production.
+
+And we can be
+
+doing this a lot
+more efficiently.
+
+And so this idea
+of breaking
+
+off tasks for
+people to do,
+
+right, kinda
+became part of
+
+this scientific
+management of workers.
+
+And some of those
+people were
+
+doing more
+computational tasks,
+
+that physical tasks.
+
+This is, these models
+of work really tied
+
+into these ideas of
+
+evolving how we
+use crowdsourcing,
+
+and how we use
+human computation.
+
+You're probably
+familiar with
+
+other types of crowds,
+
+especially ones that
+are on social media or
+
+online forums like
+
+Stack Overflow or
+StackExchange.
+
+These are examples of
+where you're going to
+
+have a problem
+encoding or something.
+
+And you are going to
+
+pose your problem
+to a crowd,
+
+to crowdsource
+your solutions
+
+are your potential
+solutions,
+
+or maybe find that
+people have run into
+
+very similar problems and
+
+those resolutions
+help you out.
+
+So that's another
+example of
+
+the types of crowds and of
+
+crowd-sourcing solutions.
+
+We're also going
+to be looking at
+
+types of paid
+crowds, right?
+
+So it's not always just
+volunteers, right?
+
+It's sometimes
+it's paid crowds.
+
+Amazon Mechanical Turk is
+
+what we're going to
+use the heat mind.
+
+We don't ask you to buy
+
+a textbook for
+this course,
+
+but instead we're going to
+
+ask you to establish
+
+them Mechanical
+Turk account and do
+
+some paid data collection
+
+where you're going
+to pay Turkers very
+
+little amount
+per data point,
+
+but to help CrowdSource
+
+some of the responses.
+
+But there's other types
+of paid crowds like
+
+marketing often
+uses focus groups.
+
+And there's
+other platforms
+
+other than Amazon
+Mechanical Turk as well.
+
+There's also
+volunteer crowds
+
+that might serve
+an action.
+
+So this is a picture of
+
+the 160s for
+Berkeley riots,
+
+but sometimes this type of
+
+community sourcing or
+
+activism
+demonstration, right?
+
+Your crowdsourcing people
+to take action or,
+
+or be outspoken to
+
+achieve some sort
+of political
+
+goal or political means.
+
+Now when we look at
+the trade-offs of
+
+different sources
+of credits,
+
+there's different
+dimensions that
+
+we can look for in
+
+the quality of a type
+
+of crowd that we're
+going to use.
+
+I'm just showing you here.
+
+Juxtaposing reliability
+against speed.
+
+You can see that
+maybe I want to have
+
+expert volunteers
+who are highly
+
+skilled and there's
+not gonna be
+
+as many of them, right?
+
+But that's going
+to do better
+
+than like common
+assumptions are
+
+open crowds from
+
+that reliability
+perspective.
+
+If I want speed to kinda
+
+go to Open crowds
+
+where they're more
+available, right?
+
+That's going to be faster.
+
+But not as not
+necessarily.
+
+I'm like common
+assumptions
+
+or I can have a
+paid workforce.
+
+I could call center.
+
+But that's going to
+be more expensive.
+
+So there's different
+trade-offs
+
+in these sources
+of crowds.
+
+And so the dimension,
+
+so we would like
+to use follows
+
+the acronym realm
+of reliability,
+
+expertise, availability,
+location, and
+
+motivation will just
+go into each of these
+
+in a little bit of depth
+
+just so you can
+see what they are.
+
+So reliability is
+how confident are we
+
+that we're getting
+the right answer
+
+that the system
+is going to work.
+
+So sometimes the task at
+
+hand doesn't require
+
+a high level of
+skill or knowledge.
+
+So you don't
+have to go into
+
+such high expertise.
+
+Or you can have
+greater assurance and
+
+the reliability of what
+
+you're doing without
+that expertise.
+
+For example, if I'm
+trying to crowd source,
+
+here's videos, I
+want you to draw
+
+bounding boxes around
+trucks, right?
+
+And I'm just doing
+
+that for
+classification tasks.
+
+Well, most people can
+
+tell you what a truck is.
+
+If I'm doing
+identified cancer
+
+in this medical radiology,
+
+well, that's a higher
+higher skilled task.
+
+And so then my
+reliability goes down.
+
+And so you have to
+balance this expertise,
+
+the difficulty
+of the task for
+
+getting the concept
+of reliability.
+
+There's also an
+issue of commitment.
+
+Why is the, why is
+the crowd doing this?
+
+Are they really committed
+to doing your task?
+
+How reliable is
+your answer?
+
+You'll find that a lot of
+
+times people will just
+
+kinda pencil
+with a lot of,
+
+a lot of your questions
+
+or they're trying to get
+just a really quick,
+
+quick buck and
+they're not really
+
+invested or committed.
+
+But other times you'll
+find like some of
+
+my medical work for
+medical decision-making,
+
+we'll have physicians
+that will volunteer
+
+their time because they
+
+understand the
+importance for medicine.
+
+They're not
+doing it for me.
+
+They're doing it
+because they want
+
+to improve the quality
+of health care.
+
+And so they know that
+
+their input is
+going to help us
+
+design technology
+to better
+
+support medical
+decision-making expertise.
+
+Think about what
+skills are needed,
+
+what specific
+knowledge like
+
+that example of if we're
+
+doing detecting
+
+cancer and medical
+radiology, right?
+
+There's some very
+specific knowledge,
+
+some specific
+expertise that
+
+you have to have in
+order to do that.
+
+It doesn't have to
+
+be medical
+knowledge, right?
+
+It could be familiarity
+
+with the user interface.
+
+If I'm, if I'm going to be
+
+designing a
+
+medical charting
+system for nurses,
+
+familiarity with the task
+
+of charting or familiarity
+
+with the interface of
+
+the existing system
+is important.
+
+Or if I'm doing
+something on
+
+improving the quality
+of game design, right,
+
+of having somebody
+that has a lot of
+
+experience playing
+video games would be,
+
+would be helpful or
+
+familiarity with the
+particular platform.
+
+Availability. How
+responsive are they?
+
+A lot of times we're doing
+
+crowdsourcing because
+we want to get
+
+quick answers from people.
+
+And so you're not going to
+
+have everybody
+available all the time.
+
+But is there a
+sufficient pool
+
+of people you can
+reach out to where
+
+you're going to
+get feedback
+
+or input in a
+timely manner.
+
+If you're working on a
+software challenges,
+
+software development
+problem,
+
+and you pose your
+problem and you
+
+don't get a response
+for a week,
+
+that's probably a
+little too late
+
+to be effective. Location.
+
+A lot of times, location.
+
+Location is important
+
+for a variety of reasons.
+
+It could be.
+
+We're trying to do
+market survey research
+
+on an understanding of
+
+reactions in a
+particular market.
+
+And so there's
+cultural differences.
+
+There's, there's,
+
+there's psychodynamic
+differences.
+
+And so we want
+to make sure
+
+that we're having
+appropriate,
+
+culturally
+appropriate group
+
+that's responding
+to the data.
+
+Other times, it can be
+
+for a security perspective
+
+where if it's a national
+security issue,
+
+that country wants to
+
+make sure that they
+have citizens that
+
+are actually working on
+
+the tasks and
+don't want to
+
+have foreign non-citizens
+doing that, right?
+
+So it could be a
+security issue.
+
+So sometimes location
+is important
+
+when we're thinking
+
+about our
+crowdsourcing tasks.
+
+At last though we kind of
+
+touched on this
+as motivation.
+
+Why are people
+participating
+
+isn't like the
+doctors that are
+
+doing it because
+they want to benefit
+
+the quality of the
+
+medical decision-making
+in the technology
+
+to support medical
+decision-making?
+
+Or are they doing
+it for pay?
+
+Or they're doing
+it because
+
+it's just something
+they liked doing.
+
+Have you gamified
+it to make it fun?
+
+And so they're doing
+it because it's fun.
+
+I have a colleague at
+Georgetown who designed
+
+a highly addictive
+game where you're
+
+like a TSH and
+checking bags.
+
+But then we use that
+
+to test out some of the
+new recruit and hire
+
+and some of the
+new thoughts
+
+that have for improving
+
+the training of TSA agents
+
+as they're checking back.
+
+So sometimes, you know,
+
+gamifying and is a great
+
+way to crowdsource some of
+
+that otherwise
+mundane efforts.
+
+So here's a
+motivating example.
+
+I want you to try
+and do this, right?
+
+So look at the bottle
+here and this guy says,
+
+how many M&Ms do you think
+
+are in this Pittsburgh
+Penguins container?
+
+So just pause the video.
+
+I don't want you
+to write down your
+
+answer because
+it'll be fun.
+
+I'm assuming
+you've paused,
+
+you've written down
+your answer for
+
+how many M&Ms are
+in the video.
+
+And this guy put it out on
+
+Facebook is you
+might be able to
+
+see from the post here.
+
+And I know the image
+quality is not good,
+
+but this bus I can
+pull off my computer,
+
+so apologies for that.
+
+But what are some
+
+of the comments
+that he has?
+
+Well, hey,
+
+the first one
+right now and
+
+those are Skittles, right?
+
+Well, he's looking at
+
+the green scuttle
+in front of
+
+the thing and I can't
+
+really tell if they're
+
+M&M's or skills or both.
+
+But then you get
+an answer 252.
+
+I'm curious how close
+that is to your answer.
+
+And another response here,
+
+I like a picture
+of the bottom
+
+to asking for
+more information.
+
+So you'll see that
+
+the guy that
+actually posted it,
+
+it says this didn't go
+so well on my class.
+
+So you're getting a lot
+
+of off topic comments.
+
+You're getting a few
+answers that you want.
+
+You got to parse
+through that.
+
+But you got to
+ask. It's got
+
+a lot of responses, right?
+
+It's it's very
+quick for him to
+
+get access to opinions
+
+that you wouldn't
+otherwise have.
+
+But you'll see a lot
+
+of absurd answers there
+
+to like a 100 thousand
+
+or this number in
+the lower left for
+
+Brian Keegan is like
+
+a ridiculously large
+number, right?
+
+So you see that
+
+it's not exactly that
+you're gonna get
+
+on-point answers
+directly like you
+
+like in an example
+like this on Facebook.
+
+So when we're, when we're
+
+actually seeking data
+though from labels,
+
+oftentimes the labels
+were using to train
+
+machine-learning
+algorithms are just
+
+as absurd or just
+as off point,
+
+which creates
+performance issues in
+
+our models and in our
+AI solutions, right?
+
+So what's possible?
+
+Previously, we
+would create
+
+knowledge base is
+putting answers in.
+
+It was very laborious
+and time intensive.
+
+We now have systems
+that can label
+
+a like images,
+audio, video.
+
+The output can
+then be used to
+
+train AI or
+machine learning.
+
+But how good is that?
+
+What's the quality?
+
+We have on-demand systems
+
+like Amazon Turk that
+can go pretty quickly.
+
+We have groups of
+
+non-experts that
+can perform tasks.
+
+We can assemble
+databases are
+
+called call lists of
+
+experts for some of those.
+
+So there's a lot of,
+
+of of different ways
+in which we can
+
+address crowdsourcing That
+
+wasn't necessarily
+available.
+
+Traditionally.
+
+Hybrid Intelligence
+is where you're using
+
+the crowd to help
+
+train and develop what
+He's well-trained,
+
+automatic systems that
+then can be used to
+
+have routine performance,
+lower cost, etc.
+
+We can use sometimes
+
+automated system
+guiding crowds.
+
+So for example,
+
+if I'm doing a
+classification task,
+
+I'm having people look
+at Intel reports and
+
+determine the
+type of threat
+
+that is included
+in this report.
+
+For example, because
+I'm gonna develop
+
+a search system.
+
+Well, I can ask the person
+
+what type of
+threat is that
+
+and let it be open-ended.
+
+Or they might say
+terrorist threat,
+
+or they might say
+extremist threat, right?
+
+So now there's
+
+two different bins
+that they've created.
+
+They might use some
+other word for it.
+
+Or I can have an
+automated system say,
+
+Hey, is this a
+terrorist threat?
+
+Is this a bomb threat?
+
+Is this a right?
+A police threat?
+
+Is this information
+about a location.
+
+I can have more
+predefined categories
+
+and let the people
+select which one
+
+is accurate or the
+miscellaneous loop.
+
+Alright, well, there's
+a certain bias
+
+and that you have
+because the computer
+
+is kinda nominating it,
+
+but you have a
+certain narrowing of
+
+the variance of options
+
+so you can stay more
+on point, right?
+
+So that's an example
+of automated systems.
+
+And so if you can work
+that into your design,
+
+you can actually
+help maybe have
+
+divergent phase where
+you have a bunch of
+
+people create open-ended
+questions or items.
+
+You do some sort of
+cluster analysis,
+
+and then you get the
+
+categories you're
+going to use.
+
+And then go to a second
+
+phase where
+you're now using
+
+Hybrid Intelligence
+to have
+
+the machine kinda
+get people started.
+
+And that's going to create
+
+greater consistency
+in the labels,
+
+which is going to lead to
+
+better precision
+and performance
+
+and your AI solution.
+
+Alright?
+
+And we call some of
+that human in the loop.
+
+Research. Where,
+where do I put
+
+the humans in or,
+
+or how do I string
+
+together the different
+machine options
+
+to achieve and design
+a result That's good.
+
+Here's another example of
+
+hybrid intelligence,
+
+in this case in a
+chat bot, right?
+
+So here we're using,
+in this case,
+
+a user application is
+how I want to ask, Hey,
+
+is there any food
+restaurants near me, right?
+
+So in this case,
+
+the user types in
+the free text,
+
+the AI, can be used to
+identify things like,
+
+okay, there's a term
+Chinese food, right?
+
+There's a location
+San Diego, right?
+
+So we're using AR
+
+that is then
+passed to yell,
+
+which is a search tool
+and it's crowdsourced.
+
+And then it's looking
+at the reviews of
+
+a certain category
+or whatever.
+
+And then it passes
+it back through.
+
+Maybe you regularize
+the expressions to say,
+
+Hey, try this or
+this location.
+
+So this is an example
+of where we're
+
+combining free
+text from a human.
+
+We're doing some
+level of machine,
+
+machine learning to
+identify certain terms.
+
+We're doing some
+crowdsourcing.
+
+We're bringing it
+back to provide
+
+an usefulness for
+the need of a user.
+
+Thank you for
+taking the time to
+
+listen to this lecture.
+
+And I hope you're
+looking forward to
+
+a great semester
+where we're going to
+
+explore more of
+these applications.
+
+I think when you
+can put this
+
+into practice in
+your AI delivery,
+
+you will design better,
+
+more user-friendly
+solutions.
+
+You will be much
+more creative
+
+and identifying
+where you can
+
+improve the performance of
+
+your systems because it's
+
+not always in
+the algorithm.
+
+Sometimes it's
+in the data,
+
+sometimes it's in
+the way that we're
+
+crowdsourcing the
+labels for the data.
+
+And all of that
+
+becomes the focus
+of this course.
+
+Thank you.
+

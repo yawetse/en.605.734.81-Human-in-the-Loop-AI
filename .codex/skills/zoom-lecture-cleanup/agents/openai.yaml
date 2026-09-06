@@ -1,0 +1,4 @@
+interface:
+  display_name: "HITL AI Zoom Lecture Cleanup"
+  short_description: "Extract EN.605.734 Zoom transcripts to Markdown"
+  default_prompt: "Use $zoom-lecture-cleanup to clean this EN.605.734 Zoom lecture export into transcript and next steps Markdown."

@@ -1,0 +1,2122 @@
+Hello, I'm Dr.
+Ian McCullough.
+
+Welcome to this
+week's lecture
+
+on crowdsourcing and
+human computation.
+
+We have four learning
+
+objectives for this week.
+
+Defined social computing,
+
+explain crowdsourcing
+and its uses,
+
+defined human
+computation, and describe
+
+the relationship between
+
+social media and
+social computing.
+
+So let's start
+about talking about
+
+what this course
+is all about.
+
+There are certain concerns
+
+people have about
+
+artificial
+intelligence, right?
+
+Why is it not taken
+over the world?
+
+Why do we not have
+Skynet from Terminator?
+
+What types of
+horrible risk and
+
+liability will
+computers created?
+
+The humans certainly
+would be perfect.
+
+But the reality of
+it is there are
+
+certain things
+that humans can
+
+do well, that a
+computer can not.
+
+And there's certain
+things that a computer
+
+can do well that
+humans cannot.
+
+And there's also
+certain things that
+
+many humans
+combined can do
+
+better than individual
+humans by themselves.
+
+So this course is
+
+all about taking that
+collective intelligent,
+
+the intelligence
+that can be
+
+contained in groups
+of humans and
+
+transferring that an
+intelligent ways for
+
+advancing artificial
+intelligence
+
+and advocates
+Computer Science.
+
+Collections of humans
+are sometimes though,
+
+not intelligent when
+you'd be careful of
+
+the risks and would
+
+encourage you to
+click on the link
+
+and check out
+
+the article on
+
+Microsoft's Tay AI
+bot that went wrong.
+
+It learned racist behavior
+
+from collective
+groups of people.
+
+And so we need to be
+also concerned about
+
+the potential risks and
+
+pitfalls of large groups
+
+of people with
+collective intelligence.
+
+So that we can make
+
+sure that we're
+not inadvertently
+
+training algorithms and
+machines to be wrong.
+
+So I want you to pause
+
+the video for a minute,
+
+and I want you to just
+jot down on your paper
+
+a list of what you think
+
+computers can do.
+Well, don't go click.
+
+Don't skip yet, right?
+
+I just want you to
+pause the video,
+
+jot down what
+computers do well,
+
+and then you can
+
+hit play and
+resume the video.
+
+So I'm assuming you
+have paused the video.
+
+You've jotted
+down a few ideas
+
+and now you're
+ready to continue.
+
+So here's several
+of my ideas.
+
+We think the computers
+
+will automate or
+repeat tasks.
+
+They do perpetual running.
+
+They don't need any
+rests or break.
+
+They're generally
+
+error-free depending
+on the task, right?
+
+Depending on how
+well-specified the task
+
+is, pretty
+consistent, reliable.
+
+They can also
+deal with lots of
+
+data and a lot of
+
+information at
+massive scales.
+
+I'd be curious what
+are some of the ideas?
+
+Maybe in our course chat,
+
+throw down a few
+things that maybe I
+
+missed for discussion
+with your classmates.
+
+Alright, now we're gonna
+
+do this exercise again,
+
+but I want you to
+pause the video and
+
+jot down what
+humans do well,
+
+what do you think
+humans do well?
+
+And then when you're done,
+
+then hit play and
+resume the video.
+
+I'm assuming you've
+paused the video
+
+and you've kinda jotted
+
+down what humans do well,
+
+so I'm going to share
+with you my list.
+
+We generally think
+humans are good
+
+with tasks involving
+creativity,
+
+empathy like
+sentiment, emotion,
+
+those sorts of things
+like happy or sad.
+
+Language.
+
+Interpretation, right?
+
+Machine translation is not
+
+quite as good
+as humans yet.
+
+Vision, seeing,
+
+hearing, anything
+dealing with symphony,
+
+sympathy or, or
+
+socialization,
+social connection.
+
+So the ultimate
+question is,
+
+can we combine the
+strengths of humans
+
+and computers
+
+together to get
+better outcomes?
+
+That's what we're
+trying to do.
+
+So let me start with
+a Venn diagram.
+
+And this Venn diagram,
+
+there are several terms
+
+that we're going to
+be kicking around.
+
+Human computation,
+
+crowdsourcing,
+social computing,
+
+collective intelligence,
+data mining.
+
+We're gonna go into a
+little bit more detail
+
+for each one of these.
+
+The first is
+
+that big circle of
+collective intelligence.
+
+And collective
+intelligence is
+
+the idea that
+groups are going
+
+to collectively act with
+
+a certain level
+of intelligence.
+
+There's certain
+value in groups.
+
+And later in this module,
+
+I'm going to show you
+some classic examples
+
+of collective
+intelligence,
+
+of work groups of
+people actually
+
+performed better
+than individuals.
+
+Human computation, right?
+
+Q0, Q1.
+
+The course is called
+crowdsourcing
+
+and human computation.
+
+So what is human
+computation?
+
+And human computation
+is simply this.
+
+It is using people
+
+to solve problems that
+computers can't solve.
+
+That. That's it.
+Human computation.
+
+And perhaps if you've
+
+If you've seen the movie
+
+about nasa's
+first computers,
+
+the computer is, we're
+not machines and
+
+computers were individual
+mathematicians.
+
+And there was
+a great movie
+
+about several African
+
+American mathematicians
+that did
+
+some of the initial
+human computation
+
+that sent the
+first rockets
+
+into space, right?
+
+So human computation
+is this idea of
+
+people being utilized to
+
+solve problems that
+computers can not done.
+
+Probably not
+an individual,
+
+probably groups of people,
+
+but that's why it
+
+overlaps with collective
+intelligence.
+
+But sometimes there's
+individual tasks.
+
+That's why the
+Venn diagram
+
+doesn't fully overlap.
+
+It also is used
+to talk about
+
+a computational
+process that
+
+is using humans in place
+of computers, right?
+
+So, so maybe there's
+
+tasks that are
+traditionally done by
+
+computers in modern times
+
+that we have
+humans do as well.
+
+Moving to the left
+there, crowdsourcing,
+
+right replaces
+traditional like
+
+expert humans maybe with
+
+members of the public.
+
+So crowdsourcing
+is instead of,
+
+instead of having Like
+
+workforce that I'm going
+
+to put out a job
+requirement for.
+
+And I'm going to
+expect them to have
+
+certain skills
+and certain,
+
+certain qualifications.
+
+And I'm going to have
+a manager and I'm
+
+gonna give them
+HR benefits and
+
+all that crowdsourcing is
+
+remanent is replaced
+
+those traditional
+human workers
+
+with just general
+members of the public.
+
+And these can
+be volunteers,
+
+these can be paid.
+
+And we're gonna go
+into more detail about
+
+the different types of
+
+crowdsourcing
+that you can,
+
+you can do and
+what the strengths
+
+and weaknesses
+are for those.
+
+Data mining is
+where we are trying
+
+to extract patterns
+from data.
+
+So data mining
+is where it is,
+
+where you have
+this expression
+
+of tell me what the
+
+let me hear what
+the data is telling
+
+me. What is the
+data saying?
+
+Well, data is doing
+is it's just data.
+
+But when there's patterns
+
+that you can detect,
+
+then that might lead to
+
+hypothesis generation.
+
+It might lead to
+some insights
+
+where you're
+going to then put
+
+the science and data
+science and actually
+
+go and see if that is,
+
+that is actually something
+
+that's happening in your,
+
+in your problem wherever
+
+the data is applied to.
+
+Usually however, the
+data money is coming
+
+from human created data
+
+or a lot of the times the,
+
+the data's coming from
+human created data.
+
+So this could be where
+you've asked humans
+
+to rate movie
+reviews, for example.
+
+And so there's this
+huge thing or Yelp is
+
+a huge crowd sourcing
+customer feedback.
+
+Google reviews,
+for example,
+
+right now when we
+wanted to detect
+
+patterns on that data
+
+that has been
+human created,
+
+that's where
+that overlap is
+
+between
+
+collective intelligence
+and data mining.
+
+But you'll see
+that most of
+
+the data mining is kind of
+
+falling outside of
+
+that collective
+intelligence circle.
+
+The last one is
+social computing.
+
+And these are
+technologies that
+
+are facilitating
+collective
+
+action and social
+interaction.
+
+So these might be
+
+like social
+media platforms.
+
+Yelp, like I
+described, right?
+
+Are things that
+are going to
+
+facilitate human at scale,
+
+human collective
+review, activities,
+
+action, assessments,
+
+opinion,
+information, mining.
+
+All of those sorts of
+
+things fall
+under that area
+
+of social, social
+computing.
+
+So what has happened in
+
+the last decade or so that
+
+has made social
+computing so popular.
+
+Technology is going to
+
+catch up with
+social needs.
+
+So form follows function.
+
+So when there is a need,
+
+technology is going to
+
+evolve to meet
+those needs.
+
+And so as we
+see technology
+
+catching up with
+social needs,
+
+we see this rise in
+social computing.
+
+And so there's some
+questions, right?
+
+Perhaps the human social
+
+needs have always
+remained the same.
+
+There is.
+
+When you look at
+the human brain,
+
+a huge portion of
+the human brain
+
+is devoted to the
+cerebral cortex,
+
+which and especially in
+
+the prefrontal
+regions of the brain,
+
+are largely
+associated with
+
+social connection
+and empathy.
+
+So we're actually
+biologically
+
+wired to be social.
+
+If you're
+interested in how
+
+the brain affects
+
+social interaction
+and social behavior,
+
+and encourage you to
+sign up for my class and
+
+the systems
+engineering side
+
+on engineering and
+measuring influence.
+
+Which then takes
+this concept
+
+of influence
+we'll talk about.
+
+But it goes into
+the neural basis of
+
+it and discusses
+technologies for
+
+how we actually use
+neural imaging to
+
+measure biomarkers
+in the brain
+
+for some of these social,
+
+social needs that we have.
+
+With new technology
+over the last 20 years,
+
+we actually have the
+
+technology to support it.
+
+If you think about a
+cell phone, right?
+
+This is just amazes me.
+
+If you go back
+into the eighties.
+
+That's when I
+used to work at
+
+RadioShack and back in
+the eighties, right?
+
+A cell phone was the
+size of a brick,
+
+had about a 30
+hour battery life.
+
+And if you adjust
+for inflation today
+
+was about $40 thousand
+in today's dollars.
+
+Who is going to pay
+$40 thousand for
+
+a brick that last
+30 minutes to
+
+talk to a couple of people
+
+right now, not a lot.
+
+But through that initial
+investment, right,
+
+Motorola was able to get
+
+more and more and more
+technology development
+
+to lower the cost
+to the point now
+
+and then we
+have the advent
+
+of the iPhone, right?
+
+And the smartphone.
+
+And with these advances,
+
+we're now at a point
+
+where almost everybody has
+
+a powerful computer that
+was undreamed of in
+
+the eighties in their
+pocket right now today.
+
+And that allows us to
+
+connect with each other
+
+in new and
+interesting ways.
+
+Whether it's
+calling somebody.
+
+Like I remember as a kid,
+
+I used to just go
+off to play and
+
+my parents had
+no idea where
+
+I was until the
+end of the day.
+
+Right now, I can't
+
+imagine my
+granddaughter like
+
+going down the road to
+
+a friend's house
+without having
+
+a phone in our
+pocket so that I can
+
+get a hold of her
+now and instantly.
+
+Right. So it's it's
+still a need, right?
+
+You still want
+to know where
+
+your kids are at.
+
+But now you have
+
+this technology
+that enables it.
+
+Imagine now social media,
+
+which allows me
+to connect with
+
+international friends
+around the world,
+
+right?
+
+When I was growing up,
+
+I had a lot of friends
+from the Middle East.
+
+And when they went,
+
+we graduated
+college and then
+
+went back home and
+phone numbers change.
+
+You just lost
+contact with him.
+
+I've been more recently
+
+reunited with friends I
+
+hadn't seen in 20 years.
+
+But today, we all have
+
+social media
+connectivity and we can
+
+actually almost maintain
+a Rolodex forever of
+
+colleagues and
+friends that we meet
+
+and they might move
+and shift, right?
+
+So I think there's
+still that need, right?
+
+But the technology is
+
+allowing us to better
+meet those needs.
+
+This other term you
+might hear about
+
+socio-technical systems,
+
+that is referring to
+
+technology that
+is enabling
+
+social computing, right?
+
+So socio-technical
+system, twitter
+
+is an excellent example
+
+of a socio-technical
+system,
+
+and we use it because
+
+it was probably one of the
+
+first widespread
+
+at scale social
+media platforms.
+
+Twitter and Facebook came
+
+around about
+the same time.
+
+But why is Twitter
+so popular?
+
+Well, I would, I would,
+
+I would propose
+to you that
+
+it's because the tech
+
+is pretty straightforward.
+
+You know, you get
+like initially it was
+
+144 characters now I
+
+think it's 288 characters.
+
+The tech is
+straight forward
+
+and it
+
+makes certain social
+interactions possible.
+
+You can tell the world
+what's on your mind.
+
+And if it's interesting,
+
+a bunch of people
+might be following
+
+you and listening, right?
+
+It allows people to engage
+
+in political
+opinion and debate,
+
+discuss celebrities,
+
+or talk about what food
+they hadn't launch.
+
+It. It just makes your
+ability to communicate
+
+with others easy and
+straightforward.
+
+Socio-technical systems
+
+meet all our social
+needs, right?
+
+Stop and think for
+a minute what,
+
+what needs might
+exist today.
+
+Social needs, Where
+the technology
+
+doesn't meet those needs.
+
+And what's an interesting
+approach is when we
+
+start to understand some
+
+of the social science,
+
+some of the social
+
+psychological
+foundations of people.
+
+And what are
+human needs are.
+
+It creates innovation
+in understanding of
+
+what technology is going
+
+to be more successful
+in development.
+
+So I'm just going
+to say that again.
+
+If we understand a
+little bit about
+
+social science and
+social psychology,
+
+we understand what the
+needs of people are.
+
+It allows us to
+design, develop,
+
+and build better
+socio-technical systems
+
+to meet those needs.
+
+Alright, so there is
+
+a sociotechnical gap
+and we can address it.
+
+So the socio-technical
+gap is
+
+a term used to refer
+to this divide,
+
+this great divide
+between what we
+
+know we need to
+support socially and
+
+what we can support
+technically.
+
+But that becomes
+this space for
+
+rapid innovation
+and development.
+
+There's always going
+to be this tension
+
+between what is
+technically working,
+
+what is organizationally
+workable, right?
+
+And so there's
+different ways
+
+where we're already
+
+meeting some of the
+social needs, right?
+
+Where we look at
+
+organizational design and
+
+management, for example.
+
+That's an example
+of what's working.
+
+Another great
+example of this in
+
+military context is have
+
+you ever wondered why
+in the Civil War,
+
+people like lined up in
+
+an open field
+and shot across,
+
+shot and rifles across
+
+the field to each other.
+
+Well, everything's
+that's ridiculous.
+
+Why don't you
+disperse and hide?
+
+Well, you need to be
+able to communicate
+
+for that force
+to be able to
+
+mass fires on
+an objective,
+
+to be able to take
+and hold land.
+
+When.
+
+The Indians, right
+in the French and
+
+Indian War is attempted to
+
+disperse and hide without
+
+the ability to
+communicate.
+
+They were easily defeated
+
+in the French Indian wars.
+
+So we knew that
+we needed to line
+
+up big open fields, right?
+
+And shoot across
+from each other.
+
+Because you needed
+to be able to see
+
+the signal flags,
+
+to be able to coordinate.
+
+But as we have this
+advancement of the radio,
+
+the radio allowed us to
+
+communicate without
+
+having to see
+signal flags.
+
+So once you could
+communicate in that way,
+
+it allowed forces
+to disperse.
+
+In the late 90s,
+
+we had forced
+21 in the army,
+
+which is where we
+introduce computers and
+
+other GPS and other forms
+
+of situational awareness
+communication,
+
+which allowed
+us to disperse
+
+even further and draw
+
+down the size
+of the military
+
+that we had, right?
+
+So that's an example of
+
+this tension between what
+
+we can do technically,
+
+what we need to do
+
+organizationally to
+accomplish some Ns.
+
+What makes this difficult?
+
+Alright?
+
+Well, there are some
+factors, social factors.
+
+There's also some issues
+
+with technical complexity.
+
+And so the question
+
+that we are faced with is,
+
+what is it about
+
+human sociality that makes
+
+it hard to design
+technical systems?
+
+I want you to
+just stop here
+
+and again, pause
+the video,
+
+jot down some notes on
+what you think it is
+
+that makes human
+sociality.
+
+What is it about that,
+
+that makes it social
+groups of humans?
+
+What is it that
+makes it hard
+
+to design
+technical systems?
+
+I'm assuming you have
+
+taken, taken some notes,
+
+you've done this exercise
+
+and you
+
+paused and now you're
+ready to resume.
+
+Social life requires
+flexibility
+
+and technical solutions
+
+need to be told what to,
+
+what to expect,
+what to do, right?
+
+You gotta, you
+gotta cut it up.
+
+So being able to
+forecast or anticipate
+
+that flexibility is not
+
+a good strength
+of computers.
+
+Social activity is
+as kind of a fluid,
+
+fluid and nuance
+fluid meaning that it
+
+changes over time
+like slang changes.
+
+I mean, if you look
+at the word sick
+
+a number of years ago,
+
+sick was referring to
+
+somebody who was
+physically ill right.
+
+Then it started
+becoming somebody
+
+that was mentally
+
+unwell or mentally ill.
+
+Now it's something
+that's crazy cool,
+
+totally opposite
+meaning, right?
+
+That's just a
+word. I would say.
+
+Even social activity,
+things that we do today
+
+as normal course
+might've been very
+
+taboo a number
+of years ago.
+
+And it's also
+nuanced, right?
+
+There's, there's
+manners, there's,
+
+cuz there's things like
+
+that that are tacit in
+
+us that we can't even
+explicitly defined.
+
+And that nuance or there's
+
+things that we all know,
+
+is hard for us
+to encode up
+
+in computers or
+in machines.
+
+People often have
+
+different or hidden goals
+
+and their interactions,
+
+which makes it difficult
+
+to understand or
+to anticipate.
+
+There is oftentimes lack
+of shared contacts,
+
+contexts which must
+be negotiated.
+
+Like, I might assume
+
+that you're in this course
+
+to learn and improve
+yourself as a,
+
+as a computer scientist.
+
+And many of you are,
+
+but there's others
+that are trying
+
+to just check the blog,
+
+get a degree so
+they can get
+
+a pay raise or
+different job.
+
+Yet, again,
+other people are
+
+doing this because they'd
+
+been pressured by
+somebody else.
+
+Or you might have like a
+
+GI bill and you don't get
+
+the free housing allowance
+
+if you're not using
+your GI Bill, right?
+
+So there's a lot
+of shared context
+
+and those are negotiated
+
+as people interact
+over time.
+
+People also want to
+be aware of whose
+
+present in a shared
+space, right?
+
+So there's this,
+
+this desire to
+have understanding
+
+of what we'll do is
+when we interact with
+
+people in a public
+
+setting is we try
+and size them up.
+
+We try and make a judgment
+
+about who they are,
+what they're about.
+
+When you see a computer,
+
+it can become, it can be
+
+very ambiguous as to
+what they're doing.
+
+You don't have the
+normal social cues.
+
+And then the last
+thing is that
+
+people are going to
+
+adapt technical systems
+to their needs.
+
+So you might design
+
+a tool or a machine
+for one purpose.
+
+And people are going
+to use it for a very
+
+different, different
+purpose entirely.
+
+For example, with
+social media people
+
+design social media,
+
+I think with this intent
+
+for connecting
+social groups.
+
+But then it can
+get adapted
+
+for advertising
+and marketing.
+
+It can also get adapted
+
+for recruiting
+and retention.
+
+It can also be adapted for
+
+radicalizing
+people online and
+
+by extremist
+organizations, right?
+
+So people are
+going to take
+
+a tool or a
+technical system,
+
+regardless of what
+the original intent
+
+was and they will adapt
+them to their needs.
+
+Here's here's some
+examples, right?
+
+I need to communicate
+with somebody in
+
+another office
+at work, right?
+
+What are your options?
+
+Well, I call
+them on a phone.
+
+I call them if it's if
+
+it's a military
+setting right,
+
+I can call them on an
+unclassified work phone
+
+and call it a
+classified work phone.
+
+If I have both
+of them there,
+
+I can use an email.
+
+There's a bunch of
+different emails. I can
+
+email classified
+classified system.
+
+I could do an
+instant message
+
+on a classified system.
+
+I can go on
+
+a video teleconference
+and classified system.
+
+These are the
+different options.
+
+And you'll see
+organizations
+
+try and establish
+policies.
+
+But each of these,
+
+each of these are
+
+a different
+sociotechnical solution
+
+that you're gonna make
+
+a decision as far
+as what to use.
+
+Now, one of the problems
+
+we had in
+consulting client,
+
+I was working with
+Department of Navy.
+
+We're Navy maintainers
+on a ship.
+
+And when they were trying
+
+to do the maintenance
+task, right?
+
+As we had people
+
+actually observing
+them doing their work,
+
+we saw that
+they were using
+
+their personal phones and
+
+social media connections
+to communicate with
+
+their buddies on
+
+other ships to
+resolve problems.
+
+Well, why?
+
+Well, in this
+particular case,
+
+the ship to ship
+communication system
+
+was slow and unreliable.
+
+Or the bandwidth was
+
+prioritized for
+their needs.
+
+And the sailors didn't
+
+want to necessarily
+let their supervisors
+
+know that they
+couldn't successfully
+
+complete the task
+on their own,
+
+then they are
+finding a way to get
+
+around the normal system.
+
+Well, that created
+a security
+
+vulnerability if
+you're talking about
+
+maintenance or ship data
+
+through these networks.
+
+And so the initial
+reaction was, Oh hey,
+
+we need to discipline
+the sailors for using
+
+their personal communication
+devices, right?
+
+We can't have that
+or we need to
+
+confiscate personal
+communication devices.
+
+Well, that is a choice.
+
+But perhaps the
+other alternative
+
+is to design a
+solution that
+
+addresses the need
+of connecting
+
+peer to peer
+maintainers through
+
+a social network of
+
+friendship and being
+able to connect them
+
+so that they
+can cross-level
+
+knowledge and
+share information
+
+so that the ship
+gets maintained
+
+easier and faster
+and better.
+
+And then maybe there's
+
+different choices than
+
+just enforcing the policy.
+
+That's the kind of
+
+thinking that we
+need to get to
+
+actually help
+better design
+
+socio-technical
+systems that meet
+
+the social needs
+of people.
+
+There one technology that
+
+handles all of
+these issues.
+
+Now there's too many
+social nuances, right?
+
+And even if you built
+
+the perfect
+socio-technical system,
+
+it will be too brittle in
+
+terms of their
+social needs
+
+are going to evolve
+
+to something that,
+that doesn't meet.
+
+Or it's gonna be so
+
+complex that
+there's so much
+
+that could go
+wrong with it.
+
+Even if you could
+force people
+
+to use one technology.
+
+Nobody really wants
+to be forced into
+
+a single platform
+or single solution.
+
+And it's always bad if
+
+the technology is forcing
+
+human social
+activity, right?
+
+You don't want to have
+
+the technology
+limitation say,
+
+well, this is the
+tech we have.
+
+So you got to operate.
+
+This way to enable
+
+the tech you want to
+do is understand how
+
+humans want to operate
+and design the tech
+
+to them and maybe design
+
+multiple technologies
+for them.
+
+Here's some examples of
+
+where technology might
+
+actually change
+social life, right?
+
+The iPhone, right?
+
+We were talking about that
+
+before with the iPhone.
+
+Now, like when I have
+an argument with
+
+my wife about is is this
+true? Is that true?
+
+We just pull up
+the phone and
+
+Google it, right?
+
+If think about
+communications,
+
+right, where we're
+talking about
+
+when you send
+your kid out,
+
+you said your kid
+out with some sort
+
+of communication device so
+
+you can get a hold of
+them or track them.
+
+I think I just
+went on a trip
+
+to Europe and
+I put air tags
+
+in my luggage so that
+I could track where it
+
+was on the iPhone
+so that my
+
+my bags wouldn't get lost.
+
+Right. Commercial planes.
+
+I live in Florida and I
+work up in DC, right?
+
+Well, that technology
+of the plane
+
+enables me to live
+in a warmer climate.
+
+That's better for my
+health and better for
+
+my taxes and better
+cost of living.
+
+And I can just hop
+on a plane and
+
+fly up to work
+what I need to
+
+before I would have had
+to live where I work,
+
+automobiles, TV,
+Internet, right?
+
+And what we're
+trying to do is,
+
+is balanced these
+socio-technical systems,
+
+technical systems,
+and this is
+
+kind of a nuanced
+slide here.
+
+Are we going to expect
+
+users to adapt technology?
+
+Are we expecting users
+
+to adapt to technology?
+
+And there's a balance
+because you can't make
+
+technology that just does
+
+everything for
+everyone right?
+
+There. There's limitations
+on the technology
+
+and there's also
+the limitations
+
+on the way people behave.
+
+And so we're trying
+to balance that
+
+between what you expect
+to use her to do,
+
+what you expect
+the tech to do.
+
+It doesn't mean that a
+organizational leader,
+
+I've had this
+problem before too,
+
+where we have a client
+
+or organizational
+leader that's
+
+doing things a certain
+way and they just
+
+want you to come in
+and automate it,
+
+or they want
+you to come in
+
+and put a dashboard in
+
+place that meets
+
+their decision-making
+preferences.
+
+And either that
+is extremely
+
+costly or it can
+even be unreliable.
+
+In a static display,
+
+there are seven
+elements of
+
+information that you
+can communicate.
+
+It represented somebody
+and there could be
+
+cognitive
+limitations on what
+
+a person can understand.
+
+Its number of cases
+where a decision-maker
+
+wants to be able to view
+
+12 or more pieces of
+
+information at
+the same time,
+
+which is just not
+cognitively feasible.
+
+Yet they don't understand
+
+that or don't
+believe that.
+
+Sometimes the user
+has to adapt to what
+
+is technologically and
+cognitively feasible.
+
+And that can
+be resistance.
+
+They can be resistant
+to that as well.
+
+But trying to
+strike the balance
+
+between the socio,
+
+the social and the
+technical, it is,
+
+is essentially what we're
+
+gonna be talking about
+through the course.
+
+And it allows
+us to increase
+
+our performance in AI
+
+and machine
+learning solutions.
+
+It allows us to design
+better user interface.
+
+It allows us to
+
+better leverage technology
+
+to accomplish means.
+
+And for that reason,
+I think it's one of
+
+the most important
+courses you can
+
+take in your
+graduate program.
+
+So in summary,
+humans and computers
+
+have different strengths
+and weaknesses as
+
+we've discussed
+as enumerated,
+
+if you did the exercises,
+
+the social computing
+
+is about using technology
+
+to facilitate
+human sociality,
+
+doing work,
+creating content.
+
+Social computing is using
+
+socio-technical systems.
+
+And those
+socio-technical systems,
+
+there's a gap between
+the social needs
+
+and the technology
+solutions.
+
+There are
+
+many social factors
+that caused that.
+
+And that's
+essentially what
+
+we're gonna be
+talking about
+
+this week and
+this semester.
+
+I hope you enjoyed
+this lecture.
+

@@ -1,0 +1,645 @@
+Hello, I'm Dr. Ian
+McCullough and welcome to
+
+this course in
+crowdsourcing
+
+and human computation.
+
+Over the next
+several weeks,
+
+we're gonna go
+through a journey of
+
+understanding
+how humans and
+
+machines can work together
+
+to achieve
+better outcomes.
+
+There are certain
+tasks that are
+
+better done by the
+machine and the computer.
+
+And there are certain
+tasks that are better
+
+done by the human.
+
+And it's an increasingly
+important area
+
+of computer science
+
+and artificial
+intelligence.
+
+Part of this reason is
+
+we've gotten a
+lot more data.
+
+We've gotten a lot more
+
+computational resources
+with the Cloud.
+
+And we've gotten a
+lot more advances
+
+as a result of that.
+
+So that algorithms and
+
+machines are doing better
+
+and better and better.
+
+They're doing way
+better than they've
+
+ever done before,
+of course.
+
+And so when you look
+at the overall system
+
+of how humans and machines
+
+interact to
+solve problems,
+
+there is perhaps a lot
+greater opportunity
+
+to improve performance
+with people.
+
+I'm going to give you
+an example. One of
+
+my customers is a
+
+is an organization
+that like pastoral,
+
+respond to
+service requests.
+
+And when they receive
+the service requests,
+
+they have to evaluate
+
+what is the issue
+that's facing
+
+the customer and
+
+what response are
+they going to have?
+
+What kind of policy
+they're going to have?
+
+And they like to
+automate that so
+
+that they can get faster
+customer response.
+
+So when they're getting
+
+the initial service
+requests data,
+
+this is raw text that
+
+a customer is putting
+in there saying,
+
+Hey, we have this issue
+and they bring it in.
+
+They want to
+figure out, Okay,
+
+do we need to do
+courses of action?
+
+A course of action
+
+be send it for
+manual review.
+
+Manual review can take
+
+a long time to process.
+
+So how do we do that?
+
+Well, when we ran
+the first set of
+
+artificial intelligence
+algorithms
+
+to classify it into
+
+one of these three
+outcomes are
+
+our algorithm
+performance was
+
+about 83% accurate and
+the client was like,
+
+I'm not really
+comfortable with that.
+
+Eighty-three
+percent accurate.
+
+And so what do
+you do with it?
+
+Well, the team wanted
+
+to initially
+start looking at,
+
+well, let's try a
+different algorithm.
+
+Let's try RepRap,
+
+trying new parameters
+in that algorithm.
+
+Let's try doing
+some things to
+
+make that
+algorithm better.
+
+There were becoming
+very frustrated.
+
+The solution,
+however, came
+
+from looking at, well,
+
+how did the initial humans
+
+that were
+triaging the data
+
+and labeling the
+data and determining
+
+what the outcome was.
+
+How good were they at
+
+deciding which of the
+three buckets to put,
+
+put the data into.
+
+It turns out there were
+
+only about 84% consistent.
+
+So if the humans
+labeling the data
+
+are only about
+84% consistent,
+
+how can you expect
+the machine to do
+
+better than data they've
+ever been shown are
+
+taught in the particular
+solution was,
+
+well, let's work with
+
+the people and redefine
+
+what the standards are.
+
+Let's, let's
+redefine what,
+
+what that what
+that process looks
+
+like in order to
+
+improve the consistency
+of labeling the data,
+
+which allowed
+us to achieve
+
+97% accuracy at the end
+
+of the day, which
+is pretty good.
+
+So sometimes you want
+
+to play with the
+algorithm and
+
+get that
+performing better.
+
+But other times you
+want to play with
+
+the people and get them
+doing that better,
+
+you need to make decisions
+between the two.
+
+We haven't even begun
+to discuss issues
+
+of ethics and
+responsible AI as,
+
+as ai is becoming
+
+more and more common
+across our society,
+
+people are getting
+more and more
+
+fearful and
+they're driven by
+
+things like
+Terminator movies
+
+or fear of adoption of AI.
+
+And certain
+adversarial nation
+
+states in the world are
+
+certainly trying
+to fuel that make
+
+people more and
+more fearful of AI.
+
+But we never stopped
+to say, well,
+
+how good are the humans
+
+that are doing
+the process?
+
+You see when we look at
+
+bias or discrimination or,
+
+or, or lack of fairness
+in AI solutions,
+
+I would argue
+to you the most
+
+likely place that enters
+
+the solution is at
+the point where
+
+the racist and biased and
+
+discriminatory and
+horrible humans
+
+are labeling the data
+
+that trains the computers.
+
+So it's not just
+simply a matter
+
+of governing the
+AI algorithms.
+
+It's a matter of looking
+
+at the process by which
+
+we have data enter
+
+the humans interacting
+with that system.
+
+Can we not use that
+AI system if we,
+
+if we can measure
+the bias and
+
+discrimination and
+equity challenges in
+
+the people labeling
+the data or in
+
+a manual process
+that's existing today,
+
+can we not then
+engineer out the bias
+
+and the discrimination
+and fairness,
+
+unfairness?
+
+I would submit we can
+if we can do that,
+
+is AI risk or is
+
+failure to adopt
+AI a liability?
+
+And that's, I think
+an interesting change
+
+that our society
+is beginning to
+
+face with is we decide how
+
+we're going to interact
+with AI today.
+
+Have you ever picked
+up the phone and call
+
+the customer service and
+
+you get an
+automated system.
+
+And it's very frustrating.
+
+And you don't get
+doesn't really help you.
+
+Or have you sat on hold
+
+for long periods of time
+
+waiting to get
+customer service
+
+and customer support.
+
+Have you had been
+
+in a position where
+your manager and you've
+
+tried to actually
+hire people to do
+
+those sorts of
+tasks, right?
+
+All of these are
+
+important challenges
+in our society today.
+
+And AI provides
+the ability to
+
+introduce
+
+automated customer service
+
+and customer engagement.
+
+But what are the issues
+that customers face?
+
+How do we actually
+design algorithms and
+
+interactive chatbots
+that better meet
+
+those needs of
+the customers.
+
+These are questions
+that we need to face.
+
+We need to we need to
+address because if I
+
+can automate answering
+simple questions,
+
+but if it's a
+complicated question,
+
+get you to a human quickly
+
+as our culture
+changes and shifts,
+
+as people become
+more and more
+
+accustomed to that,
+
+Can we not produce
+better outcomes and
+
+make better utilization of
+
+people and machines
+working together?
+
+I'm sure a lot of
+you have heard
+
+of fake news and
+misinformation online.
+
+But are people really
+
+influenced by
+
+misinformation that
+they see online?
+
+Does social
+conformity that
+
+we know exists in
+in-person social groups?
+
+Does that even
+exist online?
+
+And if it does, how does
+
+the online environment
+moderate that?
+
+How should we respond?
+
+I think you'll find
+that influence
+
+and persuasion is highly
+counter-intuitive.
+
+And the things
+you think you
+
+should do might actually
+
+have disastrous outcomes
+
+and quite the opposite.
+
+So these are some
+of the topics
+
+that we are going to be,
+
+we're gonna be
+
+exploring throughout
+the course.
+
+As our industry for
+
+AI has more and more
+people entering it,
+
+we're also seeing a rise
+in technology that's
+
+even changing
+the way we do
+
+artificial intelligence
+and machine learning.
+
+We're seeing a lot
+more low code,
+
+no code environments where
+
+lower-skilled people are
+
+implementing AI solutions.
+
+But do they understand
+the pitfalls?
+
+Do they understand?
+
+Do I tune the
+algorithm or do I
+
+tune the manual
+process or the data?
+
+And as we have
+
+more and more people
+
+with less and less skills,
+
+having environments
+that allow them
+
+to conduct more and
+more problem-solving.
+
+Where do we inject
+
+that skill and
+that talent?
+
+Where do we inject
+people into
+
+the process to de-risk it,
+
+to govern it, to improve
+
+the equity and
+fairness and
+
+transparency of
+the solutions.
+
+These are some of
+
+the challenges that
+we're gonna be
+
+faced in the future of AI.
+
+And particularly
+germane to this course.
+
+So I hope you
+enjoy the course.
+
+Over the next
+several weeks.
+
+You'll have my e-mail,
+
+you'll have my my
+text, my cell phone.
+
+Probably the best way
+to get a hold of me is
+
+by by text or
+by calling me.
+
+If I'm busy, I
+just don't answer.
+
+Not you might get lucky
+
+and I'm looking forward
+
+to working with you over
+
+the next several weeks.
+
+Thank you.
+

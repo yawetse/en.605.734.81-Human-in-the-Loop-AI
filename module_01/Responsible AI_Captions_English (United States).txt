@@ -1,0 +1,1644 @@
+Hello,
+
+I'm Dr. Ian McCullough
+
+and this lecture
+is going to
+
+focus on trust,
+ethics, and bias.
+
+So you may have heard
+
+about when
+initially YouTube
+
+added humans to
+review videos,
+
+or there's other forms of
+
+this with different
+social media platforms.
+
+But in YouTube,
+
+they're adding
+human reviewers
+
+to remove things
+like pornography
+
+or hate speech or other
+types of content.
+
+And there were several
+different scandals
+
+that caused them to
+take this action.
+
+And then of course,
+other scandals and
+
+sued that made them
+question the policy.
+
+And so we'll talk a
+little bit about that.
+
+The other thing to talk
+
+about the top
+ten AI failure.
+
+So anytime you
+can go and Google
+
+top ten AI failures
+of putting the year.
+
+And it'll just, you'll see
+
+a few different
+sites that can
+
+talk about what some
+of the top ten AI,
+
+ai failures are and
+
+that's a good
+exercise to do.
+
+If you want to pause
+
+the video and do that now
+
+you can did it.
+
+And at the time of
+this recording,
+
+and here are some
+of the top ten
+
+AI failures that we have.
+
+The first was
+computer vision.
+
+Computer vision
+has evolved
+
+quite a lot since 2012
+
+and is considered a really
+
+reliable and stable. Yes.
+
+There was a Berkeley
+study in 2021
+
+that found that
+
+the computer vision
+algorithms of
+
+leading providers
+could not
+
+identify a large number
+of just nature images
+
+or videos of various
+nature categories.
+
+What really got a lot of
+
+negative attention was
+
+Microsoft's Tay chatbot,
+
+which declared Hitler
+
+was correct to
+hate the Jews.
+
+I think we can
+all say that
+
+that's like
+pretty messed up.
+
+And that caught, caught
+
+a lot of scandal.
+As you can imagine.
+
+Lesser node was
+
+IBM's AI system
+to fight cancer,
+
+to help improve on
+medical decision-making.
+
+They found that it
+was recommending
+
+erroneous drug treatments
+that can actually
+
+exacerbate bleeding
+and even cause
+
+death and other
+dangerous treatments.
+
+And was, was
+absolutely horrible.
+
+Amazon's first
+automated recruit hire
+
+to screen resumes
+was sexist.
+
+It had unbalanced
+training data
+
+and discriminated
+against women.
+
+Apple's face ID
+was tricked.
+
+If you remember,
+the initial Face ID
+
+was tricked by a mask.
+
+So if you took a mask
+
+and had
+two-dimensional eyes,
+
+you could trick
+Apple's face ID,
+
+which was a security
+vulnerability.
+
+I believe they've since
+improved on that.
+
+Amazon had an AI system
+
+to detect criminals
+and offenders,
+
+and they ran a test
+
+and found that
+it identified
+
+a large number of
+
+African-American
+congressman as offenders.
+
+So it was racist
+and biased.
+
+So there's a lot
+of issues with
+
+that, especially in crime.
+
+There was a Hong Kong
+investor in 2021,
+
+the suit of fintech firm
+for their AI system,
+
+that was losing him
+$20 million a day.
+
+And the fintech
+system didn't,
+
+didn't stop when it
+was getting losses.
+
+In Japan, there's
+
+a fully automated
+henna hotel
+
+that has all robotic
+clerks, cleaning staff,
+
+everything is fully
+automated and
+
+received a number of
+customer complaints
+
+about the robots
+breaking down or being
+
+rude or not
+functioning properly.
+
+And perhaps the top
+
+of the list is
+deep fake of
+
+a UK CEO instructing
+employees to
+
+transfer thousands
+of Euros
+
+to some offshore account.
+
+And so that was where
+I was successful,
+
+not a failure, but used
+
+in a pretty nefarious way.
+
+Then the last one would
+
+be an AI driven
+food truck.
+
+Malfunction was spinning
+out of control,
+
+almost going to crash
+into some planes.
+
+And then one of
+
+the tarmac workers
+
+rammed it with
+another vehicle,
+
+knocking it over
+to disable it.
+
+So these are some of
+
+the top ten failures
+of AI that cause
+
+us to lose trust and
+
+question our reliance
+on technology.
+
+Let's talk a
+little bit about
+
+content moderation.
+
+Many of you might
+have heard of
+
+social media content
+moderation before,
+
+but it's basically where
+
+the social media platform
+
+has people that
+are reviewing
+
+the content users post
+
+and deciding
+whether that can
+
+remain on the
+platform or whether
+
+it should be
+censored or removed.
+
+There has been a lot of
+
+political scrutiny in the,
+
+in the recent elections,
+
+2020 elections in
+
+the US around
+content moderation,
+
+arguing that
+some of it was
+
+censoring one
+
+political party
+and not another,
+
+or biasing the content
+that was censored.
+
+And a lot of people
+are outraged
+
+and you might have
+even heard elon Musk.
+
+One of his motivations for
+
+taking over Twitter is to
+
+try and create allegedly
+
+a more balanced
+platform politically.
+
+Well, despite the
+political scrutiny,
+
+there are other things I
+
+think we can
+all agree maybe
+
+shouldn't be
+posted online,
+
+like child pornography.
+
+That carries a
+prison sentence for
+
+online viewing of
+
+child pornography
+in the US anyway.
+
+There's also
+
+violent extremism
+where people are
+
+radicalized and
+recruited to
+
+terrorist
+organizations online.
+
+Or from a more purely
+commercial perspective.
+
+What about copyright
+violations
+
+or IP violations?
+
+Online?
+
+There are certain things
+
+that I think we
+can all agree on.
+
+It should be censored
+
+online and should
+not be allowed.
+
+Platform and then
+there's other things
+
+that are in a gray area.
+
+And then other things
+we think should
+
+just be the domain
+of free speech.
+
+And where those
+lines exist are
+
+largely driven
+by by moral,
+
+political, and other forms
+
+of preference
+that people have.
+
+So there's a lot of
+debate as far as
+
+where those lines
+should be drawn.
+
+And that's something that
+
+you should engage
+in as well.
+
+But these, these,
+these lines
+
+are determined by
+terms of service and
+
+that's kinda
+what establishes
+
+where those lines
+are going to be
+
+beheld and it's not
+a terms of service
+
+on can you get
+
+the data or not
+to do the data?
+
+It's just the platform
+saying, this is,
+
+this is the content type
+
+of online behaviour
+that we will permit on
+
+the platform where
+pain to offer as
+
+a free service for
+
+you or sometimes it's a
+paid service for you.
+
+Right.
+
+So that's kind
+of the area.
+
+But one of the
+other areas is very
+
+interesting with some
+of my clients is,
+
+is this idea of
+
+the workforce that is
+
+doing the content
+moderation, right?
+
+It is, it is a
+human computation
+
+or hybrid intelligence
+type of a,
+
+of a, of a workforce.
+
+Where you have
+large numbers of
+
+people that are making
+the decisions on
+
+whether they should
+remove content or not.
+
+Now, they don't do this
+
+just completely
+at isolation,
+
+trying to read everything
+
+that's posted on
+the Internet.
+
+There is ai that is used
+
+to flag potential content
+for their review.
+
+But let's think about
+
+the workers for a minute.
+
+One of the big debates
+is whether they
+
+should be allowed to
+work from home or not,
+
+especially during
+the COVID pandemic.
+
+So when, when COVID
+
+occurred and there's
+massive pandemic,
+
+Twitter for example, I
+
+wanted everybody
+to work from
+
+home and they didn't
+want people coming into
+
+the office for
+health reasons.
+
+My company, we chose to,
+
+to no longer provide
+
+that service for
+Twitter because we felt
+
+that the hazards of
+having people do content
+
+moderation at home or
+
+worse than the
+health risks.
+
+You might disagree,
+that's totally fine.
+
+But when you
+have people that
+
+are looking at
+content around,
+
+violet, violent
+crime, hate speech.
+
+I mean, there's some
+horrible, horrible,
+
+horrible things
+that people
+
+post on social
+media platforms.
+
+And when you're viewing
+that day in, day out,
+
+it can create a
+huge mental stress
+
+or mental toll on you.
+
+And so in our facilities,
+
+we have people come into
+an actual facility.
+
+We have clinical
+psychologists that are
+
+walking through
+the through
+
+the rooms and
+making sure that
+
+people are doing okay.
+
+Counseling services,
+other things just
+
+to attend to the
+mental health and
+
+wellness of the people
+
+that are doing that task.
+
+Let alone the idea.
+Can you imagine
+
+being at home and
+
+a multi-generation
+household,
+
+and a kid comes around,
+
+mom or dad screen
+and is seeing
+
+some horrible
+violent image
+
+or pornographic image.
+
+Or you can let
+your mind wander.
+
+And it's probably
+worse than that.
+
+There's also just an issue
+
+with having that in
+your house, right?
+
+And having that kind
+
+of that kind of
+environment.
+
+So for those reasons,
+
+we find that it is
+
+my company and myself
+believe that it is.
+
+It's not very
+ethical concern
+
+for your workforce to
+
+let that kind of work
+be done at home.
+
+Feel that it should be
+done in a facility.
+
+Now, there's
+other issues that
+
+come with that, right?
+
+So now, are you
+
+potentially creating
+
+bias in content
+moderation?
+
+Maybe. One of
+the other areas
+
+for bias is if you have,
+
+you know, going
+back to that
+
+political content
+moderation debate,
+
+if you have all of
+the people that are
+
+competent moderators are
+
+one or one political party
+
+and highly polarized in
+
+that political
+party and of
+
+one homogeneous culture
+
+that's not
+representative, right?
+
+You're now creating
+a workforce that is
+
+inherently biased
+in the diversity
+
+of the people that
+are doing that task.
+
+So what can you do
+to intentionally
+
+engineered
+greater diversity
+
+in that workforce?
+
+What can you do to monitor
+
+the consistency of how
+they label content?
+
+And in flight that
+
+for improving
+the standards by
+
+which we use to tolerate
+people are the,
+
+are the algorithms
+that are being used to
+
+flag potential content
+or those biased.
+
+And if their bias,
+why are they biased?
+
+Are they biased?
+
+Because of the people,
+
+the label, the
+data to train
+
+the initial algorithms.
+
+Does that drift over time?
+
+Right? So there's a lot of
+
+aspects of content
+moderation
+
+that require some
+very attentional
+
+design to think about.
+
+You know, what are
+
+the objectives
+of the task?
+
+And how do we design
+
+a system with
+humans and machines
+
+working together to
+try and create a more
+
+on-point on target,
+less bias system.
+
+And that's a challenge.
+
+But it's one of the things
+
+that as we go
+through this course,
+
+you should be
+well-equipped to a table.
+
+Another topic
+similar to bias
+
+is measuring fairness.
+
+A little bit different.
+
+Now this is a wordy slide.
+
+It's meant for your
+reference later
+
+for you to review.
+
+There's a second
+slide here that
+
+has some key definitions.
+
+And again, that's meant
+
+for your later review.
+
+What I want to talk about
+
+is these three concepts
+
+of disparate treatment,
+
+disparate impact, and
+disparate treatment.
+
+Now the first two
+disparate treatment and
+
+disparate impact come from
+
+the legal case law
+
+surrounding
+discrimination.
+
+Largely employment
+discrimination.
+
+So disparate
+disparate treatment
+
+is when you are
+intentionally
+
+treating groups
+differently based on
+
+their based on
+
+a certain protected
+class variable.
+
+Let's use gender
+as an example.
+
+So people have
+found that if I,
+
+if I hire on the
+basis of gender
+
+where I'm going to hire
+
+men because
+they're stronger,
+
+maybe I'm hiring movers
+for moving company.
+
+So I believe that men
+typically are strong,
+
+physically stronger
+than women.
+
+So I'm going to hire
+men for that task.
+
+That's disparate
+treatment.
+
+I am, I am biased.
+
+I'm biased on the variable
+
+I'm using. Just
+select people.
+
+Alright?
+
+Legally they found that
+
+if you make strength and
+
+requirement in the
+hiring process, right?
+
+Because that's
+highly correlated
+
+with the protected class,
+
+then that is also
+
+disparate disparate
+treatment as well.
+
+Disparate impact is the
+
+unintentional,
+unintentional bias.
+
+So if I include a
+
+variable or a model
+
+and I can then
+look and say,
+
+Well, here's men,
+Here's women.
+
+And are they,
+
+are there different
+proportions, right?
+
+So if I'm gonna say
+I'm gonna hire on
+
+the basis of
+height, right?
+
+Heightened strength.
+
+I don't have any intention
+
+of being discriminatory
+towards gender.
+
+But when I look at it,
+of the applicants,
+
+like 80% of the
+males qualify,
+
+yet only 50% of
+the women qualify.
+
+Those proportions are
+
+different in the outcome.
+
+So that is
+desperate impact
+
+the outcome of the model.
+
+It disproportionately
+benefits or
+
+hurts a sensitive group
+
+based on the variable.
+
+Now the disparate
+mistreatment is
+
+relatively new and there's
+
+a paper in your
+readings on this.
+
+And this is when
+
+the misclassification
+rates
+
+differ between groups.
+
+And so this is
+when you have
+
+historical ground
+truth data
+
+that's used to
+train an algorithm.
+
+And then you can see
+that the outcome of
+
+that model has
+a different,
+
+different
+misclassification rates of
+
+individuals based
+
+on the outcomes
+of that model.
+
+There's a lot of
+examples of this.
+
+Could be something like
+
+a credit score being used
+
+to determine somebody that
+
+whether somebody
+gets a loan or not.
+
+Right.
+
+And and what what
+
+are the other
+variables that could
+
+be packed into that
+
+disability
+claims benefits?
+
+It could be that
+there's just a lot of,
+
+you let your mind
+wander a lot of
+
+different
+applications of where
+
+algorithms are
+being used in
+
+conjunction with people
+to have a greater,
+
+greater impact on
+
+financial wellness
+benefits,
+
+these kinds of
+outcomes that
+
+really affect
+people's lives,
+
+so becomes an
+important issue.
+
+Now I would argue,
+do we apply
+
+these same measures to
+
+manual processes? I
+would say yes, we do.
+
+The fact that
+
+disparate treatment
+and disparate impact
+
+comes from human resources
+
+and legal literature on
+
+case law from
+discrimination over
+
+the last several decades
+shows that these
+
+are being applied to
+
+manual processes as well.
+
+We're applying them
+now to the algorithms.
+
+And then disparate
+treatment says, Hey,
+
+when you start looking at
+
+the machine-learning
+aspects of it,
+
+there are slightly
+different or
+
+new concepts of fairness
+
+that we can begin
+to think about.
+
+I think this paper on
+
+disparate mistreatment
+from 2017 is fairly
+
+recent and it shows
+that you can still have
+
+very interesting
+contributions outside of the
+
+technical as we're looking
+
+at some of these issues.
+
+Now as we look across
+
+the bottom where some of
+
+the sources of this
+algorithmic bias
+
+that comes into play here.
+
+Well, it can come
+from the data.
+
+It can come from
+you have incomplete
+
+or imbalanced,
+insufficient data.
+
+Or it could be like in,
+
+when you think of that
+content moderation,
+
+if I have a
+very polarized,
+
+homogeneous political
+group that's
+
+not representative
+of the society.
+
+Does that cause biases
+in the data labeling?
+
+We can have model biases.
+
+We made. We
+haven't calibrated
+
+it sufficiently.
+
+Maybe we haven't tested
+
+it across multiple groups.
+
+Do we have any
+insight into
+
+levers that are actually
+
+affecting the outcomes
+of the model, right?
+
+Have we done
+sensitivity analysis?
+
+Have we, have we
+
+understood where the
+algorithms are being
+
+interjected into
+the process
+
+and then the operational
+
+bias when you
+get the output
+
+of the model, what
+do you do with it?
+
+There's an example of
+one of our clients
+
+that uses AI to review
+
+hundreds and
+hundreds of pages
+
+of medical records to
+
+identify and
+
+support potential
+claims validation.
+
+Well, that can certainly
+
+expedite the approval of
+
+the benefits and get
+medical benefits
+
+and insurance to people
+that need it quickly.
+
+But do you want
+
+ai denying people
+their benefits?
+
+How explainable is it?
+
+Well, the operational.
+
+Operational use was, hey,
+
+let us just use it to
+
+get the S claims
+done quickly.
+
+So if it can read hundreds
+
+of pages of medical
+records and say,
+
+Hey, look at page
+4370 to 156, right?
+
+And it supports the claim.
+
+And then a human can
+look at it and say,
+
+Yes, I get that done.
+
+Well, that's a lot faster.
+
+Is that equally applied
+across all groups?
+
+Where do we find is?
+
+No, it's not.
+
+There are certain
+protected classes because
+
+of a variety of
+
+factors including
+their physiology,
+
+physiology, diet, which
+stems from culture,
+
+and a lot of other foods.
+
+Like there's one
+protected class that is
+
+inherently different
+in medical
+
+documentation than others.
+
+And so there's
+disparate impacts.
+
+So then the client has
+to make a decision.
+
+Are we going to use it to
+
+get the life improving
+
+Decisions to 90% of
+
+the population as
+quickly as we can?
+
+Or are we going to
+deny or withhold
+
+that because we can't
+
+do it to everybody
+equally.
+
+And that becomes
+an example
+
+of fairness, right,
+
+that we're grappling
+with and that's
+
+on the operational
+bias at the other end.
+
+So there's a lot of other
+
+paradigms for
+assessing fairness.
+
+Again, this is
+another wordy slide.
+
+I'm not going to
+go into all of it,
+
+but we've laid
+it out here for
+
+your reading in
+later review.
+
+There are generally
+
+for responsible
+AI principles.
+
+We've been talking
+about fairness,
+
+transparency.
+
+When we're talking about
+
+understanding how
+a model works,
+
+we're not really
+looking at unpacking
+
+a neural network
+and understanding
+
+what all the
+hidden layers are.
+
+What transparency is, is,
+
+do we understand what is
+
+the task we are using
+an AI algorithm to do?
+
+Do, Have we looked
+at understanding?
+
+Is it, is it biased
+in some way?
+
+Like Dewey?
+
+Are we using it to
+inform a human decision?
+
+Where does humans
+go in the loop?
+
+Do we have
+understanding as far as
+
+why we're
+
+rendering the decisions
+we're rendering.
+
+And so it's not about
+
+denying people
+neural networks
+
+because they are
+inherently unexplainable.
+
+If you're using
+neural networks
+
+to classify an image.
+
+And you've tested
+
+several different
+parameters
+
+to make sure that
+that is not biased.
+
+And then at classification
+
+of the image is going
+
+into some other step
+in the process.
+
+That's transparent.
+
+Accountability.
+
+Alright?
+
+Who's deciding about
+what to do with these,
+
+these algorithms
+and outcomes?
+
+Have we looked
+at designing
+
+hybrid systems where we
+
+have diverse people
+labeling data?
+
+Have we looked at
+the potential bias
+
+of the outcomes
+of our models?
+
+Do we have accountability
+
+mechanisms of people,
+
+checks and
+balances in place?
+
+Have we even thought about
+
+the health and wellness
+of people that are
+
+doing potentially
+dangerous or
+
+harmful tests in
+that process.
+
+The explainability, can we
+
+identify why we
+receive the output?
+
+We did think about
+
+the Washington post-test
+or more importantly,
+
+the court of law
+tests, right?
+
+If somebody sues you,
+
+can you explain how
+
+your algorithm
+render the decision
+
+it did and why that is
+
+fair and why that is okay.
+
+All of these are
+
+somewhat related,
+as you can,
+
+as you can see,
+but we kinda
+
+look at them from four
+different angles.
+
+These are different
+than design principles.
+
+So let's look
+at explaining
+
+an algorithm versus
+understanding.
+
+So explaining is providing
+
+reasons for actions to
+
+defend yourself and
+defend your model.
+
+But understanding is where
+
+you're spending kind of
+
+empathy time
+with the users.
+
+You're really developing
+that user story and
+
+understanding
+how a user is
+
+interacting with your
+system so that you can
+
+design the
+appropriate outcomes
+
+and features that is
+
+going to really
+make the user
+
+engaged and value the tool
+
+and get the
+most out of it.
+
+Well, we look at
+transparency that's
+
+not the same as
+agency and design.
+
+Transparency is
+showing insight
+
+into how the
+system has made
+
+the decisions
+it's made, right?
+
+Yes, it's partially
+giving people trust,
+
+but it's really about
+
+defending the
+understanding
+
+how the system works.
+
+But agency is
+providing individuals
+
+the ability to change or
+
+alter how they're going to
+
+interact with that system.
+
+You may not
+want to do that
+
+if you're dealing
+with hiring decisions
+
+because once you
+allow users agency,
+
+then they have
+the ability to
+
+alter the system so
+that it lacks fairness.
+
+So you have to have
+
+some of the balance
+between some of
+
+these different features
+or systems as you're
+
+designing whatever
+
+your human machine
+system is.
+
+I hope you enjoyed
+listening to this lecture
+
+on trust, ethics and bias.
+
+Hopefully you
+see that it's a
+
+very rich and
+deep concept.
+
+We will go into
+a whole lot
+
+more in this course.
+
+But there are
+other courses on
+
+responsible AI at
+Johns Hopkins.
+
+If you're interested
+in the topic.
+

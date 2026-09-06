@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "gpdoc": {
+      "command": "node",
+      "args": [
+        "/Users/yawetse/.vscode/extensions/repetere.gpdoc-3.14.3/out/mcp-server.js"
+      ]
+    }
+  }
+}
