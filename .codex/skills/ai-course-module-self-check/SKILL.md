@@ -31,6 +31,8 @@ Prefer `rg --files module_01` adjusted to the active module for inventory. For P
 3. Write the requested artifact to the module folder when the user asks for a file.
 4. Ground the summary in the local files. Mention source filenames where useful.
 5. Use straightforward first-person course language. Explain the relationship between people, models, data, evaluation, and governance when it is relevant. Avoid hype, em dashes, and ornamental phrasing.
+6. For every module learning summary, end the document with `## Glossary of Module Terms`. Include every term explicitly defined in the assigned module materials that is relevant to the summary. Give each term a plain-language definition and a direct local Markdown link to the source file, with page, section, or timestamp when available.
+7. Treat specific facts, figures, dates, counts, results, and study conditions as source-traceable claims. Capture the material facts needed to understand the reading’s evidence in a `## Specific Evidence to Remember` section or adjacent sourced prose. Link each claim directly to its local source and identify the relevant page, section, table, figure, or timestamp. Do not present an interpretation as a source fact.
 
 Recommended summary shape:
 
@@ -46,6 +48,8 @@ Recommended summary shape:
 ## Assignment Readiness
 
 ## My Takeaway
+
+## Glossary of Module Terms
 ```
 
 Keep the summary practical. Capture what I need to remember for the module's reflection, analysis, evaluation, or other assignment.

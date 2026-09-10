@@ -1,0 +1,193 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hi, everyone. Welcome back to the final lecture. Uh, for this module, this is Doctor Christine Liebert.
+
+And in this lecture we're going to shift away from analyzing systems and more towards designing them.
+
+We will use a repeatable process that starts with considering the problem.
+
+Then we'll move on to task decomposition architecture, recruitment incentives, aggregation, quality control and ethics.
+
+I want to stress that each of the decision that each of the decisions that's made will constrain the decisions that will follow.
+
+So at the end of this set of slides, there's also, um, a checklist for your design assignment for the module.
+
+All right. So previously we focused on understanding system. But today I want you to shift perspective a little bit.
+
+Think like a system architect who's responsible for designing a brand new computation system, a human computation system.
+
+Successful systems are intentionally engineered. They don't just pop out of thin air.
+
+Um, we're going to introduce a repeatable design framework so that you can apply this same framework to a wide variety of domains and expertise.
+
+Our design process will be beginning with the problem rather than our favorite platform or what our incentive is going to be.
+
+And I'd like to emphasize that not every problem should become a human computation problem.
+
+Good candidates are ones where humans have a cognitive advantage, like judgment or creativity or context.
+
+Um, but also where the work can be divided into many individual contributions.
+
+We then analyze the task, choose the architecture, recruit contributors, design motivation, aggregate results, validate quality,
+
+and evaluate the ethics These stages form a life cycle with feedback that goes much like engineering after deployment.
+
+So, like software engineering, later testing may reveal that an earlier assumption needs to be revisited.
+
+Starting with identifying the problem, I know I went into it a little on that last slide.
+
+Um, but suitable problems, um, is one that's difficult to currently automate, but it's feasible for people to do an at scale.
+
+I would caution against using human computation if the task that you have in mind is already kind of cheap and easy to automate,
+
+or if, um, all the contributors that you want need to recruit have to have full context for the problem.
+
+All right. Now we have a problem. Let's go into task decomposition. I think it's one of the most important engineering decisions.
+
+Um, it reduces the cognitive load and it allows for parallel work to take place.
+
+But when you decompose tasks, I wouldn't say smaller is not always better.
+
+Smaller tasks will increase scalability. They're going to reduce your cognitive load.
+
+Um, and it's going to simplify your quality control.
+
+But decomposition needs to preserve enough context so that contributors can continue to complete the work accurately.
+
+It also has to specify how those units can later be recombined as a coherent result.
+
+So now that we've identified the right problem, figured out how we're going to decompose our tasks, let's consider the architecture.
+
+This was from one of the previous slides kind of summarizing the different options.
+
+And you can actually have a um, combination of architectures that you choose to address your problem.
+
+You need to select the architecture based off the characteristics of the problem, not just from a.
+
+Well, I personally prefer collaborative, so I'm going to apply it to my problem though.
+
+Um, and furthermore, not one single architecture is going to be optimal for all tasks.
+
+Uh, you should use parallel work if you're trying to do independent labels.
+
+Um, if you want to use architectural or hierarchy, I'd recommend using this if it fits with escalation.
+
+Uh, if you want to use collaboration, I would use this on something that's requiring like a creative synthesis for an iterative architecture that
+
+works well for refinement and a competitive one is a good architecture to choose to fit an open search problem.
+
+Again, there's going to be trade offs. No matter what architecture or what combination of architectures that you use.
+
+Um, you're going to be considering scalability, the coordination costs, the output quality and all of that when you're making this choice.
+
+All right. We're getting to our next step, which is recruiting workers.
+
+Some of the systems that you are making might require experts, but some might benefit from just kind of public participation,
+
+required expertise if you are requiring it, needs to match the task complexity.
+
+You don't need a PhD to label a dog a dog. And remember from our lectures that having a diverse group is going to reduce the shared blind spots.
+
+So if you're going with the broad public participation method, that's really great for some tasks.
+
+But if you need like a medical diagnostic or legal advice there, you might need credentialed experts.
+
+Moving on. How are you getting these credentialed experts or broad Citizens to want to work in your system.
+
+Well, your system's incentives are going to influence the quality of your participants.
+
+Um, sometimes you're going to have to pay them if it's something like Mechanical Turk.
+
+Maybe you want to make it a gamified system, like fold it, um, appeal to some sort of volunteer community or altruism.
+
+And the community that you're targeting might respond to different incentives.
+
+So maybe money is great if you're being paid enough.
+
+Um, but maybe going the social purpose route can attract volunteers where you need a specific set of knowledge incentives,
+
+or can also shape the behavior of the people that the workers that you recruit.
+
+So if you have a poorly chosen reward that is going to lead to gamification or kind of superficial checked out effort.
+
+Next up are our aggregation strategies. The output type that you are getting from your workers should be determining the aggregation strategy.
+
+Something like majority voting works great for categorical labels,
+
+when kind of all of the workers are going to kind of come to the same reliable, independent conclusion.
+
+Weighted vote and expectation maximization really help for variation in reliability,
+
+and consensus is more appropriate if you're requiring synthesis instead of just a single label.
+
+Moving on to quality control. This should be designed before data collection even begins.
+
+We have gold tasks to estimate reliability using known answers.
+
+Redundancy. This is going to reduce single person error within your system.
+
+And then we have an expert review that's going to handle kind of low confidence or either low confidence or high stakes cases.
+
+Now our ethical design principles we have privacy.
+
+It requires minimizing exposure to data fairness.
+
+Um this is going to require auditing assignments in the results. Transparency supports informed consent compensation.
+
+You want to be paying fair wages and not exploit labor.
+
+Uh, ethical review is not just a footnote or an appendix that you add after you're finished your design.
+
+This should be something at the forefront as you're coming up with your entire system.
+
+As a case study. We've gone through disaster mapping before, but it shows. Working end to end how this system functions.
+
+We have satellite imagery is divided into these small geographic units.
+
+Then we have our contributors annotating the damage in parallel.
+
+And then if you have more of an uncertain region with more contention, that goes into a verification tier.
+
+Once we have all this information, we can aggregate it to produce a map for first responders to respond quickly to some sort of natural disaster.
+
+This is a hybrid parallel and hierarchical architecture,
+
+and it's going to balance both the urgent throughput with the need to avoid labeling the wrong road or building.
+
+And speaking of incorrectly labeling, I wanted to include some of the common design mistakes that I've seen.
+
+Uh, Task design. Um.
+
+If your task is too ambiguous, there's going to be too much variance in your results.
+
+If your incentives are weak, your workers are going to have minimal effort.
+
+If you miss validation that less more noise and errors flow downstream.
+
+Um, and each problem should be oh, and unnecessarily complex, um,
+
+workflows will consume any sort of benefits of scale that you're hoping to achieve by using collective intelligence.
+
+This is a little bit wordy of a slide,
+
+but I'm using it more as a reference today for all of you when you're working on your design project or assignment.
+
+Um, so please use this kind of as a reference of things to consider when you're going through it.
+
+All right. Now for our assignment. You're going to choose a novel problem and apply the framework that I have set out in that last slide.
+
+I want you to justify every single architectural choice that you make and have a rationale for why you selected it,
+
+and what trade offs you are balancing. Your reflection should explain what could fail and how you would measure that within the system.
+
+After launch. A strong decision makes its assumptions visible and testable.
+
+All right. This is our last lecture for this module. My takeaway for you is that human computation is not just about how can we use crowds.
+
+It's about designing computational systems that effectively combine human cognition, architecture and quality control.
+
+I hope you enjoyed this lecture and the rest of the module. I will see you in office hours this week.
+
+If there's anything you want to discuss or ask. Again, this is Doctor Christine Liebert.
+
+I hope you have a great day.
+

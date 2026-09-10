@@ -1,0 +1,217 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hi, everyone. This is Doctor Christine Liebert of Johns Hopkins. Welcome back.
+
+Uh, today in our lecture, we're going to be answering a question. And that is kind of a interesting one in my opinion.
+
+Um, the question is, why do well-organized groups consistently outperform highly capable individuals.
+
+And we call this collective intelligence, and it emerges only under conditions that really preserve the useful differences
+
+that each contributor has and combines their information most effectively.
+
+So today we're going to walk through some of the wisdom and failure modes of crowds,
+
+and then we'll get to how we can design appropriate systems for collective intelligence.
+
+Let's begin. Sorry about that.
+
+Collective intelligence is the ability of groups to perform cognitive tasks in a way that exceed what any individual could accomplish alone,
+
+and this is something that is studied by Thomas Malone.
+
+He is a professor at MIT, and this is kind of recent.
+
+This was 2006. Um, he has his center for Collective Intelligence, and he's known for his his research on how groups and computers collaborate.
+
+He likes to call the concept super minds.
+
+Um, and his most influential work, arguably, is the mapping of the genome of collective intelligence to harness crowds,
+
+where he would ask two pairs of questions for these designs one who is performing the task and why are they doing it,
+
+and to what is being accomplished, and how is that being done?
+
+So when we're talking about collective intelligence, we're not talking about just collaboration.
+
+We're talking about an actual synergy of the group being greater than the individual.
+
+And this is not just. These people work together.
+
+We can solve real world problems by individual experts or from the crowd.
+
+Crowds, I'm not arguing, are inherently better than experts.
+
+There's a time and a place to have them. But, um, crowd's advantages come from having being able to combine multiple independent judgments.
+
+But if we can't effectively aggregate all of their judgments, it's just a list of opinions.
+
+If we can aggregate it effectively, this crowd becomes a computational resource that's capable of producing highly accurate estimates.
+
+So here's an example of that. I don't know if you're familiar with Francis Galton's famous ox weight experiment.
+
+He had just under 800 individuals at the fair. Guess the weight of an ox.
+
+And even though there was a lot of variation in these individual guesses, the average estimate was incredibly accurate.
+
+This was because these were all independent estimation errors, and they would cancel each other out,
+
+so the aggregate estimate would then converge on the right answer.
+
+But this is highly dependent upon all of these estimates having statistical independence.
+
+Um. The result is not saying that every single crowd is wise.
+
+It just means that independence and a suitable aggregation rule can take noisy
+
+judgments that we're getting and turn them into an actually accurate estimation.
+
+For those of you who are familiar with the Wisdom of crowds by James Swarovski, um, he has these four conditions.
+
+For collective intelligence. One, it's diversity ensuring that contributors possess different information and perspectives and heuristics.
+
+Second, independence. This prevents contributors from just copying what somebody else is doing.
+
+Decentralization. This is talking about, um, letting individuals apply their own knowledge.
+
+And finally the fourth is aggregation, which is what you'll hear me talk about a lot throughout this, uh, this lecture.
+
+Um, it's combining all of these individual contributions into a very meaningful collective result.
+
+And if you remove any single one of these conditions, you are going to degrade the collective intelligence performance.
+
+Crowds can also become less intelligent if crowd contributors lose their independence.
+
+Think of groupthink, where you see social pressure that's going to force you to change your opinion based off of what everyone around you is doing.
+
+Then you have information cascades where individuals ignore their own evidence because
+
+of earlier contributors were influencing their perceived consensus and herd behavior.
+
+You can kind of see this in like financial bubbles or online misinformation spaces, or like TikTok trends.
+
+Once people copy one another, it starts becoming correlated and aggregation can actually amplify all of those errors instead of canceling them out.
+
+It just feels like a lecture where I recommend, um, business books written by men.
+
+But, uh, another example is Scott Paige's book called The Difference.
+
+And he did research showing that diverse groups of semi-skilled individuals can outperform homogenous groups of experts if the problem is complex,
+
+because those experts who have really homogenous, um, thinking have the same assumptions, they have the same blind spots and views of limitations.
+
+By having more diversity in who's contributing, you're including new heuristics and assumptions,
+
+and you're complimenting the expertise as opposed to just merely replacing it.
+
+Um. Another theme throughout this course is that our strongest system is one that is going to be a hybrid.
+
+In this case, I'm talking about combining expertise with some sort of cognitive and informational diversity.
+
+Aggregation is that computational step that is transforming what human inputs we collect and making them into a single system output.
+
+But we have to be careful in choosing which one we want to use.
+
+So you can take the simple majority vote, which I usually do for Mechanical Turk.
+
+Just assuming everyone has equal judgments, you can use a weighted vote where you're incorporating more of a reliability of the individual saying,
+
+oh, I think this person is more likely to be right than the others. Using consensus is going to support a deliberation prediction markets.
+
+They use incentives and prices. Um, to kind of summarize a belief that's like the Caci, um, predicting.
+
+Uh, by putting bets on on these.
+
+And I just read a paper, and I wanted to kind of, like, do a deeper review into it, saying that it's actually using prediction markets to have,
+
+um, predictions based of like what the weather will be gets higher accuracy from non meteorologists type people than the meteorologists.
+
+Um, uh prediction. So it's important that you have to choose an aggregation algorithm because that is an engineering decision.
+
+And it's going to affect the accuracy and how robust it is. Uh communication is something that can also affect your network.
+
+Um, sorry. Communication structure can also affect the collective intelligence.
+
+You have centralized systems where information is going to flow through a hub.
+
+But, um, it can also get stuck in a bottleneck.
+
+You have Decentralized systems that allow independent contributions than the fully connected ones.
+
+Where you're going to get rapid information sharing. But then you might also have that downside of the groupthink that we were just talking about.
+
+Um, so decentralized structures are going to preserve the diversity and independence a little bit more.
+
+Okay. I want to go into some case studies. This is going to be a little bit more the focus of the next lecture.
+
+We have Wikipedia where you'll see interactions between contributors, editors, um, any sort of policies that are published and the revision history.
+
+It also has many independent improvements that accumulate over time into a very highly accurate knowledge base.
+
+Um, but all of these elements, the editors, the policies, the contributors,
+
+they have to work together to make something that is then more accurate than
+
+not one single author would make if they were like the expert on the topic.
+
+Another example are community notes. You see these on X, I believe on blue sky.
+
+They're not just published because people can all agree. Um, the community note that gets picked by the platform is.
+
+Favored because it finds agreement among differing perspective.
+
+And on social media, the platform will have you labeled as leaning in one political direction or the other.
+
+And if they see a consensus forming across multiple groups, that's when they will publish the community.
+
+Note. We still have to measure collective intelligence empirically,
+
+just like any other computational system we have standard metrics like accuracy, which is usually our go to of how correct it is.
+
+But we also need to consider the coverage.
+
+How much of this problem space are we actually able to reach through our group of people who are working on this reliability,
+
+meaning how consistent we are across our annotator populations?
+
+Um, and then our throughput of how fast can we get things done and at what cost.
+
+And just like everything else we've discussed, you can have very great accuracy and not great results on the other metrics.
+
+So it's not linear and they don't all correspond to each other.
+
+So comparing all of the strengths, weaknesses and when to use and when not to use humans, crowds and AI.
+
+We see that individuals have deep expertise but kind of narrow coverage, and they're good in terms of specialized judgment.
+
+If you need someone specifically who's like the leading expert in something, but they will have blind spots.
+
+Crowds have diversity and robustness, but you need to coordinate them.
+
+Um, it's great for things like open ended discovery, but depending on how your topology for the communication works, it could also lead to groupthink.
+
+Um, for large language models, they are fast, but they might lead you to have some hallucinations.
+
+They could do these routine tasks that are high volume. Um, but they also have their failure mode.
+
+That's the distribution shift. So these are all things to consider because we need to understand where to use all of these different um.
+
+Individual components in a system. Now Successful systems begin with thoughtful task design.
+
+It's so important to recruit diverse contributors to preserve independence and to use the appropriate aggregation algorithms.
+
+A key takeaways here are that collective capability is a system.
+
+System level, um, a function.
+
+And we can't find that in any single contributor.
+
+In our next lecture, we're going to go through some more case studies, real world examples, and delve deeper into computational platforms like Foldit,
+
+Galaxy Zoo, Wikipedia, Community Notes, and to show how all the different principles are implemented in practice.
+
+So I hope you enjoyed today's lecture.
+
+Thanks for taking the time to watch it. Um, this is Doctor Christine Liebert.
+
+Take care.
+

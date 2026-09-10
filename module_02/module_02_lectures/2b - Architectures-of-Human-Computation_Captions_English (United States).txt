@@ -1,0 +1,269 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hi, everyone. Welcome back. This is Doctor Christine Leppard and this lecture.
+
+We're going to be moving away from defining human computation and more towards engineering it.
+
+Our central idea is that a crowd does not automatically produce reliable computation.
+
+Reliable reliability emerges from the workflow that structures participation, checks quality, and combines results.
+
+So we're going to move through a few more examples and focus on the architecture rather than the platform name.
+
+And by the end, you'll be able to recognize common workflow patterns and explain the trade offs that each pattern can create.
+
+Let's begin. In our last lecture, we defined human computation as intentionally embedding people inside of an algorithmic process.
+
+And now what we need to do is ask how those human contributions can be organized into a functioning system.
+
+Recruiting a large number of people is necessary for some systems, but it's not going to be sufficient in and of itself.
+
+On top here, we have a naive pipeline that's setting a problem to people and just hoping that they get a useful response back,
+
+and these are going to make unreliable results. The bottom pipeline here, the engineered one,
+
+actually inserts architecture between the problem and the participants, and it treats humans as nodes in a design.
+
+Computational graph architecture is the engineering intervention that transforms crowd participation into reliable computation.
+
+Human computation resembles distributed computing in a way in that many nodes can process, work in parallel, and contribute to a combined result.
+
+The difference is that computer processors are more homogenous and predictable, whereas people have a lot of variability.
+
+Human latency changes with availability and human error rates change with how much expertise they have,
+
+how much fatigue they have, what their incentives are, and how clear the instructions were due to that variability.
+
+That means that we need a bit more redundancy, routing and quality control when working with humans.
+
+So the distributed system analogy gives us a useful vocabulary, but the human characteristics of the nodes are still central.
+
+Most human computation systems can be understood through three core operations.
+
+First, you have to decompose a large task into small units that a person can reasonably complete.
+
+Second, we need to coordinate or route those tasks, um, to the appropriate contributors.
+
+And third, we need to aggregate the responses into a reliable output Every single human
+
+computation system from Galaxy Zoo and Mechanical Turk and all the way to Wikipedia.
+
+It follows this pipeline regardless of what domain it's in.
+
+Our engineering challenge is figuring out how to optimize each stage for the target performance criteria.
+
+So let's go through a bunch of examples of these types of architectures.
+
+I'm going to spell out the pros and cons and then we'll put them all together.
+
+Our first is independent parallel work. It's the simplest high scale architecture.
+
+It's where you divide work into tasks that have no meaningful dependencies.
+
+And then you're going to send each task to a different contributor.
+
+An example of this would be like capture interpretation, um,
+
+the galaxy classification that I mentioned in the last module and large annotation pipelines.
+
+The advantage here is that it's fast and there's a very low coordination cost,
+
+since these workers aren't communicating with each other and having to agree on things.
+
+But that's also the weakness is that a single response can be wrong.
+
+So the design when you're building a design like this,
+
+you have to decide whether just having one independent response is adequate or whether you're going to need some sort of redundancy.
+
+One tasks share no dependencies.
+
+These systems scale linearly with the size of the workforce, and this is kind of like a human equivalent of MapReduce.
+
+Maybe I shouldn't be comparing humans to computers in such a extreme way each time, but basically throughput is what's going to be really high here.
+
+But accuracy is more task dependent. And we don't have to worry though, about the inter work coordination.
+
+If we wanted to, we'd pivot to redundant parallelism.
+
+So when you're assigning the same tasks to multiple people, instead of just having one person do it for this,
+
+you can have agreement that would indicate that the majority vote is correct.
+
+But there's also other things you can do to figure out, like weighing contributors based off their expertise.
+
+Having this redundancy is generally going to improve your accuracy, but it's going to cost you a little bit more.
+
+So you have to think of these trade offs. So how much confidence does this application require and how much money do you have to fund it?
+
+When I use platforms like Mechanical Turk,
+
+usually I'll have 3 or 5 workers on a given task and just take a majority value or the majority vote of the value that I accept.
+
+Hierarchical workflows match different levels of work to different levels of expertise.
+
+So you have a very large pool of humans handling routine cases.
+
+Then reviewers are going to take just the more uncertain ones, and you're going to see have experts be given very hard or highest risk items.
+
+We see this in example like Wikipedia and medical annotation using some sort of tiered structure.
+
+And the key design is figuring out what your escalation criteria should be.
+
+So when do you need to escalate this task from like a low level step to okay, we're going to need an expert here.
+
+Iterative refinement is that when we're asking contributors to improve on something that we already have, instead of creating something new.
+
+Examples for this would be Wikipedia articles, Google docs, um,
+
+open source code And what you find is kind of a sequence of edits to get to the final product.
+
+Uh, it's important that the design preserves some sort of trace to see the version history, so that you can roll back any mistakes that are within it.
+
+And the benefit here is that you have a cumulative improvement.
+
+But on the risky side is that later contributors can still reinforce an earlier error.
+
+Um, I think like when you're pushing changes to git, if you're on a branch and something happens,
+
+you need to make sure you have those recovery mechanisms so you can revert.
+
+Divide and conquer. This is where you partition a large problem into a bunch of subproblems.
+
+Um, which that first step probably sounds familiar, but then you're solving them independently and merging their outputs partially.
+
+So examples for this. So think of disaster mapping. If you have a bunch of geographic tiles covering different Um, longitude and latitude.
+
+All coordinates or document transcription.
+
+Um, where you're saying, okay, you take this page, you take this page, you're working on parallel work, but it's more.
+
+Scalable in this approach. Um, but it's very important that you have figured out what your merge step is.
+
+Competitive systems. This is where you're broadcasting the same problem to a bunch of different problem solvers and figuring out,
+
+um, what the best scoring response is and using that.
+
+So competition is something where people have this extrinsic motivation to be the best,
+
+and they feel this natural pressure towards I need to produce the best.
+
+So we see this in examples like Foldit and Kaggle.
+
+Um, the architecture requires very little coordination among participants because the scoring function is what is doing the selecting.
+
+But an important caveat here is that when you're designing a system that's using competition like this, it needs to.
+
+You need to be careful what you're making as your scoring function,
+
+because it needs to reflect the quality of the solution, because that's what workers are going to be optimizing for.
+
+They might not be familiar with the specific problem you're trying to solve. They're just trying to say, well, how can I get this number higher?
+
+And finally, we have collaborative networks.
+
+These are what allow contributors to communicate, coordinate and build a shared result without one central controller saying every single step.
+
+Examples here are um, Wikipedia has talk pages and we have things like open source pull requests,
+
+community notes that all of these rely on a networked interaction of multiple people.
+
+They can combine distributed expertise and produce insights unavailable to any single person.
+
+It also introduces coordination costs and the possibility of groupthink.
+
+So the topology of the network based on who can see and influence who becomes part of the system architecture.
+
+And that's also important when we're working on designing them. So putting them all together.
+
+What I'm trying to do here is show that there is no architecture that is going to win out on every single dimension.
+
+We have independent parallel work, which is scalable and fast, but not as accurate.
+
+Um, the redundancy is going to improve your confidence at an additional cost.
+
+Uh, hierarchies are having higher accuracy with greater latency.
+
+Collaborative and also iterative systems have more of a complex synthesis and require more coordination.
+
+Um, so what I'm really trying to convey is that selecting your architecture, it's optimizing on multiple different elements.
+
+You're trying to consider the quality of the result, the cost, the speed, the expertise and the risk.
+
+Every design decision that you make when you're picking an architecture is a trade off,
+
+and the correct architecture is determined by the application's performance requirements.
+
+Going back to the example of Foldit, where your protein folding.
+
+Um, it's useful because it combines a number of different architectures instead of just relying on one.
+
+So you see the competition where people, the humans involved in it are trying to compete through their rankings,
+
+but they're also collaborating by sharing their strategies.
+
+And we're seeing this iterative iteration of iteratively improving the structures across their sessions.
+
+The system then selects promising solutions for scientific evaluation.
+
+So yes, it's good that there are people who are very enthusiastic about the mission for Foldit.
+
+Um, but its success can be attributed also to the architecture, the arranging,
+
+the spatial intuition, the motivation, the interaction and the workflow. Um, that is what is kind of the secret sauce of Foldit.
+
+It's very architecturally sophisticated to give you an idea of how successful it's been.
+
+Back in 2011, um, Foldit players actually solved a protein folding problem in I believe it was ten days.
+
+And computational methods had been struggling with this problem for 15 years.
+
+So. Those are some massive gains.
+
+And as I said, all these different architectures have trade offs. Um, you have redundancy raising quality but increasing costs pretty much linearly.
+
+Hierarchical review conserves expert attention, but can create a really narrow bottleneck.
+
+You don't know like when to escalate. Uh, using things like parallelism is going to improve your speed, but it makes consistency a little bit harder.
+
+And the design that you need to pick for your, um, the architecture that you need to pick for your design,
+
+it really depends on what the consequences of having an error are.
+
+So don't just say what is the best architecture in general,
+
+you need to figure out what failure modes are acceptable to the application that you are using for your assignment.
+
+Um, production systems much like Foldit usually combine multiple architectural patterns and community notes.
+
+Like you'll see on I believe they call it X.
+
+Now that's a mixture of collaborative contribution with both competitive or like a bridge based scoring system.
+
+OpenStreetMap uses divide and conquer with iterative revisions.
+
+Wikipedia has the iterative refinement, um, plus hierarchical review.
+
+And then we have Galaxy Zoo, which uses both um redundant parallelism and majority voted morphological morphology labeled at scale.
+
+Recognizing that these composited composites are used together is important, um,
+
+because it's very rare for a system to fit so neatly into a little box with just one architectural system.
+
+All right. Our key takeaways. Um architecture determines performance.
+
+Um, scale, quality and cost and latency are all properties of the workflow.
+
+Um, not just of the workforce. If we are thinking of people as distributed processors, we can then decide that they are providing um.
+
+Many options in terms of the design.
+
+As long as you remember that all of these humans that we are using as nodes in our graph are socially influenced and still fallible.
+
+In our next lecture, we're going to talk about the theoretical foundations of collective intelligence.
+
+So these are the conditions under which crowds are smarter than experts and also when they fail catastrophically.
+
+Thank you for watching this lecture today. I hope you enjoyed it and I will see you in the next one.
+
+Again, this is Doctor Christine Liebert. Take care.
+

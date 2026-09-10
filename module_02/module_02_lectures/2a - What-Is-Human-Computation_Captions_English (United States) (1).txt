@@ -1,0 +1,275 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hi everyone. This is Doctor Christine Liebert of Johns Hopkins. Welcome to module two.
+
+This is human computation and authentic AI.
+
+Uh, our module ten will go a little bit more in depth with a genetic AI, but this is going to be a preview of what is to come on that front.
+
+Today we'll be asking what makes human effort a computational operation rather than simply human participation?
+
+Effectively, people can be deliberate components of a computational system.
+
+We will be distinguishing human computation from just regular tech use, crowdsourcing, and collaboration.
+
+We're also going to examine why designers still rely on human perception, judgment, and context, even as machine capabilities improve.
+
+Let's begin. For an overview, human computation is considered how humans became deliberate components of the computational systems.
+
+Um. We're not talking about humans as just, um, users of the system.
+
+They are embedded within the system as part of it.
+
+The ideal human computation problem sits at this intersection of both human accessibility as humans can actually get done, and machine difficulty.
+
+Our important point here is that the resource assignment that we give to the machine,
+
+and that we give to the human, um, we need to delegate that to their comparative strengths.
+
+It's a very strong system that you can build. It doesn't assume that people or automation should be doing everything.
+
+It begins by figuring out the properties of all the tasks that you're breaking down,
+
+and deciding which resource resource would be most reliable for that task.
+
+So for machines, we're talking about fast, scalable, but difficulties with more ambiguous assignments and crowds have rich judgments.
+
+But they're slow.
+
+They're going to cost you a lot of money, and they have variability, which we'll talk about more later as being both a pro and a con.
+
+And we have that sweet spot here of human and machines together.
+
+So humans and computers fail in different ways.
+
+And coordinating our human contributors reliably is going to require very explicit architectural choices at every stage in our development.
+
+While people are good at handling things like ambiguity, um, differences in culture,
+
+perception, creative judgment, computers excel more on things like speed,
+
+precision, memory and storage, And human computation uses this more complementary, rather than treating humans and machines as competitors.
+
+Um, our opportunity when we're designing these systems is to assign each step to the resource that is best suited to do it,
+
+and create hand offs that preserve the context and quality, which is something that you'll be noticing a bit in our assignment for this module.
+
+Now there are three elements that make that define human computation and give it that precision.
+
+Human effort has to be intentional, meaning that the system was designed to request it.
+
+Um, it's productive so that, um, the response becomes a useful and structured output that the machine can read.
+
+And finally, it's embedded, meaning that the human step is part of the algorithmic pipeline rather than residing with the outside of it.
+
+And if removing the human step changes the computation, we're looking at more than a genuine human computation system.
+
+I'm feeling bad about how much text around some of these slides,
+
+but hopefully you can bear with me, because human computation has a lot of related fields.
+
+And you might be asking, okay, well, there are courses on crowdsourcing and human computer interaction,
+
+human computer interaction or collective intelligence.
+
+And I want to try to distinguish here how human computation is different but still related to those fields.
+
+So HCI focuses more on the interface of what you're interacting with as the human.
+
+Crowdsourcing is more focused on sourcing contributing, contributing Contributions at scale and for collective intelligence,
+
+that's more focusing on emergent group capability, which is also something we're going to be covering in this module.
+
+So human computation has elements of those, but it's focusing specifically on people executing those design steps in an algorithm.
+
+If you take something like Wikipedia for example, you can look at it through the lens of all four of these fields.
+
+Um, but the research question that you have about Wikipedia is going to be what determines the label that you put on it as,
+
+oh, this is a human computation problem, or, oh, this is a crowdsourcing problem.
+
+And this field emerged in early on in the millennia, um,
+
+as researchers discovered that everyday human activity could be channeled into structured computational work.
+
+What I want to start by talking about is in 2001, the ESP game by Louis Van on,
+
+and he's going to be a common name that we're talking about in this module.
+
+Uh, because he I wouldn't say he like fully invented this field, but a lot of the major milestones and use cases came from his research and work.
+
+So he, um, created this game, the ESP game that was basically image labeling as a game.
+
+So gamify ING it. And then he got to thinking a little bit more.
+
+He's this professor at Carnegie Mellon, and he decided to create Captcha two years later,
+
+which is how humans verify that they're humans on the internet if you're trying to get through something.
+
+A couple years later, he realized, okay, we might need to up the game a little bit.
+
+He made reCAPTCHA, which is a combination of verification and ebook digitization.
+
+Uh, and then in 2008, we have the emergence of Foldit, which I don't believe was Louis won on,
+
+but that was an example of another collaborative game that led to more research in the bio domain and Galaxy Zoo,
+
+which is a citizen science image classification problem, which we'll talk about a little bit more to get back to Louis Von on.
+
+He is also, if you've heard the name before, um, the person who came up with Duolingo.
+
+So he has taken the idea of human computation and really harnessed it into some amazing products that we're going to be analyzing a bit.
+
+And that first one from 2001 that he made was called the ESP game.
+
+And here's a screenshot I was able to get of an older version of it, to give you an idea.
+
+It looks very 2001 like Neopets in its HCI design.
+
+Um, and it showed that we can change the the way that we look at games and entertainment and actually be getting stuff done through it.
+
+But and it was producing labeled training data and it was effectively free.
+
+The things that Lewis harnessed to get this done was the motivation alignment because players wanted to win.
+
+They wanted to find the labels. Um, so it was there was some motivation to get it done, the agreement as validation.
+
+So if multiple people will have the same response, matching is pretty cheap,
+
+and the hidden computation is that the players were unaware that they were actually creating a machine learning system.
+
+And I mean, this is 2001. So the idea of, oh, they're using my data that wasn't really in the lexicon of what was happening in culture.
+
+So, um, this was really one of the revolutionary, um, elements of human computation.
+
+And then again with Lewis. I sound like such a Lewis fan on Fan Girl here, but in the context of this lecture, he's the key figure.
+
+And he. Invented capture and recapture.
+
+Here are some examples of what that looks like.
+
+Where in order to verify that you're a human on the internet, they give you this kind of task to solve.
+
+And what's interesting about it is that it was actually a method to them digitize scanned books from the library where you would see,
+
+like, either a word or a sentence that was handwritten, and you have to decode what it means.
+
+And those were actually words that researchers needed to digitize to make sure that the, um,
+
+the books that they were trying to take from print version to digital could become digital.
+
+But what it showed is that a routine human activity can be engineered to produce multiple useful outputs, um, that are Helpful for society.
+
+Okay, I'm feeling a little bad about all the text and screenshots here,
+
+but here are two more examples of human computation that was utilized in a way,
+
+um, leveraging the human component to have breakthroughs in scientific discovery.
+
+The first is in 2008 with this, uh, Foldit structure.
+
+And I think it's still used today.
+
+And players manipulate these 3D protein structures using different spatial dimensions, and they're trying to compete against each other.
+
+See who can get it. Um, most optimized. I am not, um, the best at bio proteins are this folding.
+
+So this is not a game that would appeal to me, but I could see, um, the kind of person who would be intrigued by it.
+
+Uh, like I said, it led to breakthroughs in research that wouldn't have happened if they didn't have humans contributing at this scale.
+
+Galaxy zoo Similar story the next year, involved in volunteers classifying all these images of galaxies from the telescope.
+
+And in just the first year, they had over 500 or over 50 million classifications were made.
+
+So that is automating out through human computation the work that a researcher would not want to dedicate centuries doing,
+
+but having the humans embedded within the system to be able to do it was very useful.
+
+So a good candidate for human computation is that if you have a task that is decomposable, agreeable, and verifiable.
+
+So if the task can't be divided into small, smaller tasks, I wouldn't recommend this type of system because it won't be able to scale.
+
+Um, and if the outputs from the humans and the computers can't be combined, then you're not going to get one Reliable solution.
+
+And if the quality can't be checked, that the system, the system then may generate a lot of confidence,
+
+but it won't have that reliability embedded within it. So I would not say that all tasks are suitable for human computation.
+
+We're looking at something that sits at the intersection of human accessibility and machine difficulty.
+
+All right. Now let's make an engineering model out of human computation.
+
+We define the problem. Break it into tasks. Root those tasks.
+
+Aggregate the responses and validate the result. And each of these stages can introduce an error or a bias.
+
+Um, for example, if you have great aggregation, that's not going to fix the fact that you had an ambiguous task.
+
+So we need to make sure that when we're designing them, we are. Adding reliability in a deliberate way across the entire pipeline.
+
+And coordinating all of these human contributors, it's going to require very explicit architectural choices at all of these stages.
+
+Looking at where humans can be involved. Humans have pros and cons.
+
+They're flexible. They can take in novel context.
+
+They are creative, but they're also very biased, costly and variable, which we'll discuss in a later module how this could be a pro and con.
+
+But those limitations are not reasons to avoid human computations, but they're just requirements that the architecture needs to overcome and address.
+
+So we will be talking in this lecture about in this module about more modern human computation applications.
+
+Some of the examples here I've broken down into things like citizen science,
+
+where you have volunteers that are making really great improvements for research grade data sets.
+
+We have content moderation. You posting this on things like community notes on social media, crisis mapping.
+
+That's when you have volunteers map out disaster zones as a disaster is unfolding.
+
+And that can be done because you have a lot more local context of like, oh, this stream runs through my backyard.
+
+And then accessibility. Um, the example I put here was a human generated alt text and audio descriptions make more inclusive AI systems.
+
+I'd also argue I think there's another app, the Be My Eyes app, where people who have visual impairments can.
+
+Use human computation to take pictures of things, upload them, and have someone who has stronger vision can say,
+
+oh well, this is an apple, or this is this brand of pop tart.
+
+We have four interlocking principles that determine whether a system is going to make, um, reliable results at scale.
+
+We have task design, so that's making sure we have these tasks that can be broken down scoped.
+
+And they're feasible for both what is being asked of the machine and of the human that there is some sort of incentive structure.
+
+And sometimes that's financial, like you're getting paid,
+
+or maybe there's a leaderboard when you're gamified something, or it could be social or intrinsic aggregation.
+
+And this can be done in different ways. Again, we'll go into this later, but we have options like majority voting,
+
+a weighted consensus or expectation, expectation maximization, and finally quality control.
+
+How can we make sure that we are getting good contributors, um, and having some sort of outlier detection?
+
+Okay. Our key takeaways here are that humans can actually, uh, be part of computation.
+
+And but they have to be strategically embedded in a pipeline design is going to
+
+determine how reliable your system system is by pulling different engineering levels,
+
+levers. Those levers are task decomposition incentives, aggregation, and quality control.
+
+Finally, complementary is the core insight. And this is going to be a theme throughout this whole semester where let's consider
+
+hybrid systems that can exploit the strengths of both humans and of machines.
+
+So the next few lectures in this module are going to focus on comparing the architecture of human computation,
+
+collective intelligence, some real world examples,
+
+and how we can use best design practices when we're making our own human computation systems, which is your assignment for this module.
+
+So thank you again. This is Doctor Christine Liebert and I hope you enjoyed this lecture.
+

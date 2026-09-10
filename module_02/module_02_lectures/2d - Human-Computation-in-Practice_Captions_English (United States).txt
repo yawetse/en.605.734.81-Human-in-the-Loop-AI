@@ -1,0 +1,185 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hi everyone. Welcome back to our lectures on human computation.
+
+Today we're going to be talking about human computation in practice.
+
+So our lecture is going to show how all of the different ideas that we've been talking about so far,
+
+the architectures and the theories of collective intelligence,
+
+how they appear in real systems that you've likely used, and some of the cases we've discussed before.
+
+But for each of these cases, I want you to think critically as we go through them.
+
+I want you to consider, consider the application and identify how were these tasks decomposed?
+
+What was the incentive for those who provided data?
+
+How did they choose which aggregation rule to to pick and finally identify their quality control mechanism?
+
+By the end of this lecture, you will be spotting patterns in these examples, and that'll be very useful for when you need to design a system.
+
+Let's begin. Pretty sure you guys have seen this visual before, but I'm going back to what makes a good human computation system.
+
+Remember, it should be difficult for AI to do in the sense that it might have some ambiguity to it,
+
+some context and nuance, or have a creative component to it.
+
+It is easy for people to do, and then it's repetitive, intuitive, kind of low effort and can be divided into an easy task.
+
+And it should have a scalable workflow so you can have thousands of people contributing simultaneously.
+
+Decomposition and aggregation is what is going to connect this large problem to the ultimate system.
+
+Our case studies follow that are about to follow this.
+
+I'll solve the same design problem, but in different ways. Our first is reCAPTCHA, which from Lewis one on we've talked about before,
+
+he's kind of the one who created a lot of the things that we're going to be talking about today.
+
+Um, it's pretty transformative because it took a very routine security task, And it transformed it into a productive computation.
+
+So every single time a user was trying to prove that they were human on a website,
+
+they were simultaneously also digitizing historical books from archives and translating them into digital versions.
+
+And this started in the early 2000,
+
+so users weren't even aware that what they were doing was part of a much larger project of digitizing these historical archives.
+
+But this is really a great example of incentive alignment, where one human action is actually solving two different computational problems,
+
+which is proving that to human and also digitizing these books.
+
+Then we have Foldit, which is where you're trying to they gamified human computation to two fold proteins,
+
+because this was something that actually was really difficult for computers to do because it required a very large search space.
+
+But when human players started noticing spatial patterns,
+
+they developed these really creative strategies that algorithms initially missed this competition,
+
+where there is a leaderboard and figure out who had done the best or the most.
+
+Um, it really motivated the participants to improve their solution while also generating amazing scientific discoveries.
+
+Third example here we have Galaxy Zoo, which is, um, classifying millions of images of the galaxy.
+
+And while an individual classification or individual who is making a classification could be could have an imperfect classification.
+
+Oh gosh, how many times can I say classification?
+
+But when you aggregate it across many independent volunteers, you actually get really highly reliable scientific data sets.
+
+This is an example of how important, um, the role of both redundancy and majority voting can play in collective intelligence.
+
+Our fourth example here. I don't know if I've touched upon this yet. This is, um, OpenStreetMap. Um, and this is, uh, where humans map out streets.
+
+And you're probably wondering, like, why can't we just use Google Maps?
+
+Well, mapping actually tremendously benefits from having local expertise.
+
+A contributor might know local roads or trails or landmarks.
+
+Um, the commercial mapping companies like Google Maps would have missed. So here what they do is in, um, like disaster response, you'll even see,
+
+like the Red cross using this to figure out like what trails and how to get through to damaged areas.
+
+Um, and people have this incentive of, well, this is part of my community.
+
+I want to, um, be a leader in it and not like lidar on leaderboard, but have that sort of pride.
+
+Uh, but in terms of the architectural principles, I want you to take away that it uses iterative refinement and collaborative editing.
+
+And that's kind of the element of the architecture that allows this product to have such a large impact.
+
+Wikipedia. I thought I'd use a funny screenshot.
+
+We've gone through it a few times, but I'm sure you've all used Wikipedia at some time or another, but thinking of it instead of a product.
+
+But as a system with architecture, it combines collaborative editing, hierarchical oversight, and continuous revision.
+
+Its quality comes from architecture, not just a single contributor.
+
+Community knows, I know I touched on this in the last lecture, so I don't want to go too much into this.
+
+But, um, it's not just trying to get the community that has the most upvotes.
+
+It's the one that's getting the most, in some cases, bipartisan support or having human judgments combined with an algorithmic aggregation
+
+saying we are seeing agreement among people who have very different viewpoints normally.
+
+And if they can agree on this, it might be right.
+
+So that is an example of showing where majority voting would have potentially given you a very polarized or incorrect um, response.
+
+But, uh, by using this emphasis on bringing together different viewpoints, um, that's kind of the bread and butter of community notes.
+
+Then there's Duolingo, Luis Bannon's next project. Uh, and you may have used it.
+
+It's an educational game and app. Um, but in addition to learning a new language,
+
+the people who are using it are also simultaneously generating troves of data sets that are very useful.
+
+These are very useful for how to teach.
+
+So it's data sets, computational data sets on teaching. They have information like user interactions that are then feeding other ML
+
+models to optimize for how difficult or short or interactive should a lesson be?
+
+So it has this feedback loop incorporated within it. Where the human input is actually improving the AI output.
+
+Now for I guess, five of those systems, I have this comparison chart showing, um.
+
+Even though these applications are very different from one another,
+
+they share common computational design patterns that we've been talking about in this module.
+
+Um, it has architecture, and that can largely be a combination of architectures.
+
+It requires an incentive that the human is going to want to pursue it.
+
+Uh, and it needs to be deliberate in how it's choosing to aggregate the results and make them into the output.
+
+We notice patterns are kind of like recurring engineering principles.
+
+Um, in all of these case studies, they are transferable to new applications, which I want you to keep in mind as you do your assignment this week.
+
+Um, but the four principles that every human computation system must address are the task decomposition,
+
+aggregation, quality control, and incentive design. Human computation has evolved alongside AI.
+
+Instead of just disappearing, and modern systems are going to increasingly combine AI and humans into hybrid workflows.
+
+I want you to remember that AI is built on top of human computation.
+
+So for the next slide, they actually still matter.
+
+There are still things that AI is not reliably doing, and this is something we do need to revisit from time to time as it,
+
+um, as different AI models gain different skill sets.
+
+But for now, I can say that AI cannot understand contextual nuance, cannot perform ethical reasoning,
+
+and it cannot have the sort of creativity that was needed in things like the Foldit.
+
+So I believe that future systems will continue to increasingly combine both humans and AI.
+
+I have some takeaways today. It's basically just that architecture is going to determine your outcome.
+
+You need to align your incentives with your task and make sure you have evaluation.
+
+My students, I really want you guys to start thinking about these systems like you are the system designer.
+
+Not that you're like the user of Wikipedia. Um, your architecture and how you set up your system is going to determine how effective your outcome is.
+
+Some of these may seem simple to you, but I think as you delve into your assignment,
+
+you'll realize how many small, um, decisions go into building a system like this.
+
+And in our next lecture, we're actually going to address how to design human computational system.
+
+So it's more of a capstone for this whole module. Thank you so much for listening to this lecture today.
+
+I hope you enjoyed it. Um, this is Doctor Christine Lepard and I hope you have a great day.
+
