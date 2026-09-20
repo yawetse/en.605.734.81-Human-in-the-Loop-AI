@@ -5,11 +5,24 @@
   "filename": "welcome",
   "created_at": "2026-09-01T09:33:22.763Z",
   "updated_at": "2026-09-01T09:33:32.277Z",
+  "private": false,
+  "password": null,
+  "encrypted_content": false,
+  "encrypted_key_name": null,
   "meta": {
-    "location": "/",
+    "description": "",
     "tags": [],
     "categories": [],
-    "description": "",
+    "repos": [],
+    "github_pages": [],
+    "location": "/",
+    "data": {
+      "source": "file",
+      "sourceFilename": "welcome.md",
+      "sourceExtension": ".md",
+      "sourceLinked": true,
+      "sourceFrontMatterFormat": "json"
+    },
     "source": "markdown"
   }
 }

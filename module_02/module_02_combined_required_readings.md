@@ -1,3 +1,19 @@
+---
+{
+  "id": "file_oticbqp8",
+  "filetype": "document",
+  "filename": "module_02_combined_required_readings",
+  "created_at": "2026-09-10T02:11:10.332Z",
+  "updated_at": "2026-09-10T02:11:10.332Z",
+  "meta": {
+    "location": "/",
+    "tags": [],
+    "categories": [],
+    "description": "",
+    "source": "markdown"
+  }
+}
+---
 # Module 02 Combined Required Readings
 
 > Study reader for EN.605.734 Human-in-the-Loop AI. I have combined the assigned local papers into one reading file. The takeaways and questions are AI-assisted study aids. The source-text sections reproduce the papers and retain the authors' claims; I should verify quotations and citations against the original PDFs before using them in submitted work.
