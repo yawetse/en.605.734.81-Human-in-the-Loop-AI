@@ -20,7 +20,7 @@ The starter compared quantities but ignored expiry. I added one availability res
 
 ## Order Fulfillment
 
-Fulfillment remains all-or-nothing. A complete order is delivered only when every item has a recipe and every combined ingredient requirement is available and usable. A failed order records deterministic reasons and deducts nothing. Existing status rows are updated, and missing status rows are appended.
+Atomic fulfillment remains the default policy: a complete order is delivered only when every item has a recipe and every combined ingredient requirement is available and usable. I also implemented the optional partial policy. It evaluates complete order lines sequentially, delivers available lines, rejects unavailable lines with reasons, and never splits one line's requested quantity. Existing status rows are updated, and missing status rows are appended.
 
 ## Cumulative Processing
 
@@ -32,7 +32,15 @@ I replaced the single-priority `elif` logic with consolidated reasons. The rules
 
 ## Business Summary
 
-The program now returns and prints a manager-facing summary with delivery counts, delivered IDs, failed orders and reasons, final inventory, restock recommendations, and expiry concerns. In the September 20, 2026 verification run, the supplied simulation delivered one order and rejected four because required ingredients were expired.
+The program returns and prints a manager-facing summary with full, partial, and failed delivery counts; line outcomes; final inventory; restock recommendations; expiry concerns; stockout alerts; and unavailable menu items. In the September 20, 2026 enhanced run, one order was delivered, one was partially delivered, and three were not delivered. The run also identified one predictive stockout alert and four unavailable menu items.
+
+## Optional Enhancements
+
+I implemented all four optional enhancements. Partial fulfillment delivers complete available lines while retaining failed-line reasons. Predictive alerts use actual ingredient deductions over the observed order window and a configurable horizon. Dynamic menu availability checks whether final usable inventory can produce one serving of each recipe. Improved reporting generates Markdown and self-contained HTML reports with an executive summary and tables for order outcomes, forecasts, unavailable items, inventory, restocking, and expiry.
+
+## Verification Artifact
+
+I added `verify_outputs.py` as a final reproducible check. It runs the real command-line program and the complete unit-test suite, saves both logs, copies the HTML report, and compares the captured evidence with the linked requirements. The generated `verification/requirements_sanity_check.md` reports PASS across program execution, 42 tests, partial fulfillment, cumulative inventory, restocking, expiry, predictive alerts, menu availability, both report formats, EARS completion, and test annotations.
 
 ## Refactoring Notes
 
@@ -48,7 +56,7 @@ AI helped me move faster by turning a long assignment into a sequence of specifi
 
 The AI and starter code both made assumptions that needed review. The largest problem was that the existing inventory check treated sufficient quantity as the complete availability decision. It did not prevent expired inventory from fulfilling an order. The restock function also used an `elif` chain, so one reason could hide another. An early assumption treated expiring-soon inventory as requiring a full 10,000 gram replacement. I rejected that interpretation because the assignment asks for the quantity needed to reach par, and expiring-soon stock remains usable.
 
-Testing gave me evidence for deciding which suggestions to keep. The original 20 tests passed after the filename correction, but that result did not show that the assignment was complete. Those tests did not cover expired fulfillment, invalid expiry values, simultaneous restock reasons, missing inventory rows, or the final summary. I added tests for those gaps before changing the implementation. The expanded suite first failed because the planned summary interface did not exist, which confirmed that the tests could detect missing behavior. After implementation, all 27 tests passed.
+Testing gave me evidence for deciding which suggestions to keep. The original 20 tests passed after the filename correction, but that result did not show that the assignment was complete. Those tests did not cover expired fulfillment, invalid expiry values, simultaneous restock reasons, missing inventory rows, or the final summary. I added tests for those gaps before changing the implementation. The base suite first failed because the planned summary interface did not exist. The enhancement suite also failed first because the planned Markdown reporting interface did not exist. After implementation, all 42 tests and the output sanity comparison passed.
 
 I kept the AI suggestions that preserved the starter structure and made rules explicit. These included named constants, one expiry-classification helper, structured availability details, consolidated restock output, and a summary dictionary that can be tested before it is printed. I rejected broader module splitting and an object-oriented rewrite. Those options could be reasonable for a larger application, but they would add review work and weaken the assignment's focus on auditing the supplied code.
 

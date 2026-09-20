@@ -1,0 +1,404 @@
+
+=== Recipes ===
+Recipe ID: 1
+Name: Margherita Pizza
+Ingredients:
+  - Flour: 300 grams
+  - Tomato Sauce: 100 grams
+  - Mozzarella Cheese: 150 grams
+
+Recipe ID: 2
+Name: Chicken Burger
+Ingredients:
+  - Chicken Breast: 200 grams
+  - Bun: 100 grams
+  - Lettuce: 50 grams
+
+Recipe ID: 3
+Name: Caesar Salad
+Ingredients:
+  - Romaine Lettuce: 200 grams
+  - Caesar Dressing: 50 grams
+  - Croutons: 30 grams
+
+Recipe ID: 4
+Name: Pasta Alfredo
+Ingredients:
+  - Fettuccine Pasta: 200 grams
+  - Cream: 100 grams
+  - Parmesan Cheese: 50 grams
+
+Recipe ID: 5
+Name: Chocolate Cake
+Ingredients:
+  - Flour: 250 grams
+  - Chocolate: 150 grams
+  - Sugar: 100 grams
+
+
+=== Orders ===
+Order ID: 1
+Brand: Taco Bell
+Items:
+  - Margherita Pizza: 2
+  - Caesar Salad: 1
+
+Order ID: 2
+Brand: Subway
+Items:
+  - Chicken Burger: 1
+
+Order ID: 3
+Brand: Subway
+Items:
+  - Pasta Alfredo: 1
+  - Chocolate Cake: 1
+
+Order ID: 4
+Brand: Subway
+Items:
+  - Margherita Pizza: 1
+
+Order ID: 5
+Brand: Taco Bell
+Items:
+  - Chicken Burger: 45
+  - Caesar Salad: 1
+
+
+=== Order Processing ===
+Order ID: 1
+Brand: Taco Bell
+Item: Margherita Pizza
+Quantity Ordered: 2
+Recipe Found: True
+Required Ingredients:
+  - Flour: 600 grams required
+  - Tomato Sauce: 200 grams required
+  - Mozzarella Cheese: 300 grams required
+
+Item: Caesar Salad
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Romaine Lettuce: 200 grams required
+  - Caesar Dressing: 50 grams required
+  - Croutons: 30 grams required
+
+Combined Order Requirements:
+  - Flour: 600 grams required
+  - Tomato Sauce: 200 grams required
+  - Mozzarella Cheese: 300 grams required
+  - Romaine Lettuce: 200 grams required
+  - Caesar Dressing: 50 grams required
+  - Croutons: 30 grams required
+All Ingredients Available: False
+Inventory Details:
+  - Flour: required=600 grams, available=10000 grams, enough=False
+  - Tomato Sauce: required=200 grams, available=10000 grams, enough=True
+  - Mozzarella Cheese: required=300 grams, available=10000 grams, enough=True
+  - Romaine Lettuce: required=200 grams, available=10000 grams, enough=False
+  - Caesar Dressing: required=50 grams, available=10000 grams, enough=True
+  - Croutons: required=30 grams, available=10000 grams, enough=True
+Fulfilled: False
+Reason: Not Delivered: Margherita Pizza (Flour (Expired)), Caesar Salad (Romaine Lettuce (Expired))
+
+Order ID: 2
+Brand: Subway
+Item: Chicken Burger
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Chicken Breast: 200 grams required
+  - Bun: 100 grams required
+  - Lettuce: 50 grams required
+
+Combined Order Requirements:
+  - Chicken Breast: 200 grams required
+  - Bun: 100 grams required
+  - Lettuce: 50 grams required
+All Ingredients Available: True
+Inventory Details:
+  - Chicken Breast: required=200 grams, available=10000 grams, enough=True
+  - Bun: required=100 grams, available=10000 grams, enough=True
+  - Lettuce: required=50 grams, available=10000 grams, enough=True
+Fulfilled: True
+Reason: Delivered
+
+Order ID: 3
+Brand: Subway
+Item: Pasta Alfredo
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Fettuccine Pasta: 200 grams required
+  - Cream: 100 grams required
+  - Parmesan Cheese: 50 grams required
+
+Item: Chocolate Cake
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Flour: 250 grams required
+  - Chocolate: 150 grams required
+  - Sugar: 100 grams required
+
+Combined Order Requirements:
+  - Fettuccine Pasta: 200 grams required
+  - Cream: 100 grams required
+  - Parmesan Cheese: 50 grams required
+  - Flour: 250 grams required
+  - Chocolate: 150 grams required
+  - Sugar: 100 grams required
+All Ingredients Available: False
+Inventory Details:
+  - Fettuccine Pasta: required=200 grams, available=10000 grams, enough=False
+  - Cream: required=100 grams, available=10000 grams, enough=True
+  - Parmesan Cheese: required=50 grams, available=10000 grams, enough=True
+  - Flour: required=250 grams, available=10000 grams, enough=False
+  - Chocolate: required=150 grams, available=10000 grams, enough=False
+  - Sugar: required=100 grams, available=10000 grams, enough=False
+Fulfilled: False
+Reason: Not Delivered: Pasta Alfredo (Fettuccine Pasta (Expired)), Chocolate Cake (Flour (Expired), Chocolate (Expired), Sugar (Expired))
+
+Order ID: 4
+Brand: Subway
+Item: Margherita Pizza
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Flour: 300 grams required
+  - Tomato Sauce: 100 grams required
+  - Mozzarella Cheese: 150 grams required
+
+Combined Order Requirements:
+  - Flour: 300 grams required
+  - Tomato Sauce: 100 grams required
+  - Mozzarella Cheese: 150 grams required
+All Ingredients Available: False
+Inventory Details:
+  - Flour: required=300 grams, available=10000 grams, enough=False
+  - Tomato Sauce: required=100 grams, available=10000 grams, enough=True
+  - Mozzarella Cheese: required=150 grams, available=10000 grams, enough=True
+Fulfilled: False
+Reason: Not Delivered: Margherita Pizza (Flour (Expired))
+
+Order ID: 5
+Brand: Taco Bell
+Item: Chicken Burger
+Quantity Ordered: 45
+Recipe Found: True
+Required Ingredients:
+  - Chicken Breast: 9000 grams required
+  - Bun: 4500 grams required
+  - Lettuce: 2250 grams required
+
+Item: Caesar Salad
+Quantity Ordered: 1
+Recipe Found: True
+Required Ingredients:
+  - Romaine Lettuce: 200 grams required
+  - Caesar Dressing: 50 grams required
+  - Croutons: 30 grams required
+
+Combined Order Requirements:
+  - Chicken Breast: 9000 grams required
+  - Bun: 4500 grams required
+  - Lettuce: 2250 grams required
+  - Romaine Lettuce: 200 grams required
+  - Caesar Dressing: 50 grams required
+  - Croutons: 30 grams required
+All Ingredients Available: False
+Inventory Details:
+  - Chicken Breast: required=9000 grams, available=9800 grams, enough=True
+  - Bun: required=4500 grams, available=9900 grams, enough=True
+  - Lettuce: required=2250 grams, available=9950 grams, enough=True
+  - Romaine Lettuce: required=200 grams, available=10000 grams, enough=False
+  - Caesar Dressing: required=50 grams, available=10000 grams, enough=True
+  - Croutons: required=30 grams, available=10000 grams, enough=True
+Fulfilled: False
+Reason: Partially Delivered: Chicken Burger | Not Delivered: Caesar Salad (Romaine Lettuce (Expired))
+
+
+=== Inventory ===
+Ingredient: Flour
+Quantity: 10000 grams
+Expiry Date: 2026-05-12
+
+Ingredient: Tomato Sauce
+Quantity: 10000 grams
+Expiry Date: 2026-11-15
+
+Ingredient: Mozzarella Cheese
+Quantity: 10000 grams
+Expiry Date: 2026-10-20
+
+Ingredient: Chicken Breast
+Quantity: 800 grams
+Expiry Date: 2026-10-10
+
+Ingredient: Romaine Lettuce
+Quantity: 10000 grams
+Expiry Date: 2026-05-12
+
+Ingredient: Caesar Dressing
+Quantity: 10000 grams
+Expiry Date: 2026-10-15
+
+Ingredient: Croutons
+Quantity: 10000 grams
+Expiry Date: 2026-10-18
+
+Ingredient: Bun
+Quantity: 5400 grams
+Expiry Date: 2026-10-09
+
+Ingredient: Lettuce
+Quantity: 7700 grams
+Expiry Date: 2026-10-09
+
+Ingredient: Fettuccine Pasta
+Quantity: 10000 grams
+Expiry Date: 2026-01-31
+
+Ingredient: Cream
+Quantity: 10000 grams
+Expiry Date: 2026-10-12
+
+Ingredient: Parmesan Cheese
+Quantity: 10000 grams
+Expiry Date: 2026-10-15
+
+Ingredient: Chocolate
+Quantity: 10000 grams
+Expiry Date: 2026-01-15
+
+Ingredient: Sugar
+Quantity: 10000 grams
+Expiry Date: 2026-05-12
+
+
+=== Restock ===
+Item: Flour
+Current Quantity: 10000 grams
+Quantity Needed: 10000 grams
+Reason: Expired
+Expiry Date: 2026-05-12
+Days Until Expiry: -131
+
+Item: Chicken Breast
+Current Quantity: 800 grams
+Quantity Needed: 9200 grams
+Reason: Running low on stock
+Expiry Date: 2026-10-10
+Days Until Expiry: 20
+
+Item: Romaine Lettuce
+Current Quantity: 10000 grams
+Quantity Needed: 10000 grams
+Reason: Expired
+Expiry Date: 2026-05-12
+Days Until Expiry: -131
+
+Item: Fettuccine Pasta
+Current Quantity: 10000 grams
+Quantity Needed: 10000 grams
+Reason: Expired
+Expiry Date: 2026-01-31
+Days Until Expiry: -232
+
+Item: Chocolate
+Current Quantity: 10000 grams
+Quantity Needed: 10000 grams
+Reason: Expired
+Expiry Date: 2026-01-15
+Days Until Expiry: -248
+
+Item: Sugar
+Current Quantity: 10000 grams
+Quantity Needed: 10000 grams
+Reason: Expired
+Expiry Date: 2026-05-12
+Days Until Expiry: -131
+
+
+=== Status ===
+Order ID: 1
+Delivered: False
+Remark: Not Delivered: Margherita Pizza (Flour (Expired)), Caesar Salad (Romaine Lettuce (Expired))
+
+Order ID: 2
+Delivered: True
+Remark: Delivered
+
+Order ID: 3
+Delivered: False
+Remark: Not Delivered: Pasta Alfredo (Fettuccine Pasta (Expired)), Chocolate Cake (Flour (Expired), Chocolate (Expired), Sugar (Expired))
+
+Order ID: 4
+Delivered: False
+Remark: Not Delivered: Margherita Pizza (Flour (Expired))
+
+Order ID: 5
+Delivered: False
+Remark: Partially Delivered: Chicken Burger | Not Delivered: Caesar Salad (Romaine Lettuce (Expired))
+
+
+=== Business Summary ===
+Orders Delivered: 1
+Orders Partially Delivered: 1
+Orders Not Delivered: 3
+
+Delivered Order IDs:
+  2
+
+Orders Partially Delivered:
+  Order 5: Partially Delivered: Chicken Burger | Not Delivered: Caesar Salad (Romaine Lettuce (Expired))
+
+Orders Not Delivered:
+  Order 1: Not Delivered: Margherita Pizza (Flour (Expired)), Caesar Salad (Romaine Lettuce (Expired))
+  Order 3: Not Delivered: Pasta Alfredo (Fettuccine Pasta (Expired)), Chocolate Cake (Flour (Expired), Chocolate (Expired), Sugar (Expired))
+  Order 4: Not Delivered: Margherita Pizza (Flour (Expired))
+
+Final Inventory:
+  Flour: 10000 grams
+  Tomato Sauce: 10000 grams
+  Mozzarella Cheese: 10000 grams
+  Chicken Breast: 800 grams
+  Romaine Lettuce: 10000 grams
+  Caesar Dressing: 10000 grams
+  Croutons: 10000 grams
+  Bun: 5400 grams
+  Lettuce: 7700 grams
+  Fettuccine Pasta: 10000 grams
+  Cream: 10000 grams
+  Parmesan Cheese: 10000 grams
+  Chocolate: 10000 grams
+  Sugar: 10000 grams
+
+Restock Recommendations:
+  Flour: order 10000 grams (Expired)
+  Chicken Breast: order 9200 grams (Running low on stock)
+  Romaine Lettuce: order 10000 grams (Expired)
+  Fettuccine Pasta: order 10000 grams (Expired)
+  Chocolate: order 10000 grams (Expired)
+  Sugar: order 10000 grams (Expired)
+
+Expiry Concerns:
+  Flour: Expired (expiry: 2026-05-12)
+  Romaine Lettuce: Expired (expiry: 2026-05-12)
+  Fettuccine Pasta: Expired (expiry: 2026-01-31)
+  Chocolate: Expired (expiry: 2026-01-15)
+  Sugar: Expired (expiry: 2026-05-12)
+
+Predictive Stockout Alerts:
+  Chicken Breast: approximately 0.43 orders remaining at 1840.0 grams per order
+
+Unavailable Menu Items:
+  Margherita Pizza: Flour (Expired)
+  Caesar Salad: Romaine Lettuce (Expired)
+  Pasta Alfredo: Fettuccine Pasta (Expired)
+  Chocolate Cake: Flour (Expired), Chocolate (Expired), Sugar (Expired)
+
+Markdown report: /Users/yawetse/Documents/MS Computer Science JHU/EN.605.734.81 - Human-in-the-Loop AI/module_03/mod_03_assignment/BUSINESS_REPORT.md
+HTML report: /Users/yawetse/Documents/MS Computer Science JHU/EN.605.734.81 - Human-in-the-Loop AI/module_03/mod_03_assignment/BUSINESS_REPORT.html

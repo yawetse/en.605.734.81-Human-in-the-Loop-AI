@@ -7,9 +7,9 @@ prefix: CKS
 
 ## Context and Design Philosophy
 
-The cloud kitchen simulation audits and completes a supplied procedural Python program. It uses lists of dictionaries from `seed_data.py` to evaluate orders against shared inventory, update delivery status, calculate restocking needs, and produce a manager-facing summary.
+The cloud kitchen simulation audits and extends a supplied procedural Python program. It uses lists of dictionaries from `seed_data.py` to evaluate orders against shared inventory, update delivery status, calculate restocking needs, forecast stockouts, identify unavailable menu items, and produce manager-facing console, Markdown, and HTML reports. A verification harness captures live outputs and checks them against the requirement set.
 
-The design keeps the starter structure recognizable. Focused functions own business rules, while `process_orders` coordinates the cumulative, all-or-nothing order flow. Tests use controlled inputs and explicit dates so each business rule can be verified independently.
+The design keeps the starter structure recognizable. Focused functions own business rules, while `process_orders` coordinates cumulative atomic and partial order flow. Tests use controlled inputs and explicit dates so each business rule can be verified independently.
 
 ## Data Contracts
 
@@ -32,9 +32,12 @@ Calculated interfaces use these stable shapes:
 | Result | Required fields |
 | --- | --- |
 | Availability detail | `ingredient`, `required_qty_grams`, `available_qty_grams`, `quantity_sufficient`, `expiry_status`, `is_usable`, `is_available`, `reason` |
-| Processed order | `order_id`, `brand`, `items`, `order_requirements`, `inventory_check`, `fulfilled`, `reason` |
+| Processed order | `order_id`, `brand`, `items`, `order_requirements`, `inventory_check`, `fulfilled`, `fulfillment_status`, `reason`, `actual_consumption` |
+| Processed item | `item`, `qty`, `recipe_found`, `valid_quantity`, `requirements`, `inventory_check`, `delivered`, `reason` |
 | Expiry concern | `ingredient`, `expiry_date`, `days_until_expiry`, `status` |
-| Summary | `delivered_count`, `not_delivered_count`, `delivered_order_ids`, `not_delivered_orders`, `final_inventory`, `restock_recommendations`, `expiry_concerns` |
+| Stockout alert | `ingredient`, `current_qty_grams`, `observed_consumption_grams`, `average_consumption_per_order`, `forecast_horizon_orders`, `projected_qty_grams`, `estimated_orders_remaining` |
+| Unavailable menu item | `item`, `blocking_ingredients` with ingredient and reason details |
+| Summary | Base fulfillment, inventory, restock, and expiry fields plus `partially_delivered_count`, `partially_delivered_orders`, `stockout_alerts`, `unavailable_menu_items`, and `forecast_horizon_orders` |
 
 ## Recipe Resolution and Demand Calculation
 
@@ -59,15 +62,19 @@ Each availability detail includes the required and available quantities, quantit
 
 `reference_date` accepts a `datetime.date` or `None`. `None` resolves once to `date.today()` for an interactive run. Unit tests and reproducible simulations pass a date explicitly.
 
-## Fulfillment and Cumulative State
+## Fulfillment Policies and Cumulative State
 
-Orders are evaluated sequentially against a working inventory snapshot. An order succeeds only when every order line has a recipe and every combined ingredient requirement is available and usable.
+Orders are evaluated sequentially against a working inventory snapshot. The caller selects `atomic` or `partial`; the function default remains `atomic` so the required base behavior remains available.
 
 For a delivered order, the simulation deducts all combined requirements and records `Delivered` in the status table. For a failed order, it records `Not Delivered` with the missing-recipe, missing-inventory, insufficient-stock, invalid-expiry, or expired-ingredient reasons. A failed order makes no inventory change.
 
 Failure reasons are deterministic. Invalid order and missing-recipe issues follow order-line order. Unavailable ingredients follow their first appearance in the combined requirements. Categories are joined with ` | `, and names inside a category are joined with `, ` without duplicates.
 
 After all orders are evaluated, the working quantities are copied to the caller's inventory table. Later orders therefore use inventory remaining after earlier delivered orders.
+
+In partial mode, each order line is the smallest fulfillment unit. A valid line is checked against inventory remaining after prior delivered lines. The complete requested quantity for that line is delivered and deducted, or the complete line is rejected without deduction. Unknown recipes, invalid quantities, and unavailable ingredients reject only their own line. An empty order remains not delivered. An order is `Delivered` when every line is delivered, `Partially Delivered` when at least one but not all lines are delivered, and `Not Delivered` when no line is delivered.
+
+The supplied status table keeps its boolean field. It is `True` only for a fully delivered order and `False` for partial or failed orders; the remark carries the three-state result and line details. Each processed order also records the actual ingredient quantities deducted so forecasts can use observed consumption without reconstructing it from final inventory.
 
 `process_orders` mutates the caller's inventory to the cumulative ending quantities, updates an existing status record by order ID or appends a new record, and replaces the caller's restock table with the final consolidated recommendations. Calling it again continues from the inventory passed to that call. A successful status uses boolean `True` and remark `Delivered`; a failed status uses boolean `False` and the same deterministic reason stored on the processed order.
 
@@ -100,9 +107,31 @@ The simulation returns a summary dictionary and prints it in plain language. The
 
 The returned structure supports direct unit testing. Console formatting remains a presentation layer over that structure.
 
+## Predictive Stockout Alerts
+
+The forecast aggregates `actual_consumption` from processed orders and divides by the number of observed orders. Rejected demand is excluded because it did not consume inventory. For each ingredient with positive observed consumption, the simulation projects final quantity after a caller-provided positive integer horizon. It emits an alert when estimated orders remaining are less than or equal to that horizon. Results preserve final-inventory order and include the observation totals, average rate, projected quantity, and estimated orders remaining.
+
+The forecast is a simple simulation estimate, not a procurement prediction. It assumes the observed average remains constant and does not infer seasonality, delivery timing, or demand changes from five supplied orders.
+
+## Dynamic Menu Availability
+
+Menu availability is evaluated against final inventory and one serving of each recipe. A menu item is unavailable when any recipe ingredient is missing, has less than one-serving quantity, is at or below zero, is expired, or has an invalid expiry value. Expiring-soon ingredients remain usable. The result includes every blocking ingredient and reason so a manager can understand why the item should be disabled.
+
+## Markdown and HTML Reports
+
+The Markdown and HTML reports are rendered from the same structured summary used by console output. Both contain an executive summary, order outcomes including delivered and rejected lines, predictive stockout alerts, unavailable menu items, final inventory, restock recommendations, and expiry concerns. The caller supplies each output path; existing content at that exact path is replaced so a new simulation produces one current report. The HTML file is self-contained, escapes business values, and requires no external assets.
+
+## Verification Evidence Bundle
+
+`verify_outputs.py` runs `main.py` and the complete `unittest` suite as subprocesses from the assignment directory. It records standard output and standard error, preserves each command's exit result in the sanity report, and copies the generated HTML into a dedicated `verification/` folder.
+
+The sanity comparison checks runtime evidence for data display, partial fulfillment, cumulative deduction, restocking and expiry, predictive stockouts, dynamic menu availability, and both report formats. It also checks that every EARS requirement is marked implemented and has a `@spec` annotation in the test suite. Each check records its requirement IDs, evidence source, observed evidence, and pass or fail result. The harness writes `requirements_sanity_check.md` and exits nonzero when any check fails.
+
+The generated bundle uses stable filenames: `terminal_output.txt`, `unit_test_output.txt`, `business_report.html`, and `requirements_sanity_check.md`. Regeneration replaces only those files inside the selected output directory.
+
 ## Error Handling and Boundaries
 
-The program treats an unknown recipe, missing inventory record, invalid expiry date, expired ingredient, and insufficient quantity as business failures rather than uncaught exceptions during order processing. It does not silently substitute ingredients, partially fulfill orders, or deduct stock after a failed check.
+The program treats an unknown recipe, missing inventory record, invalid expiry date, expired ingredient, and insufficient quantity as business failures rather than uncaught exceptions during order processing. It does not silently substitute ingredients or deduct stock for a rejected order or order line. Partial behavior occurs only when the caller selects the partial policy.
 
 Malformed records that omit required non-expiry fields remain outside the simulation contract. Duplicate identifiers, duplicate recipe or inventory names, negative recipe or inventory quantities, and floating-point precision policy are also outside the supplied schema contract. This keeps the assignment focused on the supplied data while handling specified business failures explicitly.
 
@@ -117,14 +146,21 @@ Malformed records that omit required non-expiry fields remain outside the simula
 | Multiple restock reasons | Join ordered reasons in the existing string field | Replace the field with a list or keep only one prioritized reason | A joined string preserves the supplied schema and retains all required reasons. |
 | Expired restock quantity | Treat expired stock as zero usable stock and request the full par level | Calculate par minus physical quantity | Physical expired stock cannot satisfy the target usable quantity. |
 | Expiring-soon restock quantity | Request only par minus current usable quantity | Replace all expiring-soon stock | The assignment asks for quantity needed to reach par, and expiring-soon stock remains usable. |
-| Summary interface | Return structured data and print a manager-facing view | Console-only output or report file | A returned structure is testable and still supports the required console output without adding an optional reporting format. |
+| Summary interface | Return structured data, print a manager-facing view, and render Markdown from the same data | Independent console and report calculations | One structured source keeps console and report results consistent and directly testable. |
+| Partial fulfillment granularity | Complete order line | Split line quantities or complete order only | The enhancement asks for deliverable items, while splitting a requested quantity would introduce a separate allocation rule. |
+| Partial status mapping | Boolean `False` with a `Partially Delivered` remark | Boolean `True` or schema replacement | `True` continues to mean the full order was delivered, and the supplied schema remains intact. |
+| Forecast denominator | All processed orders | Only fully or partly delivered orders | All processed orders represent the observed order window; rejected demand is already excluded from the numerator. |
+| Menu disabling threshold | Enough usable inventory for one serving | Only exactly zero stock | One-serving availability prevents accepting an item the kitchen cannot actually prepare. |
+| Improved reports | Markdown and self-contained HTML generated from the same summary | CSV or one report format | Two readable formats provide direct text and browser evidence without adding a third-party dependency. |
+| Verification execution | Subprocesses running the actual CLI and unit-test commands | Calling internal functions from the verifier | Subprocess execution proves the user-facing entry points work and captures what a reviewer would see. |
+| Sanity comparison | Output checks plus EARS and test-annotation coverage | A log-only bundle | A checked matrix connects runtime evidence to intent and fails visibly when expected evidence is missing. |
 
 ## Open Questions & Future Decisions
 
 ### Resolved
 
 1. The Markdown assignment controls when it conflicts with the reference PDF.
-2. The base simulation uses all-or-nothing fulfillment.
+2. Atomic fulfillment remains the default API policy, and the command-line simulation selects the optional partial policy explicitly.
 3. Expiry-sensitive tests use an explicit reference date.
 4. Optional enhancements remain outside the base implementation.
 5. Empty orders and invalid item quantities fail the complete order without deduction.
@@ -136,6 +172,9 @@ Malformed records that omit required non-expiry fields remain outside the simula
 2. Persistence, concurrency control, and external inventory updates are deferred because this is an in-memory assignment simulation.
 3. Duplicate identifiers and ingredient records are deferred because the supplied tables use unique keys.
 4. Numeric validation beyond order-line quantity and floating-point rounding policy are deferred because the supplied data uses nonnegative integral grams.
+5. Partial quantity delivery within one order line is deferred because the enhancement is defined at the item-line level.
+6. Forecast confidence intervals, seasonality, supplier lead time, and scheduled replenishment are deferred because the supplied data contains one short simulation window.
+7. Browser automation and pixel-level visual comparison are deferred because the HTML report is static and its structure and escaped content are tested directly.
 
 ## References
 

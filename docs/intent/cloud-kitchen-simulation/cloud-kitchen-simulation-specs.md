@@ -39,3 +39,35 @@
 
 - [x] **CKS-REPORT-001**: When the simulation builds its final business summary, it shall return delivered and undelivered counts, delivered order identifiers, undelivered order reasons, final inventory, restock recommendations, and expiry concerns.
 - [x] **CKS-REPORT-002**: When the command-line simulation completes, it shall print a manager-facing summary containing delivery counts, failed-order reasons, final inventory, restock recommendations, and expiry concerns.
+
+## Partial Fulfillment
+
+- [x] **CKS-PARTIAL-001**: When partial fulfillment is selected, the simulation shall evaluate order lines sequentially against cumulative inventory and shall deduct the full requested quantity for each available and usable line without deducting inventory for a rejected line.
+- [x] **CKS-PARTIAL-002**: When partial fulfillment delivers at least one but not every order line, the simulation shall mark the order `Partially Delivered`, identify delivered and rejected lines with reasons, and keep the status-table delivered flag false.
+- [x] **CKS-PARTIAL-003**: When atomic fulfillment is selected or omitted, the simulation shall preserve complete-order all-or-nothing behavior.
+
+## Predictive Stockout Alerts
+
+- [x] **CKS-FORECAST-001**: When forecasting stockouts, the simulation shall calculate each ingredient's average consumption per observed order from quantities actually deducted for delivered order lines and shall exclude rejected demand.
+- [x] **CKS-FORECAST-002**: When an ingredient's estimated orders remaining is less than or equal to the configured positive integer forecast horizon, the simulation shall emit an alert containing current quantity, observed consumption, average consumption per order, projected quantity, horizon, and estimated orders remaining.
+- [x] **CKS-FORECAST-003**: If the forecast horizon is not a positive integer, then the simulation shall reject it with a clear error.
+
+## Dynamic Menu Availability
+
+- [x] **CKS-MENU-001**: After order processing, the simulation shall identify each recipe that cannot produce one complete serving because an ingredient is missing, insufficient, depleted, expired, or has an invalid expiry value.
+- [x] **CKS-MENU-002**: When a menu item is unavailable, the simulation shall report every blocking ingredient with a clear reason while treating expiring-soon inventory as usable.
+
+## Improved Reporting
+
+- [x] **CKS-REPORT-003**: When optional enhancement results are supplied, the structured business summary shall include partial-delivery counts and line outcomes, predictive stockout alerts, unavailable menu items, and the forecast horizon without removing required base fields.
+- [x] **CKS-REPORT-004**: When the enhanced business summary is printed, the console output shall include partial deliveries, predictive stockout alerts, and unavailable menu items.
+- [x] **CKS-REPORT-005**: When a Markdown report path is supplied, the simulation shall replace that file with a business-readable report containing an executive summary, order outcomes, stockout alerts, unavailable menu items, final inventory, restock recommendations, and expiry concerns.
+- [x] **CKS-REPORT-006**: When an HTML report path is supplied, the simulation shall replace that file with a self-contained, escaped, browser-readable report containing the same business sections as the Markdown report.
+
+## Verification Evidence
+
+- [x] **CKS-VERIFY-001**: When the verification harness runs, it shall execute the real command-line program and save its standard output and standard error to `terminal_output.txt`.
+- [x] **CKS-VERIFY-002**: When the verification harness runs, it shall execute the complete unit-test suite and save its standard output and standard error to `unit_test_output.txt`.
+- [x] **CKS-VERIFY-003**: When the verification harness completes its commands, it shall copy the generated HTML report into the verification directory and write `requirements_sanity_check.md` with requirement IDs, evidence sources, observed evidence, and pass or fail results.
+- [x] **CKS-VERIFY-004**: If any command fails, expected runtime evidence is absent, any EARS requirement is unchecked, or any EARS requirement lacks a test annotation, then the verification harness shall report an overall failure and exit nonzero.
+- [x] **CKS-VERIFY-005**: When the verification harness is rerun for a selected output directory, it shall replace only the stable verification artifact filenames and shall report an overall pass when every sanity check succeeds.

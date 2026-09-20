@@ -2,6 +2,8 @@
 
 from copy import deepcopy
 from datetime import date, datetime
+from html import escape
+from pathlib import Path
 
 from seed_data import inventory, orders, recipes, restock, status
 
@@ -9,6 +11,9 @@ from seed_data import inventory, orders, recipes, restock, status
 LOW_STOCK_THRESHOLD_GRAMS = 1000
 PAR_LEVEL_GRAMS = 10000
 EXPIRING_SOON_DAYS = 5
+ATOMIC_FULFILLMENT = "atomic"
+PARTIAL_FULFILLMENT = "partial"
+DEFAULT_FORECAST_HORIZON_ORDERS = 5
 
 
 def _resolve_reference_date(reference_date):
@@ -342,7 +347,34 @@ def refresh_restock_table(
     )
 
 
-# @spec CKS-RECIPE-003, CKS-FULFILL-001, CKS-FULFILL-002, CKS-FULFILL-003, CKS-FULFILL-004, CKS-RESTOCK-004
+def _record_shortage_reasons(unavailable_ingredients, shortage_reasons, inventory_names):
+    """Merge failed availability reasons into the final restock inputs."""
+    for detail in unavailable_ingredients:
+        ingredient_name = detail["ingredient"]
+        reasons = shortage_reasons.setdefault(ingredient_name, [])
+        if ingredient_name not in inventory_names:
+            _append_unique(reasons, "Missing from inventory")
+        elif not detail["quantity_sufficient"]:
+            _append_unique(reasons, "Insufficient for order")
+
+
+def _consumption_records(requirements):
+    """Convert requirement records into actual-consumption records."""
+    return [
+        {"name": item["name"], "qty_grams": item["required_qty_grams"]}
+        for item in requirements
+    ]
+
+
+def _format_unavailable_ingredients(unavailable_ingredients):
+    """Return deterministic ingredient failure text."""
+    return ", ".join(
+        f"{detail['ingredient']} ({detail['reason']})"
+        for detail in unavailable_ingredients
+    )
+
+
+# @spec CKS-RECIPE-003, CKS-FULFILL-001, CKS-FULFILL-002, CKS-FULFILL-003, CKS-FULFILL-004, CKS-RESTOCK-004, CKS-PARTIAL-001, CKS-PARTIAL-002, CKS-PARTIAL-003
 def process_orders(
     recipe_data,
     inventory_data,
@@ -350,9 +382,13 @@ def process_orders(
     status_data,
     restock_data,
     reference_date=None,
+    fulfillment_policy=ATOMIC_FULFILLMENT,
 ):
-    """Process complete orders atomically against cumulative usable inventory."""
+    """Process orders against cumulative inventory under an explicit policy."""
     reference_date = _resolve_reference_date(reference_date)
+    if fulfillment_policy not in (ATOMIC_FULFILLMENT, PARTIAL_FULFILLMENT):
+        raise ValueError("fulfillment_policy must be 'atomic' or 'partial'")
+
     processed_orders = []
     working_inventory = deepcopy(inventory_data)
     shortage_reasons = {}
@@ -366,8 +402,120 @@ def process_orders(
             "order_requirements": [],
             "inventory_check": None,
             "fulfilled": False,
+            "fulfillment_status": "Not Delivered",
             "reason": "",
+            "actual_consumption": [],
         }
+
+        if fulfillment_policy == PARTIAL_FULFILLMENT:
+            requirement_groups = []
+            inventory_details = []
+            consumption_groups = []
+
+            if not order["items"]:
+                order_result["inventory_check"] = {"all_available": False, "details": []}
+                order_result["reason"] = "Invalid order: order has no items"
+                update_status_entry(
+                    status_data, order["order_id"], False, order_result["reason"]
+                )
+                processed_orders.append(order_result)
+                continue
+
+            for item in order["items"]:
+                recipe = find_recipe_by_name(recipe_data, item["item"])
+                quantity = item.get("qty")
+                valid_quantity = type(quantity) is int and quantity > 0
+                item_result = {
+                    "item": item["item"],
+                    "qty": quantity,
+                    "recipe_found": recipe is not None,
+                    "valid_quantity": valid_quantity,
+                    "requirements": [],
+                    "inventory_check": None,
+                    "delivered": False,
+                    "reason": "",
+                }
+
+                issues = []
+                if not valid_quantity:
+                    issues.append(f"Invalid quantity {quantity!r}")
+                if recipe is None:
+                    issues.append("No matching recipe")
+                if issues:
+                    item_result["reason"] = "; ".join(issues)
+                    order_result["items"].append(item_result)
+                    continue
+
+                requirements = calculate_ingredient_requirements(recipe, quantity)
+                requirement_groups.append(requirements)
+                item_result["requirements"] = requirements
+                inventory_check = check_inventory_availability(
+                    working_inventory, requirements, reference_date
+                )
+                item_result["inventory_check"] = inventory_check
+                inventory_details.extend(inventory_check["details"])
+                unavailable = [
+                    detail
+                    for detail in inventory_check["details"]
+                    if not detail["is_available"]
+                ]
+
+                if unavailable:
+                    item_result["reason"] = _format_unavailable_ingredients(unavailable)
+                    _record_shortage_reasons(
+                        unavailable, shortage_reasons, inventory_names
+                    )
+                else:
+                    deduct_inventory(working_inventory, requirements)
+                    item_result["delivered"] = True
+                    item_result["reason"] = "Delivered"
+                    consumption_groups.append(requirements)
+
+                order_result["items"].append(item_result)
+
+            order_result["order_requirements"] = combine_requirements(requirement_groups)
+            order_result["inventory_check"] = {
+                "all_available": all(item["delivered"] for item in order_result["items"]),
+                "details": inventory_details,
+            }
+            actual_requirements = combine_requirements(consumption_groups)
+            order_result["actual_consumption"] = _consumption_records(actual_requirements)
+
+            delivered_items = [
+                item for item in order_result["items"] if item["delivered"]
+            ]
+            rejected_items = [
+                item for item in order_result["items"] if not item["delivered"]
+            ]
+            if delivered_items and not rejected_items:
+                order_result["fulfilled"] = True
+                order_result["fulfillment_status"] = "Delivered"
+                order_result["reason"] = "Delivered"
+            elif delivered_items:
+                delivered_text = ", ".join(item["item"] for item in delivered_items)
+                rejected_text = ", ".join(
+                    f"{item['item']} ({item['reason']})" for item in rejected_items
+                )
+                order_result["fulfillment_status"] = "Partially Delivered"
+                order_result["reason"] = (
+                    f"Partially Delivered: {delivered_text} | "
+                    f"Not Delivered: {rejected_text}"
+                )
+            else:
+                rejected_text = ", ".join(
+                    f"{item['item']} ({item['reason']})" for item in rejected_items
+                )
+                order_result["reason"] = f"Not Delivered: {rejected_text}"
+
+            update_status_entry(
+                status_data,
+                order["order_id"],
+                order_result["fulfilled"],
+                order_result["reason"],
+            )
+            processed_orders.append(order_result)
+            continue
+
         requirement_groups = []
         missing_recipe_items = []
         invalid_order_issues = []
@@ -396,6 +544,13 @@ def process_orders(
                         "recipe_found": recipe is not None,
                         "valid_quantity": valid_quantity,
                         "requirements": [],
+                        "inventory_check": None,
+                        "delivered": False,
+                        "reason": (
+                            "No matching recipe"
+                            if recipe is None
+                            else f"Invalid quantity {quantity!r}"
+                        ),
                     }
                 )
                 continue
@@ -409,6 +564,9 @@ def process_orders(
                     "recipe_found": True,
                     "valid_quantity": True,
                     "requirements": requirements,
+                    "inventory_check": None,
+                    "delivered": False,
+                    "reason": "",
                 }
             )
 
@@ -441,22 +599,26 @@ def process_orders(
                 )
             )
 
-            for detail in unavailable_ingredients:
-                ingredient_name = detail["ingredient"]
-                reasons = shortage_reasons.setdefault(ingredient_name, [])
-                if ingredient_name not in inventory_names:
-                    _append_unique(reasons, "Missing from inventory")
-                elif not detail["quantity_sufficient"]:
-                    _append_unique(reasons, "Insufficient for order")
+            _record_shortage_reasons(
+                unavailable_ingredients, shortage_reasons, inventory_names
+            )
 
         if reason_parts:
             order_result["fulfilled"] = False
             order_result["reason"] = " | ".join(reason_parts)
+            for item in order_result["items"]:
+                if not item["reason"]:
+                    item["reason"] = "Order rejected by atomic fulfillment policy"
             update_status_entry(status_data, order["order_id"], False, order_result["reason"])
         else:
             deduct_inventory(working_inventory, order_requirements)
             order_result["fulfilled"] = True
+            order_result["fulfillment_status"] = "Delivered"
             order_result["reason"] = "Delivered"
+            order_result["actual_consumption"] = _consumption_records(order_requirements)
+            for item in order_result["items"]:
+                item["delivered"] = True
+                item["reason"] = "Delivered"
             update_status_entry(status_data, order["order_id"], True, "Delivered")
 
         processed_orders.append(order_result)
@@ -470,6 +632,90 @@ def process_orders(
     )
 
     return processed_orders
+
+
+# @spec CKS-FORECAST-001, CKS-FORECAST-002, CKS-FORECAST-003
+def predict_stockouts(inventory_data, processed_orders, horizon_orders=DEFAULT_FORECAST_HORIZON_ORDERS):
+    """Estimate stockouts from actual fulfilled consumption per observed order."""
+    if type(horizon_orders) is not int or horizon_orders <= 0:
+        raise ValueError("horizon_orders must be a positive integer")
+
+    observed_orders = len(processed_orders)
+    if observed_orders == 0:
+        return []
+
+    consumption = {}
+    for order in processed_orders:
+        for item in order.get("actual_consumption", []):
+            consumption.setdefault(item["name"], 0)
+            consumption[item["name"]] += item["qty_grams"]
+
+    alerts = []
+    for inventory_item in inventory_data:
+        ingredient = inventory_item["ingredient"]
+        observed = consumption.get(ingredient, 0)
+        if observed <= 0:
+            continue
+        average = observed / observed_orders
+        current_qty = inventory_item["qty_grams"]
+        estimated_orders_remaining = current_qty / average
+        if estimated_orders_remaining > horizon_orders:
+            continue
+        alerts.append(
+            {
+                "ingredient": ingredient,
+                "current_qty_grams": current_qty,
+                "observed_consumption_grams": observed,
+                "average_consumption_per_order": round(average, 2),
+                "forecast_horizon_orders": horizon_orders,
+                "projected_qty_grams": round(current_qty - average * horizon_orders, 2),
+                "estimated_orders_remaining": round(estimated_orders_remaining, 2),
+            }
+        )
+    return alerts
+
+
+# @spec CKS-MENU-001, CKS-MENU-002
+def identify_unavailable_menu_items(recipe_data, inventory_data, reference_date=None):
+    """Return menu items that cannot produce one serving from usable stock."""
+    reference_date = _resolve_reference_date(reference_date)
+    inventory_lookup = {item["ingredient"]: item for item in inventory_data}
+    unavailable_items = []
+
+    for recipe in recipe_data:
+        blocking_ingredients = []
+        for requirement in recipe["ingredients"]:
+            ingredient = requirement["name"]
+            required_qty = requirement["qty_grams"]
+            inventory_item = inventory_lookup.get(ingredient)
+            if inventory_item is None:
+                reason = "Missing from inventory"
+            else:
+                current_qty = inventory_item["qty_grams"]
+                expiry_status, _, is_usable = _expiry_context(
+                    inventory_item, reference_date
+                )
+                if not is_usable:
+                    reason = expiry_status
+                elif current_qty <= 0:
+                    reason = "Out of stock"
+                elif current_qty < required_qty:
+                    reason = "Insufficient for one serving"
+                else:
+                    continue
+            blocking_ingredients.append(
+                {"ingredient": ingredient, "reason": reason}
+            )
+
+        if blocking_ingredients:
+            unavailable_items.append(
+                {
+                    "item": recipe["name"],
+                    "blocking_ingredients": blocking_ingredients,
+                }
+            )
+
+    return unavailable_items
 
 
 def print_order_processing_results(processed_orders):
@@ -517,17 +763,35 @@ def print_order_processing_results(processed_orders):
         print()
 
 
-# @spec CKS-REPORT-001
+# @spec CKS-REPORT-001, CKS-REPORT-003
 def build_business_summary(
     processed_orders,
     inventory_data,
     restock_data,
     reference_date=None,
+    stockout_alerts=None,
+    unavailable_menu_items=None,
+    forecast_horizon_orders=None,
 ):
     """Return the final simulation outcome in a testable business structure."""
     reference_date = _resolve_reference_date(reference_date)
-    delivered_orders = [order for order in processed_orders if order["fulfilled"]]
-    not_delivered_orders = [order for order in processed_orders if not order["fulfilled"]]
+    delivered_orders = [
+        order
+        for order in processed_orders
+        if order.get("fulfillment_status", "Delivered" if order["fulfilled"] else "Not Delivered")
+        == "Delivered"
+    ]
+    partially_delivered_orders = [
+        order
+        for order in processed_orders
+        if order.get("fulfillment_status") == "Partially Delivered"
+    ]
+    not_delivered_orders = [
+        order
+        for order in processed_orders
+        if order.get("fulfillment_status", "Delivered" if order["fulfilled"] else "Not Delivered")
+        == "Not Delivered"
+    ]
     expiry_concerns = []
 
     for item in inventory_data:
@@ -544,8 +808,17 @@ def build_business_summary(
 
     return {
         "delivered_count": len(delivered_orders),
+        "partially_delivered_count": len(partially_delivered_orders),
         "not_delivered_count": len(not_delivered_orders),
         "delivered_order_ids": [order["order_id"] for order in delivered_orders],
+        "partially_delivered_orders": [
+            {
+                "order_id": order["order_id"],
+                "reason": order["reason"],
+                "items": deepcopy(order.get("items", [])),
+            }
+            for order in partially_delivered_orders
+        ],
         "not_delivered_orders": [
             {"order_id": order["order_id"], "reason": order["reason"]}
             for order in not_delivered_orders
@@ -553,19 +826,30 @@ def build_business_summary(
         "final_inventory": deepcopy(inventory_data),
         "restock_recommendations": deepcopy(restock_data),
         "expiry_concerns": expiry_concerns,
+        "stockout_alerts": deepcopy(stockout_alerts or []),
+        "unavailable_menu_items": deepcopy(unavailable_menu_items or []),
+        "forecast_horizon_orders": forecast_horizon_orders,
     }
 
 
-# @spec CKS-REPORT-002
+# @spec CKS-REPORT-002, CKS-REPORT-004
 def print_business_summary(summary):
     """Print the final simulation result for a non-technical kitchen manager."""
     print("\n=== Business Summary ===")
     print(f"Orders Delivered: {summary['delivered_count']}")
+    print(f"Orders Partially Delivered: {summary.get('partially_delivered_count', 0)}")
     print(f"Orders Not Delivered: {summary['not_delivered_count']}")
 
     print("\nDelivered Order IDs:")
     if summary["delivered_order_ids"]:
         print("  " + ", ".join(str(order_id) for order_id in summary["delivered_order_ids"]))
+    else:
+        print("  None")
+
+    print("\nOrders Partially Delivered:")
+    if summary.get("partially_delivered_orders"):
+        for order in summary["partially_delivered_orders"]:
+            print(f"  Order {order['order_id']}: {order['reason']}")
     else:
         print("  None")
 
@@ -600,6 +884,301 @@ def print_business_summary(summary):
     else:
         print("  None")
 
+    print("\nPredictive Stockout Alerts:")
+    if summary.get("stockout_alerts"):
+        for item in summary["stockout_alerts"]:
+            print(
+                f"  {item['ingredient']}: approximately "
+                f"{item['estimated_orders_remaining']} orders remaining "
+                f"at {item['average_consumption_per_order']} grams per order"
+            )
+    else:
+        print("  None")
+
+    print("\nUnavailable Menu Items:")
+    if summary.get("unavailable_menu_items"):
+        for menu_item in summary["unavailable_menu_items"]:
+            blockers = ", ".join(
+                f"{item['ingredient']} ({item['reason']})"
+                for item in menu_item["blocking_ingredients"]
+            )
+            print(f"  {menu_item['item']}: {blockers}")
+    else:
+        print("  None")
+
+
+def _markdown_table(headers, rows):
+    """Render a compact Markdown table, including an empty-state row."""
+    def cell(value):
+        return str(value).replace("|", "\\|").replace("\n", " ")
+
+    lines = [
+        "| " + " | ".join(cell(header) for header in headers) + " |",
+        "| " + " | ".join("---" for _ in headers) + " |",
+    ]
+    if rows:
+        lines.extend("| " + " | ".join(cell(value) for value in row) + " |" for row in rows)
+    else:
+        lines.append("| " + " | ".join(["None"] + [""] * (len(headers) - 1)) + " |")
+    return lines
+
+
+# @spec CKS-REPORT-005
+def generate_markdown_report(summary, output_path, reference_date=None):
+    """Replace a Markdown file with a polished report from structured results."""
+    reference_date = _resolve_reference_date(reference_date)
+    output_path = Path(output_path)
+    lines = [
+        "# Cloud Kitchen Business Report",
+        "",
+        f"**Simulation date:** {reference_date.isoformat()}",
+        "",
+        "## Executive Summary",
+        "",
+        f"- Orders delivered: {summary['delivered_count']}",
+        f"- Orders partially delivered: {summary.get('partially_delivered_count', 0)}",
+        f"- Orders not delivered: {summary['not_delivered_count']}",
+        f"- Predictive stockout alerts: {len(summary.get('stockout_alerts', []))}",
+        f"- Unavailable menu items: {len(summary.get('unavailable_menu_items', []))}",
+        "",
+        "## Order Outcomes",
+        "",
+    ]
+
+    order_rows = [
+        (order_id, "Delivered", "Delivered")
+        for order_id in summary["delivered_order_ids"]
+    ]
+    order_rows.extend(
+        (order["order_id"], "Partially Delivered", order["reason"])
+        for order in summary.get("partially_delivered_orders", [])
+    )
+    order_rows.extend(
+        (order["order_id"], "Not Delivered", order["reason"])
+        for order in summary["not_delivered_orders"]
+    )
+    lines.extend(_markdown_table(["Order", "Status", "Details"], order_rows))
+
+    lines.extend(["", "## Predictive Stockout Alerts", ""])
+    alert_rows = [
+        (
+            item["ingredient"],
+            item["current_qty_grams"],
+            item["average_consumption_per_order"],
+            item["forecast_horizon_orders"],
+            item["projected_qty_grams"],
+            item["estimated_orders_remaining"],
+        )
+        for item in summary.get("stockout_alerts", [])
+    ]
+    lines.extend(
+        _markdown_table(
+            ["Ingredient", "Current g", "Avg g/order", "Horizon", "Projected g", "Orders remaining"],
+            alert_rows,
+        )
+    )
+
+    lines.extend(["", "## Unavailable Menu Items", ""])
+    menu_rows = [
+        (
+            item["item"],
+            "; ".join(
+                f"{blocker['ingredient']}: {blocker['reason']}"
+                for blocker in item["blocking_ingredients"]
+            ),
+        )
+        for item in summary.get("unavailable_menu_items", [])
+    ]
+    lines.extend(_markdown_table(["Menu item", "Blocking ingredients"], menu_rows))
+
+    lines.extend(["", "## Final Inventory", ""])
+    lines.extend(
+        _markdown_table(
+            ["Ingredient", "Quantity g", "Expiry date"],
+            [
+                (item["ingredient"], item["qty_grams"], item.get("expiry_date", ""))
+                for item in summary["final_inventory"]
+            ],
+        )
+    )
+
+    lines.extend(["", "## Restock Recommendations", ""])
+    lines.extend(
+        _markdown_table(
+            ["Ingredient", "Current g", "Order g", "Reason"],
+            [
+                (
+                    item["item"],
+                    item.get("current_qty_grams", ""),
+                    item["qty_needed_grams"],
+                    item["reason"],
+                )
+                for item in summary["restock_recommendations"]
+            ],
+        )
+    )
+
+    lines.extend(["", "## Expiry Concerns", ""])
+    lines.extend(
+        _markdown_table(
+            ["Ingredient", "Status", "Expiry date", "Days"],
+            [
+                (
+                    item["ingredient"],
+                    item["status"],
+                    item.get("expiry_date", ""),
+                    item.get("days_until_expiry", ""),
+                )
+                for item in summary["expiry_concerns"]
+            ],
+        )
+    )
+
+    output_path.write_text("\n".join(lines) + "\n", encoding="utf-8")
+    return output_path
+
+
+def _html_table(headers, rows):
+    """Render an escaped HTML table with an explicit empty state."""
+    header_html = "".join(f"<th>{escape(str(header))}</th>" for header in headers)
+    if rows:
+        body_html = "".join(
+            "<tr>"
+            + "".join(f"<td>{escape(str(value))}</td>" for value in row)
+            + "</tr>"
+            for row in rows
+        )
+    else:
+        body_html = (
+            f'<tr><td colspan="{len(headers)}" class="empty">None</td></tr>'
+        )
+    return (
+        '<div class="table-wrap"><table><thead><tr>'
+        + header_html
+        + "</tr></thead><tbody>"
+        + body_html
+        + "</tbody></table></div>"
+    )
+
+
+# @spec CKS-REPORT-006
+def generate_html_report(summary, output_path, reference_date=None):
+    """Replace an HTML file with a self-contained report from structured results."""
+    reference_date = _resolve_reference_date(reference_date)
+    output_path = Path(output_path)
+    order_rows = [
+        (order_id, "Delivered", "Delivered")
+        for order_id in summary["delivered_order_ids"]
+    ]
+    order_rows.extend(
+        (order["order_id"], "Partially Delivered", order["reason"])
+        for order in summary.get("partially_delivered_orders", [])
+    )
+    order_rows.extend(
+        (order["order_id"], "Not Delivered", order["reason"])
+        for order in summary["not_delivered_orders"]
+    )
+    alert_rows = [
+        (
+            item["ingredient"],
+            item["current_qty_grams"],
+            item["average_consumption_per_order"],
+            item["forecast_horizon_orders"],
+            item["projected_qty_grams"],
+            item["estimated_orders_remaining"],
+        )
+        for item in summary.get("stockout_alerts", [])
+    ]
+    menu_rows = [
+        (
+            item["item"],
+            "; ".join(
+                f"{blocker['ingredient']}: {blocker['reason']}"
+                for blocker in item["blocking_ingredients"]
+            ),
+        )
+        for item in summary.get("unavailable_menu_items", [])
+    ]
+    inventory_rows = [
+        (item["ingredient"], item["qty_grams"], item.get("expiry_date", ""))
+        for item in summary["final_inventory"]
+    ]
+    restock_rows = [
+        (
+            item["item"],
+            item.get("current_qty_grams", ""),
+            item["qty_needed_grams"],
+            item["reason"],
+        )
+        for item in summary["restock_recommendations"]
+    ]
+    expiry_rows = [
+        (
+            item["ingredient"],
+            item["status"],
+            item.get("expiry_date", ""),
+            item.get("days_until_expiry", ""),
+        )
+        for item in summary["expiry_concerns"]
+    ]
+
+    html = f"""<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cloud Kitchen Business Report</title>
+  <style>
+    :root {{ color-scheme: light; --ink: #172033; --muted: #5c667a; --line: #d9deea; --panel: #f6f8fc; --accent: #1f5fbf; }}
+    * {{ box-sizing: border-box; }}
+    body {{ margin: 0; background: #eef2f8; color: var(--ink); font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }}
+    main {{ width: min(1120px, calc(100% - 32px)); margin: 32px auto; background: white; border: 1px solid var(--line); border-radius: 14px; padding: 32px; box-shadow: 0 16px 40px rgba(23, 32, 51, .08); }}
+    h1 {{ margin: 0 0 4px; font-size: clamp(26px, 4vw, 40px); }}
+    h2 {{ margin: 32px 0 12px; border-bottom: 2px solid var(--accent); padding-bottom: 7px; font-size: 20px; }}
+    .date {{ color: var(--muted); }}
+    .metrics {{ display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; margin-top: 20px; }}
+    .metric {{ background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 14px; }}
+    .metric strong {{ display: block; font-size: 24px; }}
+    .metric span {{ color: var(--muted); }}
+    .table-wrap {{ overflow-x: auto; border: 1px solid var(--line); border-radius: 10px; }}
+    table {{ width: 100%; border-collapse: collapse; min-width: 620px; }}
+    th, td {{ padding: 10px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }}
+    th {{ background: var(--panel); font-size: 13px; text-transform: uppercase; letter-spacing: .04em; }}
+    tbody tr:last-child td {{ border-bottom: 0; }}
+    .empty {{ color: var(--muted); text-align: center; }}
+  </style>
+</head>
+<body>
+<main>
+  <h1>Cloud Kitchen Business Report</h1>
+  <p class="date">Simulation date: {escape(reference_date.isoformat())}</p>
+  <h2>Executive Summary</h2>
+  <div class="metrics">
+    <div class="metric"><strong>{summary['delivered_count']}</strong><span>Delivered</span></div>
+    <div class="metric"><strong>{summary.get('partially_delivered_count', 0)}</strong><span>Partially delivered</span></div>
+    <div class="metric"><strong>{summary['not_delivered_count']}</strong><span>Not delivered</span></div>
+    <div class="metric"><strong>{len(summary.get('stockout_alerts', []))}</strong><span>Stockout alerts</span></div>
+    <div class="metric"><strong>{len(summary.get('unavailable_menu_items', []))}</strong><span>Unavailable menu items</span></div>
+  </div>
+  <h2>Order Outcomes</h2>
+  {_html_table(['Order', 'Status', 'Details'], order_rows)}
+  <h2>Predictive Stockout Alerts</h2>
+  {_html_table(['Ingredient', 'Current g', 'Avg g/order', 'Horizon', 'Projected g', 'Orders remaining'], alert_rows)}
+  <h2>Unavailable Menu Items</h2>
+  {_html_table(['Menu item', 'Blocking ingredients'], menu_rows)}
+  <h2>Final Inventory</h2>
+  {_html_table(['Ingredient', 'Quantity g', 'Expiry date'], inventory_rows)}
+  <h2>Restock Recommendations</h2>
+  {_html_table(['Ingredient', 'Current g', 'Order g', 'Reason'], restock_rows)}
+  <h2>Expiry Concerns</h2>
+  {_html_table(['Ingredient', 'Status', 'Expiry date', 'Days'], expiry_rows)}
+</main>
+</body>
+</html>
+"""
+    output_path.write_text(html, encoding="utf-8")
+    return output_path
+
 
 def main():
     """Load seed tables, process fulfillment, and print the updated results."""
@@ -616,12 +1195,26 @@ def main():
         status_data,
         restock_data,
         simulation_date,
+        fulfillment_policy=PARTIAL_FULFILLMENT,
+    )
+    stockout_alerts = predict_stockouts(
+        inventory_data,
+        processed_orders,
+        DEFAULT_FORECAST_HORIZON_ORDERS,
+    )
+    unavailable_menu_items = identify_unavailable_menu_items(
+        recipe_data,
+        inventory_data,
+        simulation_date,
     )
     summary = build_business_summary(
         processed_orders,
         inventory_data,
         restock_data,
         simulation_date,
+        stockout_alerts=stockout_alerts,
+        unavailable_menu_items=unavailable_menu_items,
+        forecast_horizon_orders=DEFAULT_FORECAST_HORIZON_ORDERS,
     )
 
     print_recipes(recipe_data)
@@ -631,6 +1224,18 @@ def main():
     print_restock(restock_data)
     print_status(status_data)
     print_business_summary(summary)
+    report_path = generate_markdown_report(
+        summary,
+        Path(__file__).with_name("BUSINESS_REPORT.md"),
+        simulation_date,
+    )
+    print(f"\nMarkdown report: {report_path}")
+    html_report_path = generate_html_report(
+        summary,
+        Path(__file__).with_name("BUSINESS_REPORT.html"),
+        simulation_date,
+    )
+    print(f"HTML report: {html_report_path}")
 
 
 if __name__ == "__main__":

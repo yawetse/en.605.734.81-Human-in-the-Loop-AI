@@ -4,6 +4,8 @@ from copy import deepcopy
 from contextlib import redirect_stdout
 from datetime import date
 from io import StringIO
+from pathlib import Path
+from tempfile import TemporaryDirectory
 import unittest
 
 from main import (
@@ -13,6 +15,9 @@ from main import (
     check_inventory_availability,
     combine_requirements,
     find_recipe_by_name,
+    generate_html_report,
+    generate_markdown_report,
+    identify_unavailable_menu_items,
     load_inventory,
     load_orders,
     load_recipes,
@@ -24,8 +29,10 @@ from main import (
     print_recipes,
     print_restock,
     print_status,
+    predict_stockouts,
     process_orders,
 )
+from verify_outputs import evaluate_requirements, render_sanity_report
 
 
 REFERENCE_DATE = date(2026, 6, 3)
@@ -315,6 +322,84 @@ class TestOrderFulfillment(unittest.TestCase):
         self.assertEqual(status_data[1], {"order_id": 402, "delivered": True, "remark": "Delivered"})
 
 
+class TestPartialFulfillment(unittest.TestCase):
+    """Verify item-level delivery without weakening atomic mode."""
+
+    def setUp(self):
+        self.recipe_data = [
+            {"recipe_id": 1, "name": "Rice Bowl", "ingredients": [{"name": "Rice", "qty_grams": 300}]},
+            {"recipe_id": 2, "name": "Soup", "ingredients": [{"name": "Stock", "qty_grams": 100}]},
+        ]
+        self.order = {
+            "order_id": 450,
+            "brand": "Test",
+            "items": [
+                {"item": "Rice Bowl", "qty": 1},
+                {"item": "Rice Bowl", "qty": 1},
+                {"item": "Soup", "qty": 1},
+            ],
+        }
+
+    # @spec CKS-PARTIAL-001, CKS-PARTIAL-002
+    def test_partial_mode_delivers_available_lines_and_rejects_other_lines(self):
+        inventory_data = [
+            {"ingredient": "Rice", "qty_grams": 500, "expiry_date": "2026-12-31"},
+            {"ingredient": "Stock", "qty_grams": 0, "expiry_date": "2026-12-31"},
+        ]
+        status_data = []
+        result = process_orders(
+            self.recipe_data,
+            inventory_data,
+            [self.order],
+            status_data,
+            [],
+            REFERENCE_DATE,
+            fulfillment_policy="partial",
+        )[0]
+
+        self.assertEqual(result["fulfillment_status"], "Partially Delivered")
+        self.assertFalse(result["fulfilled"])
+        self.assertEqual([item["delivered"] for item in result["items"]], [True, False, False])
+        self.assertEqual(inventory_data[0]["qty_grams"], 200)
+        self.assertEqual(result["actual_consumption"], [{"name": "Rice", "qty_grams": 300}])
+        self.assertIn("Rice Bowl", result["reason"])
+        self.assertIn("Soup", result["reason"])
+        self.assertFalse(status_data[0]["delivered"])
+        self.assertIn("Partially Delivered", status_data[0]["remark"])
+
+    # @spec CKS-PARTIAL-001
+    def test_partial_mode_keeps_valid_lines_when_another_line_is_invalid(self):
+        inventory_data = [{"ingredient": "Rice", "qty_grams": 500, "expiry_date": "2026-12-31"}]
+        order = {
+            "order_id": 451,
+            "brand": "Test",
+            "items": [
+                {"item": "Unknown", "qty": 1},
+                {"item": "Rice Bowl", "qty": 1},
+            ],
+        }
+        result = process_orders(
+            self.recipe_data, inventory_data, [order], [], [], REFERENCE_DATE,
+            fulfillment_policy="partial",
+        )[0]
+        self.assertEqual(result["fulfillment_status"], "Partially Delivered")
+        self.assertEqual([item["delivered"] for item in result["items"]], [False, True])
+        self.assertEqual(inventory_data[0]["qty_grams"], 200)
+
+    # @spec CKS-PARTIAL-003
+    def test_atomic_mode_remains_the_default(self):
+        inventory_data = [
+            {"ingredient": "Rice", "qty_grams": 500, "expiry_date": "2026-12-31"},
+            {"ingredient": "Stock", "qty_grams": 0, "expiry_date": "2026-12-31"},
+        ]
+        original = deepcopy(inventory_data)
+        result = process_orders(
+            self.recipe_data, inventory_data, [self.order], [], [], REFERENCE_DATE
+        )[0]
+        self.assertEqual(result["fulfillment_status"], "Not Delivered")
+        self.assertEqual(inventory_data, original)
+
+
 class TestRestockRules(unittest.TestCase):
     """Verify stock, expiry, and consolidation rules."""
 
@@ -407,6 +492,123 @@ class TestRestockRules(unittest.TestCase):
         self.assertEqual(restock_data[0]["reason"].count("Insufficient for order"), 1)
 
 
+class TestPredictiveStockoutAlerts(unittest.TestCase):
+    """Verify forecasts use actual consumption and a controlled horizon."""
+
+    # @spec CKS-FORECAST-001, CKS-FORECAST-002
+    def test_forecast_uses_actual_consumption_and_reports_alert_fields(self):
+        processed_orders = [
+            {"actual_consumption": [{"name": "Rice", "qty_grams": 100}]},
+            {"actual_consumption": []},
+            {"actual_consumption": [{"name": "Rice", "qty_grams": 100}]},
+            {"actual_consumption": []},
+        ]
+        inventory_data = [
+            {"ingredient": "Rice", "qty_grams": 100, "expiry_date": "2026-12-31"},
+            {"ingredient": "Stock", "qty_grams": 1000, "expiry_date": "2026-12-31"},
+        ]
+        alerts = predict_stockouts(inventory_data, processed_orders, horizon_orders=2)
+        self.assertEqual(len(alerts), 1)
+        self.assertEqual(
+            alerts[0],
+            {
+                "ingredient": "Rice",
+                "current_qty_grams": 100,
+                "observed_consumption_grams": 200,
+                "average_consumption_per_order": 50.0,
+                "forecast_horizon_orders": 2,
+                "projected_qty_grams": 0.0,
+                "estimated_orders_remaining": 2.0,
+            },
+        )
+
+    # @spec CKS-FORECAST-001, CKS-FORECAST-002
+    def test_forecast_excludes_unconsumed_demand_and_non_risk_items(self):
+        processed_orders = [
+            {
+                "actual_consumption": [{"name": "Rice", "qty_grams": 10}],
+                "order_requirements": [{"name": "Rice", "required_qty_grams": 10000}],
+            }
+        ]
+        inventory_data = [{"ingredient": "Rice", "qty_grams": 100, "expiry_date": "2026-12-31"}]
+        self.assertEqual(predict_stockouts(inventory_data, processed_orders, horizon_orders=5), [])
+
+    # @spec CKS-FORECAST-003
+    def test_forecast_rejects_invalid_horizons(self):
+        for horizon in (0, -1, 1.5, True):
+            with self.subTest(horizon=horizon):
+                with self.assertRaisesRegex(ValueError, "positive integer"):
+                    predict_stockouts([], [], horizon_orders=horizon)
+
+
+class TestDynamicMenuAvailability(unittest.TestCase):
+    """Verify menu items are disabled from final usable inventory."""
+
+    # @spec CKS-MENU-001, CKS-MENU-002
+    def test_unavailable_items_report_every_blocking_ingredient(self):
+        recipes = [{
+            "recipe_id": 1,
+            "name": "Combo",
+            "ingredients": [
+                {"name": "Rice", "qty_grams": 100},
+                {"name": "Sauce", "qty_grams": 50},
+                {"name": "Cream", "qty_grams": 25},
+            ],
+        }]
+        inventory_data = [
+            {"ingredient": "Rice", "qty_grams": 90, "expiry_date": "2026-12-31"},
+            {"ingredient": "Sauce", "qty_grams": 0, "expiry_date": "2026-12-31"},
+            {"ingredient": "Cream", "qty_grams": 100, "expiry_date": "2026-06-02"},
+        ]
+        unavailable = identify_unavailable_menu_items(recipes, inventory_data, REFERENCE_DATE)
+        self.assertEqual(unavailable[0]["item"], "Combo")
+        self.assertEqual(
+            unavailable[0]["blocking_ingredients"],
+            [
+                {"ingredient": "Rice", "reason": "Insufficient for one serving"},
+                {"ingredient": "Sauce", "reason": "Out of stock"},
+                {"ingredient": "Cream", "reason": "Expired"},
+            ],
+        )
+
+    # @spec CKS-MENU-002
+    def test_expiring_soon_inventory_keeps_item_available(self):
+        recipes = [{
+            "recipe_id": 1,
+            "name": "Soup",
+            "ingredients": [{"name": "Stock", "qty_grams": 50}],
+        }]
+        inventory_data = [
+            {"ingredient": "Stock", "qty_grams": 50, "expiry_date": "2026-06-08"}
+        ]
+        self.assertEqual(
+            identify_unavailable_menu_items(recipes, inventory_data, REFERENCE_DATE),
+            [],
+        )
+
+    # @spec CKS-MENU-001, CKS-MENU-002
+    def test_missing_and_invalid_expiry_ingredients_disable_item(self):
+        recipes = [{
+            "recipe_id": 1,
+            "name": "Dessert",
+            "ingredients": [
+                {"name": "Sugar", "qty_grams": 50},
+                {"name": "Cream", "qty_grams": 25},
+            ],
+        }]
+        inventory_data = [
+            {"ingredient": "Cream", "qty_grams": 100, "expiry_date": "invalid"}
+        ]
+        unavailable = identify_unavailable_menu_items(recipes, inventory_data, REFERENCE_DATE)
+        self.assertEqual(
+            unavailable[0]["blocking_ingredients"],
+            [
+                {"ingredient": "Sugar", "reason": "Missing from inventory"},
+                {"ingredient": "Cream", "reason": "Invalid expiry"},
+            ],
+        )
+
+
 class TestBusinessSummary(unittest.TestCase):
     """Verify the structured and printed manager-facing summary."""
 
@@ -450,6 +652,215 @@ class TestBusinessSummary(unittest.TestCase):
             "Rice (Insufficient quantity)",
         ):
             self.assertIn(text, displayed)
+
+
+class TestEnhancedReporting(unittest.TestCase):
+    """Verify optional results are present in console and Markdown reports."""
+
+    def setUp(self):
+        self.processed_orders = [
+            {
+                "order_id": 1,
+                "fulfilled": False,
+                "fulfillment_status": "Partially Delivered",
+                "reason": "Partially Delivered: Rice Bowl | Not Delivered: Soup",
+                "items": [
+                    {"item": "Rice Bowl", "qty": 1, "delivered": True, "reason": "Delivered"},
+                    {"item": "Soup", "qty": 1, "delivered": False, "reason": "Stock (Out of stock)"},
+                ],
+            }
+        ]
+        self.inventory_data = [
+            {"ingredient": "Rice", "qty_grams": 100, "expiry_date": "2026-12-31"}
+        ]
+        self.alerts = [{
+            "ingredient": "Rice",
+            "current_qty_grams": 100,
+            "observed_consumption_grams": 200,
+            "average_consumption_per_order": 200.0,
+            "forecast_horizon_orders": 3,
+            "projected_qty_grams": -500.0,
+            "estimated_orders_remaining": 0.5,
+        }]
+        self.unavailable = [{
+            "item": "Soup",
+            "blocking_ingredients": [{"ingredient": "Stock", "reason": "Out of stock"}],
+        }]
+
+    # @spec CKS-REPORT-003
+    def test_summary_includes_optional_enhancement_results(self):
+        summary = build_business_summary(
+            self.processed_orders,
+            self.inventory_data,
+            [],
+            REFERENCE_DATE,
+            stockout_alerts=self.alerts,
+            unavailable_menu_items=self.unavailable,
+            forecast_horizon_orders=3,
+        )
+        self.assertEqual(summary["partially_delivered_count"], 1)
+        self.assertEqual(summary["not_delivered_count"], 0)
+        self.assertEqual(summary["stockout_alerts"], self.alerts)
+        self.assertEqual(summary["unavailable_menu_items"], self.unavailable)
+        self.assertEqual(summary["forecast_horizon_orders"], 3)
+
+    # @spec CKS-REPORT-004
+    def test_console_summary_prints_optional_sections(self):
+        summary = build_business_summary(
+            self.processed_orders, self.inventory_data, [], REFERENCE_DATE,
+            stockout_alerts=self.alerts,
+            unavailable_menu_items=self.unavailable,
+            forecast_horizon_orders=3,
+        )
+        output = StringIO()
+        with redirect_stdout(output):
+            print_business_summary(summary)
+        displayed = output.getvalue()
+        for heading in ("Orders Partially Delivered: 1", "Predictive Stockout Alerts", "Unavailable Menu Items"):
+            self.assertIn(heading, displayed)
+
+    # @spec CKS-REPORT-005
+    def test_markdown_report_contains_all_business_sections(self):
+        summary = build_business_summary(
+            self.processed_orders, self.inventory_data, [], REFERENCE_DATE,
+            stockout_alerts=self.alerts,
+            unavailable_menu_items=self.unavailable,
+            forecast_horizon_orders=3,
+        )
+        with TemporaryDirectory() as directory:
+            report_path = Path(directory) / "report.md"
+            report_path.write_text("stale report", encoding="utf-8")
+            generate_markdown_report(summary, report_path, REFERENCE_DATE)
+            report = report_path.read_text(encoding="utf-8")
+        for heading in (
+            "# Cloud Kitchen Business Report",
+            "## Executive Summary",
+            "## Order Outcomes",
+            "## Predictive Stockout Alerts",
+            "## Unavailable Menu Items",
+            "## Final Inventory",
+            "## Restock Recommendations",
+            "## Expiry Concerns",
+        ):
+            self.assertIn(heading, report)
+        self.assertIn("Partially Delivered", report)
+        self.assertIn("Rice Bowl \\| Not Delivered", report)
+        self.assertNotIn("stale report", report)
+
+    # @spec CKS-REPORT-006
+    def test_html_report_contains_business_sections_and_escaped_values(self):
+        summary = build_business_summary(
+            self.processed_orders, self.inventory_data, [], REFERENCE_DATE,
+            stockout_alerts=self.alerts,
+            unavailable_menu_items=[{
+                "item": "Soup & Salad",
+                "blocking_ingredients": [
+                    {"ingredient": "Stock <base>", "reason": "Out of stock"}
+                ],
+            }],
+            forecast_horizon_orders=3,
+        )
+        with TemporaryDirectory() as directory:
+            report_path = Path(directory) / "report.html"
+            report_path.write_text("stale report", encoding="utf-8")
+            generate_html_report(summary, report_path, REFERENCE_DATE)
+            report = report_path.read_text(encoding="utf-8")
+        for heading in (
+            "Cloud Kitchen Business Report",
+            "Executive Summary",
+            "Order Outcomes",
+            "Predictive Stockout Alerts",
+            "Unavailable Menu Items",
+            "Final Inventory",
+            "Restock Recommendations",
+            "Expiry Concerns",
+        ):
+            self.assertIn(heading, report)
+        self.assertIn("Soup &amp; Salad", report)
+        self.assertIn("Stock &lt;base&gt;", report)
+        self.assertNotIn("stale report", report)
+
+
+class TestVerificationEvidence(unittest.TestCase):
+    """Verify runtime evidence is compared with linked requirements."""
+
+    def setUp(self):
+        self.terminal_output = """
+=== Recipes ===
+=== Orders ===
+=== Order Processing ===
+=== Inventory ===
+=== Restock ===
+=== Status ===
+Orders Delivered: 1
+Orders Partially Delivered: 1
+Orders Not Delivered: 3
+Order 5: Partially Delivered: Chicken Burger | Not Delivered: Caesar Salad
+Chicken Breast: 800 grams
+Restock Recommendations:
+Chicken Breast: order 9200 grams
+Expiry Concerns:
+Predictive Stockout Alerts:
+Chicken Breast: approximately 0.43 orders remaining
+at 1840.0 grams per order
+Unavailable Menu Items:
+Margherita Pizza: Flour (Expired)
+"""
+        self.test_output = "Ran 45 tests in 0.010s\n\nOK\n"
+        self.html_output = """
+<html><body><h1>Cloud Kitchen Business Report</h1>
+<h2>Executive Summary</h2><h2>Order Outcomes</h2>
+<h2>Predictive Stockout Alerts</h2><h2>Unavailable Menu Items</h2>
+<h2>Final Inventory</h2><h2>Restock Recommendations</h2>
+<h2>Expiry Concerns</h2></body></html>
+"""
+        self.spec_text = "\n".join(
+            [
+                "- [x] **CKS-PARTIAL-001**: partial",
+                "- [x] **CKS-VERIFY-001**: verify",
+            ]
+        )
+        self.test_source = "# @spec CKS-PARTIAL-001\n# @spec CKS-VERIFY-001\n"
+
+    # @spec CKS-VERIFY-001, CKS-VERIFY-002, CKS-VERIFY-003, CKS-VERIFY-004, CKS-VERIFY-005
+    def test_expected_runtime_and_traceability_evidence_passes(self):
+        checks = evaluate_requirements(
+            self.terminal_output,
+            self.test_output,
+            self.html_output,
+            self.spec_text,
+            self.test_source,
+            program_returncode=0,
+            test_returncode=0,
+            markdown_exists=True,
+        )
+        self.assertTrue(all(check["passed"] for check in checks))
+        report = render_sanity_report(
+            checks,
+            {
+                "terminal": "terminal_output.txt",
+                "tests": "unit_test_output.txt",
+                "html": "business_report.html",
+            },
+        )
+        self.assertIn("**Overall result:** PASS", report)
+        self.assertIn("CKS-PARTIAL-001", report)
+        self.assertIn("terminal_output.txt", report)
+
+    # @spec CKS-VERIFY-004
+    def test_missing_evidence_produces_failed_checks(self):
+        checks = evaluate_requirements(
+            "",
+            "FAILED",
+            "<html></html>",
+            "- [ ] **CKS-VERIFY-001**: verify",
+            "",
+            program_returncode=1,
+            test_returncode=1,
+            markdown_exists=False,
+        )
+        self.assertFalse(all(check["passed"] for check in checks))
+        self.assertTrue(any("unchecked" in check["evidence"].lower() for check in checks))
 
 
 if __name__ == "__main__":
