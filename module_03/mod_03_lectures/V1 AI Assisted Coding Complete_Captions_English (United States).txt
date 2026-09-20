@@ -1,0 +1,521 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hello, I'm Doctor Ian McCullough from Johns Hopkins University. Today we're beginning our discussion of AI assisted coding.
+
+This is one of the most important shifts currently happening in software development today.
+
+At first glance, AI assisted coding may look like a simple productivity tool.
+
+You just type in a request and the system writes code. But I think that framing is too narrow.
+
+What is really changing is the relationship between the human and the code writing process you see.
+
+Traditionally, programing meant translating your intent into syntax line by line.
+
+You have to know the language. Remember the library calls, structure the logic, debug errors and test the results manually.
+
+But with AI assisted coding, some of that burden shifts.
+
+You still need to understand the problem, you still need to evaluate the solution, and you need to own the final result.
+
+But AI can help you generate, explain, modify, and debug code much more efficiently.
+
+And so the core question for today is not simply can AI write code.
+
+The better question is how should a thoughtful, technically responsible person work with AI when producing code?
+
+That's what this session is about. By the end of today's lesson, you should be able to do several things.
+
+First, you should be able to explain what AI assisted coding is and how it differs from traditional coding.
+
+Second, you should understand the mental model behind what's often called vibe coding.
+
+And that phrase can sound informal, but there's a couple underlying ideas that are pretty serious.
+
+Instead of manually constructing every line of code, you're guiding an AI system through that intent, that feedback, that review, in that iteration.
+
+It's important to note that it used to be a person that didn't put much thought into their code writing.
+
+Now it's become a term used for people using AI assisted coding, and that's an important distinction.
+
+Third, you need to be able to identify where AI assisted coding is effective and where it's risky or limited.
+
+You should also be able to recognize best practices for working with AI coding tools.
+
+And this is especially important because AI generated code can look polished even when it's wrong.
+
+And finally, you should be familiar with the role of common tools such as Visual Visual Studio Code and GitHub Copilot.
+
+I don't want you to leave this session merely impressed by what AI tools can do.
+
+I want you to leave with a disciplined mental model for using them well.
+
+The key phrase on this slide is a new way of working, not just a faster way of typing.
+
+That is important.
+
+Many people initially approach AI assisted coding is just a faster autocomplete tool, and that's part of it, but it's not the whole story.
+
+If you treat AI only as a faster keyboard, you're going to miss the larger change.
+
+AI assisted coding changes the workflow. Instead of asking what exact line of code should you write?
+
+Next, you're going to increasingly ask, what do I want the program to accomplish?
+
+And how can I communicate that intent clearly enough for the AI to generate a useful first draft?
+
+This means the human role shifts upward.
+
+You're going to spend less time remembering syntax and more time specifying goals, constraints, test cases, edge cases, and quality expectations.
+
+That doesn't make the human expertise less important. In many ways, it makes it more important because now your job is to judge generated output,
+
+and the judging often requires more understanding than merely producing the output to begin with.
+
+Let's compare two models directly. In traditional coding, you write every line of code yourself.
+
+You need detailed syntax knowledge you debug manually. You may spend a long time getting from idea to first prototype.
+
+In this model, the code itself often feels like the primary output in AI assisted coding.
+
+However, you describe what you want. The AI generates the code, and then you focus your attention from syntax to intent and direction.
+
+The AI can also help explain errors, purpose fixes, and and scaffold a working prototype quickly.
+
+The key shift is this. You become the director and AI becomes the implementer.
+
+The director metaphor, I think, is useful. A director does not disappear from the production process.
+
+A director is responsible for the vision, the constraints, the evaluation and the final product.
+
+The director may not personally operate every camera, adjust every light, or edit every frame, but they're still accountable for the result.
+
+In a similar way, when you use an AI coding assistant, you're not absolved of responsibility.
+
+You're not simply outsourcing correctness. You're directing a system that can produce useful work quickly, but it also needs supervision.
+
+For example, suppose you want to load a CSV file that's a comma separated file,
+
+and you need to clean missing values, calculate summary statistics, and produce a plot.
+
+In traditional coding, you might manually write every pandas command and every map plot library line in AI assisted coding.
+
+You might describe the workflow and ask the AI to generate the code, but you still need to check whether the missing values were handled correctly,
+
+whether the summary statistics match the question, and whether the plot communicates the right information.
+
+That's the new workflow. Let's talk about the mental model.
+
+The phrase vibe coding is sometimes used casually to describe programing by describing the vibe or the intention of what you want to do.
+
+And and you know, initially people would use this word vibe coding because, you know, think back to English class where,
+
+you know, before you write the essay, you're supposed to write an outline of what you're going to do.
+
+Well in software development, before you write the program, you're supposed to write the flowchart or the plan of what you want to do.
+
+And vibe coding was often used to just skip that process and just vibe away and start writing what you think is right.
+
+And that kind of led to sloppy code. And while some software developers say, hey, just get into production, it's faster.
+
+Other people are like that planning step is really important. Well, now with the advancements in generative AI.
+
+Vibe coding is is kind of being used to say, let the AI produce the code.
+
+It's just vibing away. And I think we want to make the, the, the idea a little bit more precise when I talk about vibe coding.
+
+I am not talking about being vague or careless.
+
+I'm talking about guiding the code generation through natural language examples, feedback and iteration.
+
+And the danger is that when people hear vibe coding, they think it means I do not need to understand anything anymore.
+
+And that is totally not my point at all. I disagree with that.
+
+That is the wrong lesson.
+
+The right lesson is you need to understand the task well enough to guide the AI, evaluate its output, and correct it when it drifts.
+
+So the goal is not to surrender control, it's to maintain control at a higher level of abstraction.
+
+Think back to the director example. You know, many times actors that are very, very successful become directors.
+
+I don't know many cases where you see a director all of a sudden become an actor, right?
+
+It's a higher level of management, and that's kind of what we're doing now with the AI assisted coding.
+
+Now, the point I'm going to make now is probably one of the most important in the session. AI coding assistants are not software engineers.
+
+They are probabilistic generators. They predict plausible next tokens.
+
+They produce outputs that resemble correct code because they've learned patterns from large amounts of code and text.
+
+It gives them an extraordinary fluency, and they can produce code that looks professional.
+
+They can use familiar libraries, they can explain concepts in polished language.
+
+They can generate functions, classes, tests, documentation. They can refactor code.
+
+But fluency is not the same as correctness. The AI is optimized to produce something coherent and plausible.
+
+It is not inherently verifying that the code actually satisfies your requirements.
+
+It may not know your data structure. AI is optimized to produce something coherent and plausible.
+
+It is not inherently verifying that the code satisfies your actual requirements.
+
+It may not know your data structure. It may not know the version or library you're using it.
+
+It may not know the hidden constraints of your project.
+
+It might invent functions, misuse APIs, ignore edge cases, and it can also produce insecure code that presents security risks.
+
+So we need to distinguish between two questions. Does this look like code that could be right.
+
+And is this actually correct for my problem my environment, my data, my constraints?
+
+AI is very good at the first, but you are responsible for the second.
+
+And that's why this point, um, you know, the slide says AI is is not a reliable source of truth.
+
+Plausible does not mean correct. This distinction is essential if you're building an analysis pipeline,
+
+simulation model or research tool, an error in generated code can quietly contaminate your results.
+
+The code can run the output looks reasonable, but the underlying logic might be wrong.
+
+And that's why review is not optional. It's actually more important. A useful way to think about AI is a confident but forgetful junior developer.
+
+This imaginary junior developer writes very, very fast. They have seen many examples.
+
+They are good at common patterns, but they also make mistakes. They miss details.
+
+They forget earlier instructions. Let's unpack that.
+
+First, AI writes very, very fast, right? That's its most obvious strength.
+
+It can create boilerplate scaffold files, write simple functions, generate test cases,
+
+and it can convert plain English into code much faster than most humans, probably than any humans.
+
+Second, AI has seen a lot. It knows common programing patterns because it's been trained on an enormous amount of code, right?
+
+If you ask for a standard flask route or pandas transformation or Python function to parse a JSON file,
+
+or you want to do like a SQL query template, it's going to do great.
+
+Third, AI forgets and drifts. It has a limited context window, so it's very common that's going to lose track of earlier requirements.
+
+It might make assumptions without announcing them,
+
+and it might start solving a slightly different problem than the one you asked because it it kind of wants to please you.
+
+I think this is why you should not treat AI as some amazing, you know, omniscient oracle, right?
+
+You need to treat it like a junior collaborator who needs clear assignments, frequent review, and precise feedback.
+
+A strong prompt is like a good task assignment.
+
+A good review is like code review, and a good correction is like mentoring.
+
+And the better you are in managing this kind of junior developer, the better your results will be.
+
+When working with AI assisted coding tools, you play three roles navigator, reviewer, and Decision maker.
+
+As the navigator, you set the direction, you define the goal.
+
+You break the work into small steps. You keep the broader project in mind and you know what done means.
+
+This role matters because AI works best when tasks are scoped clearly.
+
+Build. My entire app is usually a weak prompt. Create a Python function that takes a CSV path.
+
+Loads the file into pandas. Validates that the columns date, ID, and score exist, and return a clean data frame.
+
+That's a much better prompt. As the reviewer, you inspect every AI generated output.
+
+You ask, does this do what I requested? Does it introduce assumptions?
+
+Does it handle edge cases? Is it readable? Is it safe?
+
+Does it match the rest of the code base?
+
+This rule matters because AI generated code often looks more trustworthy than it actually is, and you need to stay curious.
+
+Finally, as the decision maker, you accept, reject, or redirect the output.
+
+You're deciding whether to iterate, test, simplify, or start over.
+
+And most importantly, you own the final quality. These roles work together.
+
+If you fail as navigator, the AI gets vague direction.
+
+If you fail as reviewer, error slips through, and if you fail as decision maker, the project drifts and the quality declines.
+
+So the human is not removed from the process. The human is now the control system.
+
+So now that we have the mental model, we need realistic explanations.
+
+AI assisted coding is not uniformly good or uniformly bad.
+
+It's powerful in some scenarios and risky in others.
+
+A mature user knows the difference, And that matters because many failures with AI tools comes from using them in the wrong context.
+
+If you ask AI to generate boilerplate or explain unfamiliar code or prototype a simple workflow,
+
+it might be extremely helpful if you ask it to design a security critical
+
+infrastructure or implement a novel research algorithm from scratch without review.
+
+The risk is much higher. I propose to you that there are four major areas where AI assisted coding is especially useful.
+
+The first is in prototyping and exploration. AI is excellent for getting from the idea to the first draft quickly.
+
+So suppose you want to test whether a data set can be visualized in a certain way,
+
+or whether an API can return the fields you need, or whether a simple model can be trained on your data.
+
+AI can help you create a proof of concept before you invest a lot of time in polished implementation.
+
+The second area that AI is really good at is repetitive boilerplate.
+
+Every technical field has repetitive patterns, loading files, parsing CSV, writing API calls,
+
+validating inputs, formatting output, creating directory structures, so on and so on and so on.
+
+These are areas where AI often performs well because there are many examples in its training data.
+
+But every time you call on generative AI, you are investing some level of tokens in actually creating those boilerplate.
+
+And people can become lazy where they recreate the boilerplate every time.
+
+You know, much like we would do a normal software development, I would encourage you to use the generative AI to create the boilerplate,
+
+but then maintain a catalog of those and then just reuse the code.
+
+You don't need to regenerate code every time you want to do something.
+
+The third area is translating a logic to code.
+
+Often you know what you want to do logically, but you don't remember the exact syntax for how to create it.
+
+Right? Group the data by student.
+
+Calculate the mean score for each assignment type and return only the student with the the least the three submissions or something like that, right?
+
+AI can translate that into pandas, SQL or another language pretty well.
+
+So. So that's a pretty powerful use. And the fourth area is explaining unfamiliar code.
+
+And I think this is really valuable for users learning. Right. You can paste a function and ask the AI to explain it line by line.
+
+You can ask what a regular expression does. You can ask why a particular error is occurring.
+
+Use carefully. AI can act like a patient tutor.
+
+And you know, I also think it can be used to translate from one legacy code into a new environment, right?
+
+In a similar way, these strengths are significant. AI can reduce friction and let you focus on conceptual work.
+
+The research question, the model data interpretation, the validity of the method.
+
+But it only works if you review the output. I now want to discuss some of the limitations.
+
+First, AI struggles in highly specialized domains.
+
+If you're going to work with like niche libraries, proprietary systems, unusual data formats,
+
+any kind of cutting edge research stuff, the AI may not have relevant examples.
+
+And in those cases, it might generate code that looks plausible but uses non-existent functions, outdated APIs, or inappropriate assumptions.
+
+You know, for example, I did a project where we were we were working on on LinkedIn and evaluating some real estate stuff for,
+
+you know, for, for staging and these sorts of things. So when I was buying a new house, I said, you know what?
+
+I'm going to just create a script to access that old API I used to do.
+
+And, and I can use, you know, vibe coding to help me do that.
+
+And I'll figure out what houses are undervalued when I was moving, and I'll get a great deal.
+
+Well, it didn't work very well. Why? Because the social media platform, the LinkedIn platform,
+
+is going to change and update their APIs because they don't necessarily want you scraping their site and getting all their data.
+
+And so in a novel situation like that vibe,
+
+coding was was not effective at all for figuring out how to get around changes that they place in that environment.
+
+So it is any kind of change or, or highly specialized domains is going to be an issue.
+
+Second, AI struggles with long or complex code bases.
+
+The more context that's required, the more likely the AI is going to lose track.
+
+It will have duplicates where it duplicates functionality that already exists and might ignore architecture decisions.
+
+It'll often forget naming conventions, and it's going to solve the local tasks while potentially damaging the global design.
+
+And in the same way that we learn to do kind of object oriented programing, or we learn to create functions where we learn to design code.
+
+So you could have multiple humans operating, you still need to do that with almost more so with with the AI assisted coding.
+
+And you need to make those tasks much simpler and much more simple. Third, AI is risky for security critical code.
+
+Any kind of authentication, authorization, encryption, access control.
+
+If you're dealing with like payment systems, privacy sensitive workflows,
+
+they're going to require deep review because the AI can generate code that works in
+
+demonstration but has these subtle vulnerabilities that can be exploited later.
+
+And fourth, AI is is weak at novel problem solving.
+
+If there is no clear precedent, if this has not been done before somewhere else, AI can produce an answer.
+
+But the answer might simply be a polished guess. Originality, deep extraction, and judgment remain human strengths.
+
+So the rule of thumb is the more context the AI lacks, the more oversight you need,
+
+and it's a useful principle to carry into every AI assisted coding task.
+
+At this point, we're moving from concept to practice. The question is how do effective users behave?
+
+The answer is not. They prompt perfectly right prompting matters, but workflow matters much more.
+
+Every effective AI assisted coding is iterative, skeptical, and test driven.
+
+You should think of AI output as a draft. Sometimes it's a very good draft.
+
+Sometimes it is a dangerous draft, but it is still a draft, and your job is now to transform that draft into something reliable.
+
+Let's start with the the do's. Do verify every output the AI gives you.
+
+This is the foundation. Never assume correctness comes simply because the code looks good.
+
+Do work in small focus steps. Ask for one function one refactor, one explanation one bug fix at a time.
+
+Smaller tasks are easier to evaluate and more likely to be generated correctly from AI assisted code.
+
+Do ask the AI to explain code you do not understand.
+
+This is really important for learning, but it's also important for test and evaluation.
+
+The explanation also needs to be checked. Though I do treat AI as a collaborator, not an oracle.
+
+A collaborator can help you think. An oracle gives unquestioned truth.
+
+AI is not an oracle. Do tests.
+
+With inputs you can verify manually. This is a practical habit before trusting a function on a large data set.
+
+Test it on a tiny example where you know the expected answer. When I was doing a lot of work in social network analysis,
+
+people thought it was weird that I would teach people how to calculate the measures by hand on simple cases,
+
+but that was essential so that you could actually look at different software tools that are going to calculate
+
+things a little bit differently and know what it's doing and understand understand how it's actually behaving.
+
+Do read generated code before running it in production. This is both a quality issue and a safety issue.
+
+Now let's talk about the don't. Do not copy and paste AI code without reading it first.
+
+That's the fastest way to introduce hidden errors. Do not ask for everything in one giant prompt.
+
+Large prompts often produce large, fragile outputs. Break the task down.
+
+Do not assume it is correct because it looks right. AI generated code.
+
+Typically as the appearance of competence doesn't mean it's right.
+
+Do not use AI for tasks where you cannot verify the output.
+
+That's a powerful rule. If you lack expertise to evaluate the result, you need another form of validation.
+
+Do not blindly, blindly trust AI on security, critical or financial code.
+
+The cost of subtle errors is too high. And do not confuse speed with quality.
+
+AI can make you faster. It doesn't make you necessarily better.
+
+And this is the central discipline. Use AI to accelerate work, not to bypass thinking.
+
+I want to briefly discuss some tools that you can find useful. I use Visual Studio Code or VS code.
+
+It's an industry standard code editor.
+
+It's free, it's widely used, it supports a lot of programing languages, and it has integrated terminal extensions.
+
+Debugging support has a lot of compatibility with Python. JavaScript are a lot of other languages.
+
+And the reason vs code matters in this context is that AI coding assistants integrate directly into the development environment,
+
+and that means that AI can help you writing code, editing files, reading errors,
+
+or navigating a project in the normal environment you would typically use GitHub.
+
+Copilot is another tool. It's built on the OpenAI Codex style code generation models.
+
+It's a major example of an AI coding assistant. It provides inline autocomplete.
+
+It it has some chat based assistants. Explanation fixes refactoring suggestions, and it can use context from open files,
+
+which often makes it suggestions more relevant than a completely standalone prompt.
+
+I have some friends that are using that I haven't had a lot of experience with GitHub Copilot myself.
+
+The most important part of the stack is still you write.
+
+You write the prompts, you define the goals, you provide the requirements. You review the suggestions.
+
+You're deciding whether the code is acceptable. You're testing the final results.
+
+So the AI tool is not the center of the workflow. The human judgment is.
+
+And so you should pick the environment or the tool that is is most comfortable for you, for you to use.
+
+So I want to close with three takeaways. First, you're the director, not the typist, right.
+
+So AI can help you with syntax structure and implementation.
+
+But your role your job is to set the goals, define success, review the output, and control the process.
+
+Second is to know the sweet spot. AI assisted coding is excellent for prototyping repetitive tasks.
+
+Explanation.
+
+Scaffolding translating logic into code, but it's less reliable for any kind of specialized novel or security critical, context heavy work.
+
+Third, the mental model matters. You got to think of yourself as navigator, reviewer, and decision maker.
+
+Think of AI as a confident but forgetful junior developer, and I think that framing is going to help you avoid over trusting and under using the AI.
+
+The next step in learning is to learn how to prompt iteratively and build real applications with AI.
+
+And that's where this skill becomes a skill rather than a novelty.
+
+So I think we've covered a lot in this short session. And I just want to leave you with with a simple message.
+
+AI assisted coding changes how we work, but it does not remove our responsibility for understanding verification and quality.
+
+And and I do want to point out that in a lot of my experience in industry,
+
+a lot of a lot of projects, when they start getting over budget or behind schedule.
+
+I've seen a number of project managers start cutting those same steps in the in the delivery, and then it results in disaster.
+
+So just like human projects, I would say even more so when you're using AI assisted coding,
+
+the human responsibility is understanding verification and quality. And I think we're still learning how to evolve to to make that not a bottleneck.
+
+Right. And how we actually do that. And so there's exciting advances in that.
+
+But but I want you to leave you with the fact that, you know, AI assisted coding is going to be very powerful in changing the way we work,
+
+but it does not remove our responsibility for the quality control, understanding and verification.
+
+I'm Doctor Ian McCullough from Johns Hopkins University. I'll see you next time.
+

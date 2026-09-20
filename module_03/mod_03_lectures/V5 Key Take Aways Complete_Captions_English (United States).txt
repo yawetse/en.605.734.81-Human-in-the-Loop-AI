@@ -1,0 +1,219 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hello, I'm Doctor Ian McCullough from Johns Hopkins University.
+
+In this final session, we are going to bring the full course together into a repeatable playbook.
+
+Across the previous sessions, we covered the mental model of AI assisted coding stage, prompting iterative development,
+
+testing, debugging, human oversight, context management stubs, duplication, and validation hooks.
+
+We've kind of covered a lot.
+
+Today's goal is to turn all of that into a practical sequence you can use on any AI assisted coding project, and the playbook has eight steps.
+
+Step one is defining the goal.
+
+Before you ask the AI for anything, write one clear paragraph that describes what the project does, who uses it, and what it does not do.
+
+That last part matters. Boundaries are part of a good design.
+
+If you do not define what the project excludes, the eye may expand the scope of the scope for you, uh, what we call scope creep.
+
+Step two is ask for a plan. Before writing code, ask the AI for the architecture.
+
+What components are needed? What should be built first? What depends on what?
+
+This gives you a chance to review the structure before implementation begins.
+
+Step three is convert to tasks. Each component should be broken into smaller tasks, each small enough for one focus prompt.
+
+The goal is to avoid large tangled output. Step four is implement one task.
+
+Use the implementation template. One task per prompt.
+
+Do not bundle multiple features after implementation tests before moving on to the next task.
+
+Step five is add validation hooks.
+
+Ask the AI to annotate assumptions, uncertainties, and incomplete areas directly in the code, and this makes hidden risks visible.
+
+Step six is to generate tests. Immediately after each function is generated.
+
+Ask the AI who write unit tests. These tests should include normal cases, edge cases, and failure cases.
+
+Step seven. Debug and review. Run the tests.
+
+Feed failures back using the debugging template. Read the code.
+
+Apply the review checklist and make sure you understand what changed.
+
+Step eight is refactor and repeat every 3 or 4 tasks.
+
+Check for duplication, resolve to dos and assumption comments and update your project specification file.
+
+This loop applies to any Python project a tax collector, an expense tracker, a data cleaning tool, a small web app or research utility.
+
+The point is not that every project is the same. The point is that control structure is reusable.
+
+Define. Plan. Breakdown. Implement. Validate. Test.
+
+Debug. Refactor. Repeat. That is the core workflow.
+
+Now let's talk about risk. Air assisted coding is powerful, but the power comes with predictable failure modes.
+
+There are three risks every every vibe coder must manage.
+
+The first risk is shallow. Understand? If you cannot explain a generated function in plain language to a colleague, you do not really understand it.
+
+This is one of the biggest dangers of AI assisted development.
+
+The code might run, but if you can't explain what it does, you will struggle to debug, modify it, or trust it later.
+
+The fix is to ask the AI to explain every piece of generated code.
+
+Then read the explanation against the code itself. Paraphrase the function in your own words.
+
+Add your own comments. Slow down enough to understand what you are accepting.
+
+The second risk is accumulated technical debt. Technical debt appears when stubs are left unresolved or duplicate logic is never cleaned up,
+
+validation hooks are never verified, and the two do's become permanent fixtures in the codebase.
+
+Each unresolved item is a future bug waiting to happen.
+
+The fix is to treat every to do an assumption comment as a debt entry.
+
+Do not wait until you have time. Resolve them on a schedule.
+
+This is why the playbook recommends refactoring and cleanup every 3 to 4 tasks.
+
+The third risk is a false sense of productivity. I can produce a lot of code quickly,
+
+but that code code that doesn't run is not the same as a as as code that works correctly, securely, and sustainably.
+
+A long file full of generated code might feel productive, but if it's untested,
+
+if it's poorly understood, or full of a bunch of hidden assumptions, that's not real progress.
+
+The fix is to measure productivity by verified features, not by lines of code generated.
+
+Ask. Do. Test. Pass. Have edge cases been checked?
+
+Can I explain the code? Is it maintainable? The rule of thumb is, if you could not maintain this code without AI, you built it too fast.
+
+That does not mean you should avoid AI. It means you should use AI at a pace that preserves comprehension.
+
+This slide captures the central balance of the course. The goal is not to generate code quickly.
+
+The goal is really to build things that work that you understand that you can improve.
+
+That is the distinction between speed and capability. What should we keep from AI assisted coding?
+
+We should keep using AI to move faster on well-understood, repeatable tasks.
+
+We should keep using AI as a collaborator, a planning together, implementing together, and reviewing ourselves.
+
+We should keep using AI to learn. Ask for explanations, alternatives, examples, and debugging help.
+
+But don't use it as a code vending machine. And we should keep the iterative loop, the templates and the playbook.
+
+These are the structures that let us use AI productively without losing control.
+
+But what should we watch or be careful for? Watch for, uh, for for moving so fast that you stop.
+
+Understand what you've built. Watch for treating AI as a search engine for correct code.
+
+It's not. It generates plausible output, and plausible does not mean correct.
+
+Watch for stacking new features before earlier features are verified.
+
+That's how technical debt compounds and watch for forgetting that you, not the AI, are responsible for the final output.
+
+AI is a multiplier. It amplifies the habits of the person using it.
+
+And if your habits are discipline, planning, testing, reviewing, refactoring, I can make you faster.
+
+But if your habits were careless, copying, pasting, skipping tests, ignoring assumptions, I can make you faster at creating fragile systems.
+
+So the real question is not only how good is the AI, the better question is what habits is the AI amplifying in me?
+
+Now let's discuss what you should do next. Skill and AI assisted development compounds through practice.
+
+The more projects you build using the forward flow,
+
+the better you become at structuring prompts and identifying risks, reviewing code, and maintaining control.
+
+The first practice project is to extend your tax collector, add support for different tax years such as 2023, 24 and 2425.
+
+Add command line interface so that the user can enter income directly.
+
+Export results into a formatted text file. Use the full eight step playbook plan.
+
+First scaffold. Implement one task at a time. Generate.
+
+Test. Debug. Refactor. The second practice project is to build an expenses tracker from scratch.
+
+This project should allow users to add expense entries with amount, category, and date.
+
+It should show a summary by category and it should save and load data from CSV file.
+
+This is a good project because it involves data input validation, storage summaries, and edge cases.
+
+It's simple enough to build a complex enough to require structure.
+
+The third practice project is to choose your own project, picking something you actually need or want to build.
+
+It might be a personal automation script, a data analysis helper, a small dashboard, a grading utility, or a research workflow tool.
+
+Start with the planning prompt. No code before plan. Apply every technique from the course stage, prompting task breakdown, short iterations,
+
+tests, reviews, validation hooks, deduplication, and a project specification.
+
+Markdown. As you work. Notice where I helps and where you need to take control.
+
+Your goal after three projects is simple. You should be able to explain every function you built.
+
+That is mastery, not the code runs, not the I gave it to me.
+
+Mastery means you can explain it, test it, and modify it and maintain it by yourself.
+
+Let's review the arc of this module. In visual one we introduce the mental model.
+
+AI is a probabilistic generator, not a software engineer.
+
+It can generate plausible code, but it does not own correctness.
+
+You are the director. You decide when to use it, when to review, and when to take manual control.
+
+In video two, we focus on building the skill. We introduce stage prompting, plan requirements, tasks implementation.
+
+We introduce the iterative loop. We also introduce four reusable prop templates for planning, task breakdown, implementation and debugging.
+
+In video three, we covered testing and debugging.
+
+We emphasized generating tests immediately, feeding failures back, applying the five point review checklist, and owning everything I writes.
+
+In video four we moved into advanced techniques. We discussed project specification, markdown for managing context, intentional stubs,
+
+roadmaps, deduplication audits, and validation hooks for traceability.
+
+Now, in the final session, we, uh, introduce an eight step playbook to tie it all together.
+
+Define the goal. Ask for a plan. Convert to tasks.
+
+Implement one task. Add validation hooks. Generate tests.
+
+Debug and review. Refactor. Repeat. This is a repeatable workflow.
+
+The larger message is that we're entering a new way of building software.
+
+But new does not mean careless. In fact, because I makes code generation faster, discipline matters more than ever.
+
+So as you leave this course, the challenge is straightforward.
+
+Use AI to build something real, but build it in a way that you understand, that you can verify and you can maintain.
+
+Welcome to the new way of building software. Now go build something cool.
+
+I'm Doctor Ian McCullough from Johns Hopkins University.
+

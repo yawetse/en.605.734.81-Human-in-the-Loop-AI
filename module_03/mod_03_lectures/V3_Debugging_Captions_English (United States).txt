@@ -1,0 +1,557 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hello, I'm Doctor Ian McCullough from Johns Hopkins University. In the previous session, we discussed how to think iteratively with AI.
+
+We focused on staged, prompting short development loops and the importance of building one small piece at a time.
+
+Today, we're going to move into the next major skill testing and debugging AI generated code while maintaining human oversight.
+
+This is where I assisted coding become serious. It's one thing to generate code quickly.
+
+It's another to know whether that code is correct, safe, maintainable, aligned with your intent.
+
+I can help us write code. It can help us generate tests, explain errors, propose fixes.
+
+But I cannot guarantee correctness. It cannot take responsibility for the code.
+
+It cannot know every hidden requirement, edge case, or domain specific constraint unless we provide it and verify the result.
+
+That's the same in human development teams too. But the message is simple if the I wrote it, you still own it.
+
+And that means you are responsible for understanding, testing, reviewing, and maintaining the code that enters your project.
+
+By the end of the session, you should be able to explain the AI assisted testing workflow and describe its role in development.
+
+You should understand how unit tests can be generated and used alongside AI generated code.
+
+This is really important because the same AI that writes a function can also help produce tests for that function.
+
+But those tests still need to be inspected and run. You should also be able to outline the debugging loop for identifying and fixing failures.
+
+In addition, you should be able to identify key principles of code review and human oversight.
+
+Code review is not an optional professional habit in AI system development.
+
+It is the control mechanism.
+
+Finally, you should also recognize common prompting failure modes and understand how they are going to affect code quality.
+
+The goal is not merely to debug faster, it's to debug more systematically and maintain ownership over the code and the software that you build.
+
+The main idea here is that AI excels at generating tests, but it can't guarantee correctness, and that distinction matters.
+
+I can produce unit tests very quickly.
+
+It can identify normal cases, edge cases, failure cases, and I can even suggest test inputs and expected outputs.
+
+It can also interpret error messages and propose corrections.
+
+But the AI generated tests are not automatically sufficient.
+
+They can test the wrong behavior. They might miss important edge cases.
+
+Or they can simply confirm the assumptions that are already present in the generated code.
+
+And this creates a subtle risk. If the AI writes a function and then writes a test that matches that same mistake in logic.
+
+The test can pass while the code remains wrong. So our key task here is to use the AI as a testing environment or a testing assistant.
+
+Excuse me, not as a correctness authority, and a useful way to say this is I can help you test.
+
+But it can't replace your responsibility to think about what should be tested.
+
+I'm proposing for you a four step AI assisted testing workflow.
+
+Step one is to generate the code, and you're going to use the implementation prompt from earlier sessions, right to implement one task.
+
+Keep the scope tight. As for the function of the entire module.
+
+Uh, and it matters because focus code is easier to test, as we've discussed earlier.
+
+Step two is immediately asked for tests. A good prompt might be.
+
+Write unit test for this function using Python.
+
+You know, unit test, uh, cover normal cases, edge cases, and expected failures.
+
+The word immediately is important here. Uh, because you don't want to wait until the end of the project to test it.
+
+You want to test each function right after you create it.
+
+So you're making sure you're not putting any kind of garbage into your into your application or your code.
+
+Step three is to run the test. This has to happen locally in your development environment such as VS code.
+
+Reading tests is not the same thing as running them. A test that is not run is not a test.
+
+It's wishful thinking. Step four is feed the failures back into the prompt right of a test fails.
+
+Paste the failing test and the full error message back into the.
+
+I ask for an explanation and a corrected version, then rerun the test.
+
+This creates a collaborative loop, right? I generates the code.
+
+It helps generate the test. You run the tests, you inspect the failures, and I helps explain and correct.
+
+You rerun and verify. And that caveat is crucial.
+
+IE does not guarantee correctness. I'm going to say that over and over again.
+
+Even if the test passes, you know, if you pass the test, you still need to ask what the test missed.
+
+And the AI is not an excuse for thinking it is accelerating certain parts of the process so that you have more time to think and be critical,
+
+and you've got to use that time and reinvest it back into the project.
+
+So you're elevating the overall quality and the overall success of your project.
+
+So what does a good test cover when you're asking for tests?
+
+Be specific about coverage.
+
+If we go back to the tax calculator example, a strong prompt might be write unit tests for calculate tax using uh using a Python,
+
+you know, test, unit test and you know, cover normal incomes, boundary income, uh, bracket edges, zero income, negative income.
+
+Right. The prompt is better than saying right tests. It's it's telling the AI what kind of tests matter.
+
+And I just made up a few. I mean, you might you might come up with, uh, better ones and that's great.
+
+Uh, good tests usually involve three categories normal cases, edge cases and failure cases.
+
+You see, if you kind of know what the common failure patterns are, you can you can design better tests.
+
+What are these? Well, a normal case is like expected income.
+
+So for the tax calculator, that might include an income of, you know, 15,000 pounds, 30,000 pounds, 60,000 pounds.
+
+These are these are kind of like a standard earner. Somebody in a, in a basic rate band in the UK, uh, and somebody in the higher rate band.
+
+Uh, for these cases you should verify the exact tax amounts against manual calculation.
+
+You don't want to just check the function that returns a number. You want to make sure that that number is actually correct.
+
+Now the edge cases are values at the boundaries. For example, uh, exactly at the personal allowance of 12,570 pounds,
+
+or exactly at the basic to higher rate boundary of 50,270 pounds, or an income of zero, uh, 0 pounds.
+
+Right. These edge cases are useful because a lot of bugs occur at the thresholds.
+
+So a function might work great in like the standard band,
+
+but fail exactly at the threshold because it's off by one, or there's an incorrect comparison operator.
+
+And then failure cases are invalid inputs. These are like a negative income, right?
+
+Should probably raise an error or a string like, uh, you know,
+
+if you did a string like you wrote 50,000 instead of putting numbers might be a type error.
+
+Uh, none should be, uh, the appropriate error, those sorts of things.
+
+Right. So good tests are also going to verify error messages that are clear and informative,
+
+because it helps both the users and the developers understand what went wrong.
+
+The larger lesson is this when you prompt for tests, don't merely ask for some tests.
+
+Ask for the categories of behavior that matter. And you know, that's just good software development in general.
+
+Like I would argue that's not unique to, um, to to AI assisted coding.
+
+In fact, it was amazing how many projects I would step into that were overbudget, behind schedule or problematic for a client.
+
+And there was very little thought into testing.
+
+So a lot of my big value when I was in industry was actually developing testing plans, so you could test human developed code.
+
+So I just want to raise the point here that that while we're going through, um,
+
+through these best practices for AI assisted coding, a lot of these are just best practices.
+
+Period period for software development. So I want to talk a little bit about the debugging loop.
+
+Uh, when a test fails, the first step is not to just ask for a new version.
+
+Uh, like I've seen people do this. I've even done it myself, where, you know, you see an error message and you're trying to do something quickly.
+
+And so you just put it into the eye and say, fix this error.
+
+And then you put the code back and you say, fix this error, or you put the code and you just kind of do these little, these little runs.
+
+And you know, even though if I do this periodically,
+
+I will tell you that I waste more time doing those silly loops than if I actually read the error message carefully.
+
+Error messages or information.
+
+They can tell you exactly where the code failed, what value was expected, what value was received, or what exception occurred.
+
+After you read the error, try to understand what it's saying. Even if you don't fully get it.
+
+Make an attempt because you want to be. Get engaged in the reviewer and you want to own the code.
+
+This is part of an education process.
+
+It's not just about getting the code to run, because you might do this loop and you get the code to iterate until the code runs,
+
+but it might actually incur a different type of error or a worse error that is now embedded in the code.
+
+So if you use the debugging prompt from the previous session, right,
+
+you can say here is the code and the error produces explain what is wrong and provide the correct version with comments.
+
+Right. There's two important parts here. You're pasting both the code and the full error.
+
+You're not summarizing and just saying it didn't work right. You're actually you're giving it some guidance.
+
+Second, you're asking it to explain the root cause, not just provide a fix.
+
+And the reason why that matters is because understanding the root cause helps you learn.
+
+It helps you recognize similar errors later, and it keeps you from blindly applying patches.
+
+After the fix, you want to rerun all the tests, not just the failing ones,
+
+because the fix for one test often breaks something else, and so the code still fails.
+
+You need to paste the newer and you need to repeat that loop.
+
+But the warning I'm telling you is never apply, and I fix without understanding what changed,
+
+because an unexplained fix to one bug can create more problems in your code than we care to mention.
+
+Now we're going to move from testing to code review. The central principle here is if the I wrote it, you own it.
+
+This might be the most important sentence in the course here.
+
+The AI can generate code, it can suggest fixes, it can explain errors, but it is never accountable for what goes into your project.
+
+You are human. Oversight is not a ceremonial step.
+
+It's not something that looks good when you brief a client only, right?
+
+It is the mechanism that prevents AI generated mistakes from becoming project mistakes.
+
+Code review means reading the code, understanding it, testing it, and checking whether it matches your intent.
+
+This is especially important because I generated code can be very fluent, very polished, and very wrong at the same time.
+
+I want to provide you a practical five point checklist.
+
+And, you know, again, as I mentioned earlier, this is probably I feel like one of the most important things that I did to to,
+
+uh, contribute to success when I was in industry is having disciplined approaches for project management and quality control.
+
+Those two things were the biggest innovations that I spent most of my time on, and it turned failing projects projects into highly successful ones.
+
+It turned, uh, projects that were overbudget, behind schedule on into profitable, successful, uh, early deliveries.
+
+It delighted clients and resulted in wedge growth and more work.
+
+Right. This is an important concept, and I'm going to share with you a five point checklist that I kind of use to kind of,
+
+uh, to help instruct junior developers. And now I'm using it to kind of guide, I assisted coding to, to get good quality code first.
+
+Did it do what I ask? Run with at least three different inputs.
+
+You can verify manually.
+
+Simple examples that you can check yourself on the back of an envelope, check the output against your own calculation or some other trusted reference.
+
+But don't trust test, right? I have this great sentence, uh uh, that I used to use in the Army.
+
+In God we trust, all others must sign or all others must test.
+
+Right? So, uh, if you don't trust it, never trust it.
+
+Always test it. Second. Uh, are there hidden assumptions?
+
+I often makes decisions silently. Uh, it might assume the data type or the currency or the date format.
+
+Uh, file path. Uh, it might default to a different tax year or something in our particular example.
+
+Right. It might might assume a particular structure of the input data.
+
+You need to look for assumptions that were not specified.
+
+Uh, it's hard to think of all those assumptions, but, um, um, sometimes when you run the code and you're looking at the output,
+
+some of the, some of the things you might realize ahead and make that assumption clear early, what might that have?
+
+Cause. Right. So you're kind of looking for if there are hidden assumptions. Third is anything hard coded that should be a variable.
+
+And this is where you need to look through the code for this. Right. But like maybe it's the tax rates, the thresholds, the file paths.
+
+And these aren't necessarily wrong. But hard coded values can become future bugs.
+
+Right. Like what happens next year when the tax rates change, right?
+
+Do you do you have a file that allows you to input the current year's tax rates and then the code works fine?
+
+Or have you done something that makes the code a little bit brittle and a little bit more difficult to change?
+
+Fourth. Does it handle bad inputs? Right? Can you put in negative numbers, empty strings, missing values, unexpected types?
+
+Right. If you have a little checklist of these things right, these become great things to test and see.
+
+Does it return the right error message or respond the way it should, because you have no idea what a user might do?
+
+And fifth, uh, is is there any part of this that security sentence sensitive?
+
+Right. Uh, file access, user input, uh, calling on the network authentication authority authorization, privacy.
+
+All of these things are going to require an extra review from a security perspective.
+
+So never trust the AI output alone, especially in security sensitive areas.
+
+The checklist only takes a few minutes per function, but it will save hours of debugging later,
+
+so do not shortcut this step like many project managers, uh, decide to do.
+
+Because, you know, there being that those shortcuts create huge problems later I see it over and over and over.
+
+Uh, it also builds habits, right? You want your team to not look at, oh, I'm going to use generative AI.
+
+I'm going to execute this. And then I'm going to go, you know, go for a walk or, you know, hang out at the beach or whatever, right?
+
+You want them to use the, uh, accelerated time in software development to reinvest that into quality control and quality testing.
+
+If you shortcut that process, you're going to create expectations of lower cost delivery that you're not going to be able to meet,
+
+and it's going to create problems later down the road. Let's clarify what ownership means when I generate a code goes into a project,
+
+whether it's the tax calculator, an expense tracker, research script or whatever.
+
+You are responsible for its correctness, security, and behavior.
+
+Not the AI. Ownership means reading every line of code before it goes into your project.
+
+It means being able to explain what each function does.
+
+It means testing edge cases yourself. It means fixing bugs with or without eye help.
+
+But ownership does not mean you need to write every line of code from scratch.
+
+It does not mean you must understand every algorithm at a deep theoretical level before you can use it.
+
+It does not mean you should avoid AI tools out of fear, and it does not mean you can't use AI to help fix things.
+
+Ownership is about responsibility, not isolation.
+
+There are practical habits that build ownership. Never copy and paste without reading.
+
+First ask AI to explain code in plain language.
+
+Add your own comments after the AI generates the code, and that forces you to process what the code is doing.
+
+Run your own tests independently of the AI generated tests. The goal is not just to produce code quickly.
+
+The goal is to maintain long term quality and control over what you build.
+
+I'm not going to turn to failure cases and this is an important part of learning AI assisted coding.
+
+We should not only study what works, we also need to kind of have an idea of what goes wrong.
+
+Uh, failure cases teach us patterns, and if you recognize the pattern, you can avoid it.
+
+But you can also specifically test for it.
+
+Today we're going to look at vague prompting, silent bugs, accepting output without reading it, and weak debugging prompts.
+
+These are the most common mistakes that I've seen. They're also very preventable.
+
+The first failure case is the vague prompt build a tax collector.
+
+That prompt is too broad.
+
+It doesn't specify the country, the tax year, the brackets, desired output format, input validation, error handling, and a lot more.
+
+So what might the AI return? Well, it could generate a flat tax rate function with no brackets.
+
+That doesn't even represent legal, um, tax rules in the country you're doing.
+
+It might omit error handling. You can produce a loose function in a file with no structure.
+
+It might include no comments making it hard to verify anything. So a good prompt is much more specific.
+
+Build a Python function blank right. That computes UK income tax for this tax year using the following brackets.
+
+Uh, you know, return a directory with gross income tax owed and that income raise uh, a value an error message if income is negative right.
+
+This improve prompt is specifying the function name, the jurisdiction, tax year brackets, output format, and an invalid input behavior.
+
+What does that get us? Well, it's going to get us a bracket structure matching a specification.
+
+It's going to get input validation, structure output that we can test.
+
+Uh, it gets code that can, uh, that matches what we ask for rather than what the I guess we meant.
+
+Uh, and the lesson here is pretty straightforward. Vague prompts create room for AI assumptions.
+
+Specific prompts reduce that. Room for case two is code that runs but is wrong.
+
+And this is one of the most dangerous failure modes because code that runs without errors uh, but produces subtly incorrect results.
+
+Those can kind of cascade throughout your projects and be catastrophic later.
+
+So imagine that the AI generates the calculate text function, right?
+
+It runs successfully. And for an income of of, you know, 30,000 pounds, it returns the correct tax.
+
+Right. So it passes your quick AI test. But an income that might fall on the edge boundary like 50,270 pounds, right, is uh, is a bracket boundary.
+
+And so it returns uh, something like 7540.
+
+This is just an example that could be off by 200 pounds.
+
+And that's dangerous because nothing crashed. There was no exception.
+
+There was no error message. Uh, the code seemed to work fine.
+
+The bug was only visible when you were testing the boundary.
+
+That's why boundary testing is, like an important issue. A few round number examples are not enough to catch silent bugs.
+
+You always have to test at bracket boundaries. You have to verify at least three values manually against authoritative or no known correct sources.
+
+You need to ask the AI to explain how it handles boundary conditions.
+
+Maybe ask for explicit comments at every boundary check.
+
+Compare against a known reference when one exists.
+
+And the key warning is just that, you know, a test that passes on round numbers is not the same as a correct test suite.
+
+A lot of the silent bugs are often the most expensive because they produce confidence without correctness.
+
+And again, I'll remind you this is true not just for AI assisted coding, but for human teams as well.
+
+Failure. Case three is accepting AI output without reading it.
+
+This is, um. This is the copy and paste pattern you generate.
+
+You copy paste, you run, it works, you move on. No reading, no inspection, no understanding.
+
+And I'm telling you this because it's not just that you would make such a, you know, a, you know, a freshman a mistake, right?
+
+Uh, or a lazy mistake.
+
+You know, I'm not questioning your, uh, diligence and coding, but, you know, you are going to have people that work on your teams, right?
+
+You might be in a position where you're not yourself using all the AI to to create it.
+
+You might manage teams of people that are using AI, and this is a key thing.
+
+You need to check and make sure your teams are not. Uh shortcutting.
+
+Right. Uh, it's tempting because I generated code can look clean and professional.
+
+And this is especially true if you're software developers that are using AI assisted coding don't necessarily have strong commitment to the project.
+
+Or maybe there's a slightly toxic work environment. Uh, but you need to think about what gets missed here.
+
+The silent assumptions, hard coded values, security issues and input handling.
+
+So stubs or to do's that the I left unfinished logic that contradicts what you actually need.
+
+Uh, those are symptoms, right.
+
+Where if you're inspecting like so even if you have employees that are doing AI system coding, you still need to do some inspections on that too.
+
+I'm not saying you have to inspect.
+
+If you have an employee inspecting the code, you don't necessarily have to redo all of that, but you need a spot check.
+
+And if you find these things,
+
+it might be an indication that your employees are skipping this step and you have this hidden failure mode you're in in your team.
+
+But those costs are going to appear later. Bugs are discovered, uh, you know, bugs that are discovered when they're, um, like when you discover bugs,
+
+when they're more expensive to fix, you end up with code that you do not understand and you can't maintain.
+
+And we call that technical debt.
+
+And that technical debt compounds, you develop this false confidence that the code, um, works, but it was never really verified.
+
+And then that's how you lose control over your project. The fix is simple, but it's non-negotiable.
+
+You have to read first. You have to.
+
+If you have teams of people using AI assisted coding, you have to spot check and make sure that they are reading and you are reading.
+
+All of that is important. Reading is a required step.
+
+Add your own comments as you read. That also proves understanding.
+
+It's a good uh, check to make sure people are doing this. You can ask the AI what assumptions did you make in this code?
+
+Uh, you can ask what would make this code break? Uh, never ship code that you can't explain to a colleague.
+
+It's just a general rule of thumb. Reading the code again is not optional overhead.
+
+It is the core skill that separates effective AI assisted coders from frustrated ones.
+
+The last thing I want to talk about here is, uh, weak versus strong prompting for debugging.
+
+So an example of a weak prompt is fix my expenses tracker.
+
+Right. That gives the AI like nothing. There's no code, there's no error message.
+
+There's no description of what's broken, no failing test, no expected behavior, no guidance whatsoever.
+
+So as a result is going to just guess am I rewrites part of the program unnecessarily.
+
+It might introduce new bugs. Uh, it will return code you can't verify.
+
+Right. So so that is not that is not a good prompt. A strong prompt might look more like this.
+
+You're saying here's my function. And the code. When I call it with a negative amount it does not raise an error.
+
+You see, what I've done here is I've given it the code and I've given it the test and I've given it the issue.
+
+And I'm saying here is the test. It fails.
+
+Uh, and then I'm asking you to explain what is wrong and provide a corrected version with the validation added.
+
+This prompt gives context.
+
+It gives a specific function, the incorrect behavior, the failing test in the error, and asks for the root cause and a corrected version.
+
+The result is better because the AI can target the exact problem.
+
+The larger lesson is that prompt quality is not about sounding sophisticated.
+
+It's about providing the evidence needed to solve the problem. For debugging.
+
+The evidence means code, expected behavior, actual behavior, and the full uh, error message is is provided.
+
+There are three main takeaways from this session. First, test immediately.
+
+Always. You need to generate tests right after the code is generated, not later.
+
+Don't wait. A function without tests is an assumption, not a feature.
+
+Second, you own what the AI rights. You need to read it, understand it, add your own comments, test it yourself.
+
+The AI may have authored the first draft, but you're responsible for that code.
+
+And third, failure cases teach the most vague prompts.
+
+Silent bugs and unread output are common patterns.
+
+Learn to recognize them before they cost you ours. In the next session, we're going to move into advanced AI assisted development.
+
+We're going to talk about context windows stubs, deduplication, and validation hooks.
+
+These topics build naturally on today's theme. Uh, I can accelerate development, but only if we have the system that preserves control.
+
+I want to close with one central principle one more time.
+
+If the I wrote it, you own it. That does not mean you should avoid AI.
+
+It means you need to use AI professionally with tests, review, documentation and judgment.
+
+I'm Doctor Ian McCullough from Johns Hopkins University.
+

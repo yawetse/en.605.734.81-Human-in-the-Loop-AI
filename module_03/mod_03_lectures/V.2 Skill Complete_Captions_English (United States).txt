@@ -1,0 +1,511 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hello, I'm Doctor Ian McCullough from Johns Hopkins University. In the previous session, we introduced the basic idea of AI assisted coding.
+
+We discussed how the human role changes from writing every line manually to directing, reviewing, and refining AI generated output.
+
+Today, we're going to build on that foundation by focusing on one of the most important practical skills in AI assisted development,
+
+and that is thinking iteratively. The session is about how to work with AI in a structured way, and the goal is not to simply write better prompts.
+
+The goal is to develop a workflow that keeps you in control, while taking advantage of the speed and flexibility of AI coding tools.
+
+Probably the most common beginner mistake is to treat prompting as a single event.
+
+You ask for a complete program or the AI gives you a large block of code, then you hope it works.
+
+That approach usually fails, especially as the task becomes more complex.
+
+Instead, effective AI assisted coding works more like a disciplined development cycle.
+
+You plan, specify, build, test, inspect, refine and repeat.
+
+And in the mindset of that iterative process, that's what we're going to be developing today.
+
+By the end of this lecture, you should be able to explain why prompting is a structured skill.
+
+That phrase is important. Prompting is not about clever wording.
+
+It's about designing a process that produces reliable outputs. You should also be able to explain the risks of a monolithic prompt, right?
+
+A monolithic prompt is a large, all in one request.
+
+We ask AI to do everything, and this often creates a bloated, fragile, and hard to debug code.
+
+Next, you should be able to describe the four stage stage, prompting workflow like plan requirements, task and implementation.
+
+You should also be able to outline the iterative development loop of build, test, inspect, and refined.
+
+In addition, we're going to introduce four reusable prompt templates that support your planning, implementation, and debugging.
+
+Finally, you should understand how structured prompting improves control traceability, reliability when working with AI generated code.
+
+The key theme through all of this is control. AI can generate code quickly, but speed without control creates risk.
+
+Structured prompting is how we keep the speed and reduce the risk.
+
+All right, I'm coming back to this idea. And this is a core concept here.
+
+Prompting is not about clever phrasing. It is about structure and control.
+
+I want you to remember that prompting is not about clever phrasing.
+
+It is about structure and control. Many people approach prompting as if there's some magic sentence that unlocks the perfect output.
+
+They're looking for an easy button, or they're looking for tricks like act as an expert,
+
+think step by step, write production quality code like these kinds of things.
+
+And those phrases can sometimes help, but they're not the core skill.
+
+The core skill is structuring the work so that AI is solving the right problem at the right level of detail.
+
+One step at a time. It's really about planning and structure.
+
+In software development, we already know the structure matters.
+
+We don't usually build a serious application by writing the entire thing in one uninterrupted past, right?
+
+We break the problem into components.
+
+We give the components to different software developers, just like you might give them in different prompts to different agents.
+
+Right? We define the requirements. We we implement pieces, we test, we refactor.
+
+And these same steps need to occur when we're doing AI assisted coding.
+
+We should follow the same principles. So a prompt is not just a question it's part of the workflow.
+
+Let's look at the probably the most common mistake of the monolithic prompt.
+
+A beginner might write. Build me a full tax calculator in Python with multiple tax brackets, uh, gui,
+
+csv support, previous calculation history, and an email summary feature At first glance,
+
+it sounds kind of cool or efficient, but the student is giving the AI a lot of information and asking for a full product.
+
+And in practice, this is the fastest way to lose control.
+
+The AI is going to try and do everything at once, and it might even produce a very,
+
+very long script with a lot of functions graphical interface, export logic, maybe even a placeholder for an email function.
+
+I call those stubs where it develops kind of like incomplete or, you know, not fully developed logic.
+
+The code might look impressive, but it's likely to be tangled, incomplete, and difficult to debug.
+
+There are several things that are going to go wrong in this approach. First, the output becomes bloated.
+
+The AI tries to satisfy every part of the request simultaneously. Second, the logic then becomes very hard to trace if the tax calculation is wrong.
+
+Is the problem in the bracket logic the input validation, the GUI, the output formatting?
+
+Where's the problem? Third, the AI may fill in gaps with stubs or placeholder code.
+
+It might write comments like send email here instead of implementing the feature.
+
+And fourth, if you if you only have one review point, you gave one prompt, receive one large output, and now you have to review everything at once.
+
+That's that's kind of my control. I think it's gambling. Large prompts often produce large, unreliable code.
+
+Smaller focus prompts consistently yield better results because they make review and correction a lot easier.
+
+Even though generative AI and AI assisted coding is relatively new,
+
+I've had the opportunity to look at a lot of students, you know, trying to implement this.
+
+I've also seen a number of clients in industry do the same thing, and when I look at what's successful, I kind of think of it in in four stages.
+
+And so I'm going to call this my four stage prompting workflow. There are probably others.
+
+And I'm sure these things will evolve in time. And you might even have some innovations on on how to do this a little bit better yourself.
+
+So this is not like a hard and fast rule. It's just kind of what I've found seems to be a good way of getting good results.
+
+The first stage is to ask for a plan. So before writing any code, ask the AI for a high level architecture.
+
+What components are needed, what should be built first, what depends on what.
+
+And it gives you a chance to to review the project structure before implementation begins.
+
+The second stage is to refine into requirements. A plan isn't enough, right?
+
+You need concrete specifications. What are the inputs? What are the outputs?
+
+What edge cases matter? What constraints should the code follow?
+
+Now what's really interesting is I have one student in particular that did something that I just I think is so cool when you when he prompts,
+
+you know, he's made an authentic AI workflow for supporting AI assisted coding.
+
+And when you put in the requirement that you want or even the the you know, the goal, right?
+
+What is this application supposed to do?
+
+One of the things it does is it searches the internet for competing products or similar products reviews the user comments right.
+
+That's a second agent that does that and then uses the complaints people have about competing tools and folds those into the requirements.
+
+So there's this whole iteration stage into refining the requirements. Right to to actually get a code that is better.
+
+And and in this case,
+
+I think it's kind of cool that it's looking at how you can do it better than competing tools and even be aware of what other tools are out there.
+
+The third stage is that where we break it into tasks. So each component needs to be split into small implementation tasks,
+
+and the ideal task is small enough to implement in one prompt and easy enough to read and test quickly.
+
+And then the fourth stage is implement one task.
+
+This is where the code generation happens, but it happens only after the plan requirements and task breakdown are clear.
+
+The advantage of this approach is that every stage becomes a checkpoint. If the plan is wrong, you fix the plan before writing the code.
+
+If the requirements are incomplete, you fix them before implementation.
+
+If the task is too large, you split it up before asking for code, and this is going to prevent your errors from compounding.
+
+And so you think of the stage prompting as a way of slowing down at the beginning, so that you can move faster and safer later.
+
+And as you can see, there is still a lot of thinking and human involvement in how the coding actually happens.
+
+Now let's apply the stage workflow to the tax calculator example I used earlier.
+
+The stage one prompt might be I want to build a Python tax calculator before writing any code.
+
+Give me a high level plan. What components do I need and what should I build first?
+
+You see a lot of people when you when you ask for the the building,
+
+the Python tax calculator, the way, the way most generative AI tools are currently set.
+
+They're just going to start writing the code. You actually have to tell it to slow down and write the plan, right?
+
+It explicitly says before writing any code that boundary matters. We're asking the AI to reason at the architecture level, not jump in implementation.
+
+Now the AI might return a plan with several components a tax bracket structure, a calculate tax,
+
+income function, input validation, output formatting, maybe some sort of CSV export as an optional feature.
+
+I might suggest building them in a particular order. Build like the data, the bracket data first, the input validation, next the tax,
+
+etc. and the step matters because we can correct the plan before a single line of code is written.
+
+For example, we realize that the tax calculator should include, you know, I don't know, maybe National Insurance contributions.
+
+Or maybe we decide that, you know, there's charitable donations or something that we need to include.
+
+Right. Or maybe we decide that the export is unnecessary for the first version.
+
+Or, you know, maybe we need to support different tax years.
+
+And this is where we we set the shared context for the rest of the project, and we create that map that the AI needs.
+
+And because that map is explicit, we can refer back to it.
+
+And this is going to reduce our surprises later. So once we have the project planned and broken into tasks, we enter the iterative development loop.
+
+And the loop is build, test, inspect, refine, then repeat. This is the rhythm of effective AI assisted coding.
+
+The point is not just to generate a bunch of code quickly and inspect it later.
+
+The point is to generate a small amount of code, immediately test it, inspect it, refine it, and then move on.
+
+This loop is going to help you capture errors early while they're still small and local.
+
+In traditional software engineering, we already know that late stage errors are expensive.
+
+AI does not change that.
+
+If anything, it can totally make the problem worse because it's much easier at producing large volumes of plausible looking code.
+
+That kind of works maybe not works accurately, and the iterative loop is essential to keep the process disciplined.
+
+Let's look a little closer at each step. First, build. Generate a small focus piece of code with a targeted prompt.
+
+Ideally, this is one function or one component, right?
+
+The slide gives a useful rule never ask for more code than you can read in about 60s.
+
+That's a strong practical guideline. If the output is too long, it is too large for one iteration.
+
+Second test run the code immediately. Use sample inputs.
+
+Check the output manually. It gives what you expected. This is where many beginners go wrong.
+
+They ask AI to generate code. They see that the code looks kind of reasonable and they move on.
+
+But code that looks reasonable might still be wrong. Third, inspect.
+
+Read the generated code line by line and ask yourself does this make sense?
+
+Did AI assume something? I did not specify? Are there hidden gaps?
+
+Are there stubs? Is there a scope creep? Fourth, refine feed the result, error or questions back to the AI.
+
+Ask for a specific correction and then test again. The loop repeats until the components pass your tests and make sense when you read them.
+
+That and is important.
+
+The code should both run correctly and be understandable if it works, but you can't explain it, you don't really have full control.
+
+I'm going to tell you that that short beats long every time.
+
+In a long iteration, you generate maybe a couple hundred lines of code in one pass.
+
+There might be one bug hidden inside five functions, and you're going to spend hours trying to find the root cause.
+
+It becomes difficult to know what part of your prompt caused the error.
+
+It's also hard to read prompt effectively because the generator the system generated too much at once.
+
+In a short iteration, you might generate like, I don't know, 15 to 20 lines for one function, and then you test it.
+
+And if there's a bug or if a bug appears in the code, you can identify it quickly.
+
+The relationship is traceable. The prompt produced this code, and the code produced this error.
+
+That traceability is really, really important. Short iterations make debugging faster because the error surface is smaller.
+
+They also make learning faster because you can connect prompt output test and correction.
+
+That discipline is what allows you to benefit from AI speed without sacrificing control.
+
+A useful way to think about it as this AI can accelerate implementation, but you need to be in control of the unit of acceleration.
+
+If the unit is is too large, the acceleration becomes dangerous. If the unit is small, you can get speed and visibility.
+
+Now I want to talk a little bit about templates. Um, there are reusable patterns that cover most AI assisted coding tasks.
+
+The templates are useful because they reduce decision fatigue. Instead of inventing a new prompt style every time you use it.
+
+You can use a known structure and the prompts actually become an interesting form of IP.
+
+So you can you can iterate over the prompts and find your own that tend to work better for you.
+
+And that's very helpful. But we're going to show you a few. Um, the templates are planning, task breakdown, implementation and debugging.
+
+And to together they support the the full life cycle.
+
+Remember the goal is not to create beautiful prompts, it's to create a reliable workflow.
+
+So the first template is the planning prompt. Um, you know I want to build project before writing any code.
+
+Give me a high level plan. What components do I need and what should I build first?
+
+So this prompt should be used at the start of every new project, and it gets the AI thinking in components rather than immediately producing code.
+
+Now I actually like, you know, I said earlier that, you know, you should um, um, you know,
+
+create code that you can like, kind of use and refactor and not generate code every time.
+
+But but this one is important because in in a session, if you're using a session, if you're not calling an API directly,
+
+like if you call an API to open AI or, you know, Clod or Gemini or something like that, it's stateless, it doesn't have a memory of the previous ones.
+
+Everything is brand new. You have to pass the memory session memory to it, but if you're using it in like a VS code,
+
+or you're using it in like a session window or something like that, there is a memory.
+
+So starting a new thread, write a new, um, uh, you know, new project, write a new session.
+
+And then using this planning prompt up front,
+
+it's also setting a kind of a memory that is going to kind of refer back to that architecture throughout the project.
+
+So so this planning prompt is a good thing to use at everyone.
+
+So you don't want to just keep using the same session thread. If you're going to do a new project, open up a new session.
+
+So it's kind of starting a new memory.
+
+And then start with that planning prompt as the first thing you do the second template is is the breakdown, the task breakdown prompt.
+
+And you know the example here is here. Here is component blank from our plan.
+
+Break it into individual implementation tasks. Keep each task small enough to implement in a single prompt.
+
+And you know there's iterations you can do on the way you do that.
+
+Exactly. But what we're doing here is after the plan is confirmed, right,
+
+you want to start breaking the components into smaller tasks, and then each task becomes a later implementation prompt.
+
+And that's important because build the tax calculator is too large.
+
+But write a function that calculates tax owed for a single income value using these brackets is manageable, right?
+
+And so this is what we're kind of doing. And there is kind of resident knowledge in most of these foundation models.
+
+Now to kind of give you some guidance on how to break those tasks down into smaller, smaller chunks.
+
+And so you want to use templates one and two here before writing any code.
+
+And that's your architecture phase.
+
+Uh, it's especially important because your projects might involve data, assumptions, methodology choices or research constraints.
+
+And if those are not made explicit early, you don't want the AI to invent like kind of default values for those.
+
+Template three is the implementation prompt. So this is where you're going to say hey, implement task whatever it is.
+
+Description. Use Python, keep the code simple and add comments explaining each session.
+
+Do not implement any other tasks yet, and I really like adding that that do not implement any other task yet.
+
+I find that that these foundation models, they get overambitious, right?
+
+They kind of have a goal set of output.
+
+And so when you when you do the initial prompt, then they're just going to keep you're going to keep doing other things.
+
+So you got to tell it don't do don't implement any other tasks yet.
+
+And the one task prevents over generation.
+
+You're keeping the code simple to to discourage unnecessary complexity because it's harder to evaluate and test.
+
+And you want to add comments so you can help read and evaluate the output quicker.
+
+And it's not just about like, hey, I'm not smart enough to know what this code does, so I need to add comments.
+
+Now it's about making sure that you remove confusion. You're making it easier for other developers to come in and read and understand,
+
+and you're able to do that faster and quicker if you have good comments.
+
+And then as I mentioned, the they do not implement other tasks, prevent scope creep.
+
+And that's one of the most again, one of the most common AI failure modes.
+
+You asked for one function and you get like three, right?
+
+So you want to try and make sure you're doing you're maintaining control as you're going through this process.
+
+Template four is the debugging prompt. So you know here is the code and the error it produces.
+
+So you paste the code and you paste the error. I usually put them in quotes so it's easier for them to kind of delineate.
+
+But you're trying to explain what's wrong and provide explain what's wrong and
+
+provide the corrected version with comments of what you're asking it to do.
+
+The the important part here is to base both both the code and the full error message.
+
+Don't try and paraphrase it yourself. The error message will contain precise information, and that's what's necessary to actually debug effectively.
+
+You're going to ask the AI to explain what's wrong. This turns the debugging into a learning opportunity.
+
+But you don't just want a corrected version. You want to understand the failure. And then you can rerun and verify before moving on together.
+
+Using these four templates covers the core workflow, the plan breakdown implement and debug.
+
+All right. Let's uh let's imagine using template three.
+
+For the first implementation task we might use a prompt from the from the template here implement task one.
+
+Create a Python function using the 20 2425 UK tax brackets.
+
+Add comments. Don't implement anything else yet. What would good AI output look like?
+
+Well, first I think the function should be named exactly as specified.
+
+Second, the tax bracket should be correct, so I should be able to check that to make sure they're either correct and clearly commented.
+
+The function should return a value, not merely print it, so returning a value makes the function easier to test and reuse.
+
+The AI should not add any unrelated features. It shouldn't build a GUI or create an export feature or anything like that.
+
+It shouldn't add an email function. The scope should be respected and the comments should explain each section clearly.
+
+And so how do we review it? Right? How? How do we make sure it runs without errors?
+
+Does it return the right value for an income of 20,000 pounds? Right.
+
+What happens for 0 pounds? What happens if I put a negative value in such as -100 pounds?
+
+Are there assumptions that weren't in the prompt. And this is where the requirements become practical.
+
+The tax calculator is not just a formula. It might. It needs to handle valid and invalid inputs, boundary conditions and expected outputs.
+
+For example, a negative income might raise an error message or perhaps the function should return a zero.
+
+And that's a design decision. And the point is that the AI should not just silently make these decisions for you.
+
+You decide. And the AI implements. So what happens when the system starts moving away from the task?
+
+The constraints are the decisions that you've established while there are there are several signs.
+
+First, it builds beyond the task you asked for. That's scope creep.
+
+You don't want it to do that. Second, it might contradict earlier decisions.
+
+For example, it might switch from returning a value to printing and output, even though you're already decided that functions should return values.
+
+Third, it might forget constraints from earlier prompts. Maybe you said not to use external libraries, and all of a sudden it imports one.
+
+Drift is normal. It's not a sign that you failed. It's a signal that the system needs re anchoring.
+
+Uh, the longer a system runs, it's gonna.
+
+Its memory is limited, and it's going to forget earlier, uh, direction or earlier, earlier things you've told it.
+
+And so there are kind of like several techniques that we can use to anchor your your use and mitigate the risk of drifting.
+
+The first is explicit boundaries and implementation prompts with something like do not implement anything beyond the task.
+
+Do not modify any existing code, right. That's going to reduce the chance that the AI will overreach.
+
+The second is reset and re anchor. Sometimes a chat gets too long or confused,
+
+and you might just start a new session and paste the project specification or summary of decisions that reestablishes the context, right?
+
+Like a file like a project spec markdown can be useful here.
+
+It might include the project goal, current components, design decisions, constraints, the next tasks.
+
+It's almost like, um, you know, like a software defined, you know, design document that I might use with teams to kind of make sure that,
+
+um, you know, variable conventions and, you know, commenting direction and, and some of these guidelines are set.
+
+You can even ask your, your generative AI to create that for you and then use it.
+
+And that's very helpful as a code is if you know, a code is going to be a larger project.
+
+Third technique is to summarize and confirm before we before we continue, summarize what we've built so far and what our next task is.
+
+Right. So that's going to force the AI to restate the context.
+
+And it's going to give you a chance to catch any misunderstandings before it generates more code.
+
+The key point here is that you want to be aware that drift is likely to occur.
+
+The longer your project is, you want to catch it early. You want to mitigate the risk of drift and long, long sessions.
+
+Just let it compound. So there are several key takeaways from from this lecture.
+
+First, structure beats cleverness, right? Prompting is not about magic phrases.
+
+It's about staged workflows the plan, the requirements, the tasks, and the implementation.
+
+Second, short loops win the build, test, inspect, refine loops, keep errors small and it keeps you in control.
+
+And it makes debugging and learning much easier. Third, the template saves time.
+
+The four templates I've shown you for planning, task breakdown, implementation,
+
+and debugging covers most of what you're going to need to use when you're building code with AI.
+
+In the next sessions, we'll focus on testing and evaluation of AI generated code and how to debug with AI while maintaining human oversight.
+
+This is a natural continuation because once AI write code writes code, the most important question becomes how do we know what's right?
+
+So I want to conclude with the the point that AI assisted coding is most effective when it's iterative, structured, and human directed.
+
+You're not trying to get AI to produce a perfect final answer in one shot.
+
+You're creating a controlled process where each step is small enough to understand, test, and improve.
+
+And that is how we turn AI from a source of unpredictable output into a useful development partner.
+
+I'm Doctor Ian McCullough from Johns Hopkins University.
+

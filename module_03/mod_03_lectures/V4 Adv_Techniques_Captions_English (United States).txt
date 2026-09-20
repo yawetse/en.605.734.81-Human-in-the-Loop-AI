@@ -1,0 +1,383 @@
+[Auto-generated transcript. Edits may have been applied for clarity.]
+Hello, I'm Doctor Ian McCullough from Johns Hopkins University.
+
+In the previous session we introduced, I insisted coding, iterative prompting, testing, debugging and human oversight.
+
+We've emphasized that I can generate code quickly, but you must remain responsible for the direction, review, testing, and final quality.
+
+In this session, we're going to move into a more advanced topic, deeper control when working with AI.
+
+This session is about what happens when projects get larger.
+
+A simple one function example is useful for learning, but real projects often span multiple files, multiple sessions, and many decisions over time.
+
+And that's where I used to see coding can become harder to manage. The I might forget earlier requirements.
+
+It might duplicate logic, it might insert placeholder code.
+
+It may make assumptions without telling you. It might solve the local task while slowly drifting away from the global project design.
+
+So the goal today is to learn techniques that help us maintain control across larger, more complex development workflows.
+
+The central idea is this AI does not naturally maintain a complete global understanding of your project.
+
+You have to build systems that give it one.
+
+By the end of the session, you should be able to explain context window limitations and how they affect AI assisted development.
+
+You should be able to describe techniques for managing project state, especially using uh,
+
+like a project specification, markdown file and chunking work into smaller sessions.
+
+Next, you should understand the role of stubs in structure in incomplete code.
+
+Uh, stubs are not necessarily failures. Uh, if used intentionally, they can become a roadmap.
+
+That's really helpful. You should also be able to examine how duplication arises in AI generated code and why it is risky.
+
+And finally, you should recognize validation hooks as a mechanism for exposing assumptions, uncertainty, and incomplete logic.
+
+The theme that connects all of these is visibility.
+
+We want project requirements, incomplete work, duplicated logic, and assumptions to be visible rather than hidden.
+
+Let's begin with context windows. The key idea is that I can only see a finite window of information.
+
+Earlier details may degrade, become less influential, or disappear entirely from the working context.
+
+This is a major practical constraint. When you're working with a human collaborator, you might assume that they remember the project history,
+
+the the design decisions, the constraints, and the tasks completed last week.
+
+With AI, that assumption is unsafe. The AI may appear to remember because it can respond fluently, but fluency is not memory.
+
+As the conversation grows earlier, details can become harder for the model to use consistently across sessions.
+
+There's no guarantee that the AI remembers anything unless you provide it again.
+
+So if your project relies on a decision made 20 prompts ago,
+
+you should not assume that the AI still has that decision active in its memory or context.
+
+And that is why state management becomes essential.
+
+The context window constraint means the AI has no reliable, persistent memory between sessions and even within a session.
+
+The older details can degrade as the conversation grows.
+
+What happens without management? Well, first the AI forgets requirements stated.
+
+Many promptly go. For example, you may have told it that every function should return structured dictionaries rather than print strings.
+
+Later it might start from printing output again. Second, it contradicts decisions already agreed upon and built.
+
+Maybe you decided not to use external libraries, but later the AI imports one because that seems convenient.
+
+Third, it generates duplicate logic because he can't see the full code base.
+
+And if I does not remember that, you know, some function like I don't know, validate income already exists,
+
+it might create a second validation function with a slightly different behavior.
+
+For if inconsistencies accumulate across sessions.
+
+Each individual session may look reasonable, but the overall code base begins to diverge.
+
+Fifth, your code base can silently drift away from the original plan, and this is especially dangerous because there's like no obvious crash.
+
+The project simply becomes less coherent over time. This slide offers three techniques to manage context technique.
+
+One is to work in small, well-defined chunks per session.
+
+Do not try to use one never ending eye conversation for the entire project.
+
+Keep the session focused. Technique to externalize uh state into a IT project specialization markdown file.
+
+This file can become the source of truth for the project, and you can keep reattaching it in new sessions.
+
+Technique three is reset context and re anchor at the beginning of new sessions.
+
+That means you start by telling the AI what the project is, what has been built, what decisions have been made, and what the current task is.
+
+The practical lesson is this manage context deliberately, not accidentally.
+
+Developers who do this have fewer surprises, fewer bugs, and faster progress.
+
+You've heard me talk about this a couple times.
+
+Uh, the project specification file is one of the simplest and most powerful tools for AI assisted development.
+
+It acts as an external memory. Because I can't reliably remember everything.
+
+We create a document that records the project's current state. Well, you might ask, what should go into it.
+
+Well, first you need to tell it what you're building and why this keeps the project goal visible.
+
+The second is the key components and their current status.
+
+For example, you know a tax bracket logic is completed or input validation in progress or CSV export not started.
+
+Third, any decisions that have already been made.
+
+This might include choices such as as you know, using uh Python unit test uh function should return values rather than print output.
+
+No external dependencies for version one. Forth constraints and rules I must follow.
+
+For example, keep function short. Use clear comments.
+
+Do not modify completed components without permission.
+
+Fifth the current task and the next task. This helps the.
+
+I begin each session with the right scope. Well, how do you use this file?
+
+Well, at the start of every new session, paste the relevant section and say something like, here's our project context.
+
+We're currently working on task three. Do not modify tasks 1 or 2.
+
+This gives the AI the context it needs without relying on memory.
+
+Next question is when should you update it?
+
+Well, after every session you should mark completed tasks, record new decisions, add constraints that emerge, and treat it as the source of truth.
+
+Well, what does this replace? It replaces the belief that AI remembers.
+
+It does not. The project specification file is your eyes external memory.
+
+And it's also your memory across a larger project.
+
+I would also argue that it is a, uh, a great tracking tool that allows you to kind of communicate and manage,
+
+uh, what's happening in a project across a larger team as well.
+
+And if it's used well, it turns the AI from a forgetful collaborator into one that begins each session with a full picture.
+
+Now let's talk about incomplete code. I like to call these stubs when I generated code contains placeholders or to do's.
+
+Beginners often treat that as a failure. They expect complete working code instead.
+
+And instead they receive stubs. But the stubs aren't really a problem, right?
+
+It's a placeholder for code that has not yet been implemented.
+
+It might be a function with a clear name, a document string, expected inputs and outputs, or maybe a To-Do comment.
+
+And if used intentionally, the stubs are structured to do list.
+
+They let us scaffold the project before implementing every detail.
+
+And this can be really valuable in AI assisted development because we don't want the AI to generate too much at once.
+
+A skeleton with stubs gives us structures without premature complex complexity.
+
+There are two ways to approach stubs. The problem approach is to ask the AI to generate everything in one go.
+
+The AI might produce code with hidden stubs or incomplete logic.
+
+You run it and it fails in unexpected places. You then spend time hunting for what is incomplete.
+
+That is frustrating because the stubs are accidental and poorly tracked.
+
+The better approach is to ask the AI to scaffold with intentional stubs first.
+
+In this model, each stub equals one task and each task becomes one implementation prompt.
+
+Clear To-Do comments become visible checkpoints. The stubs become your springboard.
+
+A useful prompt is before implementing, create a skeleton of the full application with all functions defined but not yet implemented.
+
+Use clear to do comments. Explain what each function should do and what inputs and outputs are expected.
+
+This prompt tells the AI not to rush into implementation.
+
+It asks for structure first. That structure can be reviewed before code is written.
+
+For example, if the skeleton includes functions for load data, validate input, calculate tax format output, and export CSV.
+
+We can evaluate whether the architecture makes sense. If something is missing, we catch it early.
+
+When are reaches uncertainty or practical limits, it may fill gaps with to dos.
+
+That is normal. The mistake is being surprised by it.
+
+A skeleton with clear to do's is often more valuable than a rushed, half working code, because it gives you a map of the project.
+
+Next, I want to talk about duplication. I often optimizes locally.
+
+That means it solves the immediate problem based on the context it sees, but it may not manage the global picture of the code database.
+
+Uh, over time, this can create duplicate logic.
+
+For example, the AI might generate one function call validate, come in one file and another called check income input and another.
+
+Both may do nearly the same thing, but not exactly.
+
+One raises a value error, the other returns false, one accepts floats, the other only accepts integers.
+
+This kind of duplication is risky because the project now has two sources of truth.
+
+The AI did not necessarily make one obvious mistake.
+
+It simply failed to see the broader architecture. And that is why duplication management has to be a deliberate part of the workflow.
+
+AI generates code based on each prompt in isolation.
+
+Without a global view, it can produce the same function twice in different places or with slightly different behavior.
+
+Why is duplication dangerous? Well, first, a bug fix in one does not copy over to the other.
+
+If you repair validate income, but the application actually calls checking some input elsewhere, the bug remains.
+
+Second, duplicate functions may diverge over time.
+
+One copy might be updated while the other becomes stale. Third, the code base becomes confusing.
+
+Which version is the real one? Which one should future functions call forth?
+
+Duplication creates long term instability that's difficult to trace.
+
+A bug might not come from one obviously wrong line.
+
+It might come from inconsistent versions of similar logics.
+
+This slide gives two techniques. Technique. One is periodic refactoring prompt.
+
+Every 3 or 4 tasks, ask. Review the code below for duplicate logic or functions.
+
+Suggest how to refactor it to eliminate duplication while keeping behavior identical.
+
+This turns duplication checking into a routine practice.
+
+Technique two is inline flags add comments like no similar logic exists.
+
+Invalidate input. Consider merging before next. Refactor.
+
+These comments make future cleanup visible. The rule of thumb is never go more than four implementation tasks without running a duplication check.
+
+Duplication logic compounds faster than you expect.
+
+We're now going to move into validation hooks and traceability.
+
+A validation hook is an inline comment that makes assumptions, uncertainties and incomplete sections visible.
+
+This is a powerful idea because one of the dangers of AI generated code is hidden confidence.
+
+The AI may produce code that looks incomplete even while assumptions are unresolved.
+
+Validation hooks force those assumptions into the open.
+
+Instead of silently hoping that the brackets are correct, the code might include a comment like assumption using 2014 for 25.
+
+UK tax brackets. Verify these are correct.
+
+Instead of silently ignoring a jurisdictional, uh, jurisdictional issue, it might say assumption.
+
+No consideration for Scottish rates. Instead of hiding incomplete logic, it might say, uh, add handling for the personal savings allowance.
+
+These hooks tell you where to inspect and the term review from vay search uh into structured processes for problem solving.
+
+To create validation hooks, you need to use a prompt like this. After generating the code, uh, add inline comments that identify one.
+
+Any assumptions you made that I should verify to any parts that you are uncertain about,
+
+and three any sections that are incomplete or required for this changes the output.
+
+Instead of just getting code, you get code plus a map of uncertainty.
+
+The benefits are significant. First, validation hooks give you a map of what to wear to review.
+
+Um, uh, where do you review your code base? Second, they make assumptions visible so you can verify or challenge them.
+
+Third, they turn incomplete sections into explicit tasks.
+
+Fourth, they create structured inspection processes instead of blind trust.
+
+But those validation hooks shouldn't stay forever. They should be resolved over time.
+
+If you verify an assumption, you can remove the assumption, comment, or convert it into a normal explanatory comment.
+
+If you completed a do to do task, remove the To-Do code.
+
+The the clean code means the resolved. Uh, the hook has been resolved.
+
+The point is not to permanently fill the code base with warnings. The point is to expose uncertainty long enough to resolve it.
+
+Now let's bring these techniques together. Step one start a fresh session.
+
+Paste your project specification file and re anchor.
+
+The AI context state with the current task is explicitly, and this prevents the AI from guessing what projects state it should assume.
+
+Step two. Scaffold with stubs. Ask for the skeleton first.
+
+Define all functions, but do not implement them yet. Review the structure before building.
+
+This gives you the roadmap. Step three.
+
+Implement with hooks. Build one stub at a time.
+
+Ask the add entity to annotate assumptions and uncertainties after each implementation.
+
+This keeps the implementation focused while making uncertainty visible.
+
+Step four. Audit and refactor. Every 3 or 4 tasks.
+
+Run a duplication check result, validation hooks and update the project specification file.
+
+Together, these practices turn eye from a novelty into a more reliable production tool for real Python projects.
+
+They all address the same root problem. AI has no natural global awareness.
+
+These techniques give it a kind of artificial global awareness by externalizing context, structure, assumptions, and review points.
+
+There are three main takeaways from today's lesson. First, manage context on purpose.
+
+Use that project specification file. Work in small session chunks.
+
+Reset and re anchor regularly. And do not assume that I remembers.
+
+Second stubs are roadmaps. As for intentional scaffolding.
+
+Each stub is a task. Each to do is a checkpoint.
+
+Visible gaps are manageable gaps. Third audit.
+
+Invalidate consistently run duplication checks every 3 to 4 tasks, use validation hooks to service assumptions, and clean code means result hooks.
+
+In the next session, we're going to summarize the repeatable playbook and discuss the honest cost of overreliance.
+
+That is an important conclusion because the goal is not just to use AI anymore.
+
+The goal is to use AI with disciplined and appropriate skepticism.
+
+So a final recap context windows define how AI retains and loses information across sessions.
+
+Because the AI cannot reliably remember everything. We need external state management.
+
+State management gives us methods to maintain continuity and consistency.
+
+And the most important tool here is that project specification file.
+
+Stubs are structured placeholders that guide incremental development.
+
+They're not necessarily failure. When they're used intentionally, they become a roadmap.
+
+That's very helpful. Duplication highlights the risk of locally generated code without global awareness.
+
+I might may generate similar logic in multiple places unless we check for it,
+
+and the validation hooks provide visibility into those assumptions uncertainty, incomplete logic, and allow us to identify these things.
+
+All of these techniques help us maintain traceability, and traceability means we know what was decided,
+
+what was built, what was, what remains unresolved, and and where assumptions need to be checked.
+
+The broader lesson is this as I assisted projects go grow your your job becomes
+
+less about prompting individual snippets and more about managing continuity,
+
+structure and accountability. I can help you move quickly, but only if you build systems that keep the project coherent.
+
+And that's what deeper control looks like. I'm Doctor Ian McCullough from Johns Hopkins University.
+
